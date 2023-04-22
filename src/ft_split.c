@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:46:59 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/22 17:53:56 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/22 22:52:06 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,6 @@ int	count_words(const char *str, char sep)
 			i++;
 	}
 	return (nb);
-}
-
-char	**isquote(char *str, char sep)
-{
-	char	**split;
-	int		i;
-	int		quote;
-
-	split = malloc(sizeof(char *) * (count_words(str, sep) + 1));
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 47)
-			quote = 1;
-		else if (str[i] == '"')
-			quote = 2;
-		else
-			quote = 0;
-		i++;
-	}
-	return (split);
-}
-
-char **which_split(char **split, char *str, char sep, int quote)
-{
-	if (quote == 0)
-		split = ft_split(str, sep);
-	else if (quote == 1)
-		split = ft_split_dq(str, sep);
-	else if (quote == 2)
-		split = ft_split_dq(str, sep);
-	return (split);
 }
 
 char	**ft_split(char *str, char sep)
