@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/21 17:36:40 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/22 17:54:47 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ void	affiche(t_command *command);
 
 //ft_split.c
 char	**ft_split(char *str, char sep);
+int		char_is_sep(char c, char sep);
+int		count_words(const char *str, char sep);
+char	**isquote(char *str, char sep);
+char	**which_split(char **split, char *str, char sep, int quote);
+
+//quote.c
+char	**ft_split_sq(char *str, char sep);
 char	**ft_split_dq(char *str, char sep);
 
 #endif
