@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/23 21:37:48 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/24 15:25:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@
 
 int count_words_quote(char *str, char quote, char sep)
 {
-	int i;
-	int j;
-	int in_quote;
+	int	i;
+	int	nb;
 
 	i = 0;
-	j = 0;
+	nb = 0;
 	while (str[i])
 	{
-		if (str[i] == quote)
-			in_quote = 1;
+		while (char_is_sep(str[i], sep))
+			i++;
+		if (!(char_is_sep(str[i], sep)) && str[i])
+			nb++;
+		while (!(char_is_sep(str[i], sep)) && str[i])
+			i++;
 	}
+	return (nb);
 }
 
 void	double_quote(char *str, char **split, char sep)
@@ -39,7 +43,7 @@ void	double_quote(char *str, char **split, char sep)
 	int	j;
 
 	i = 0;
-	res = malloc(sizeof(char *) * (count_words_quote(str, '"', sep)))
+	res = malloc(sizeof(char *) * (count_words_quote(str, '"', sep)));
 	while(str[i])
 	{
 		while(str[i] && char_is_sep(str[i], sep))
@@ -49,7 +53,6 @@ void	double_quote(char *str, char **split, char sep)
 			j = i++;
 			while(str[i] && str[i] == '"')
 				i++;
-			
 		}
 	}
 }
