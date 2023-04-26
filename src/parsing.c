@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/22 19:58:05 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/25 11:47:58 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	separate_cmd(t_command *command, char *cmd)
 	int i;
 
 	i = 0;
-	char **res_tot;
+	char **res_tot = NULL;
 	char **res_ligne;
 	if (ft_strcmp(cmd, "exit") == 0)
 		exit(0);
-	res_tot = ft_split(cmd, '|');
+	res_tot = double_quote(cmd, '|');
 	while (res_tot[i])
 	{
 		res_ligne = ft_split(res_tot[i], ' ');
@@ -30,5 +30,4 @@ void	separate_cmd(t_command *command, char *cmd)
 		i++;
 		affiche(command);
 	}
-	
 }
