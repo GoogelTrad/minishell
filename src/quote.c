@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/26 13:17:56 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:11:43 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	return (split);
 }*/
 
-int count_words_quote(char *str, char quote, char sep)
+int count_words_quote(char *str, char sep)
 {
 	int	i;
 	int	nb;
@@ -32,10 +32,10 @@ int count_words_quote(char *str, char quote, char sep)
 			nb++;
 		while (!(char_is_sep(str[i], sep)) && str[i])
 		{
-			if (str[i] == quote)
+			if (str[i] == '"' || str[i] == '\'')
 			{
 				i++;
-				while (str[i] && str[i] != quote)
+				while (str[i] && (str[i] != '"' || str[i] != '\''))
 					i++;
 				i++;
 			}
@@ -55,7 +55,7 @@ char	**double_quote(char *str, char sep)
 
 	i = 0;
 	n = 0;
-	res = malloc(sizeof(char *) * (count_words_quote(str, '"', sep) + 1));
+	res = malloc(sizeof(char *) * (count_words_quote(str, sep) + 1));
 	while(str[i])
 	{
 		while(str[i] && char_is_sep(str[i], sep))
@@ -63,10 +63,10 @@ char	**double_quote(char *str, char sep)
 		j = i;
 		while (!char_is_sep(str[i], sep) && str[i])
 		{
-			if (str[i] == '"')
+			if (str[i] == '"' || str[i] == '\'')
 			{
 				i++;
-				while (str[i] && str[i] != '"')
+				while (str[i] && (str[i] != '"' || str[i] != '\''))
 					i++;
 				i++;
 			}

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/25 11:46:02 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:10:06 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,25 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void affiche(t_command *command)
+void affiche(t_command **command)
 {
-	int i;
+	t_command	**temp;
+	int			i;
+	int			j;
 
+	temp = command;
 	i = 0;
-	printf("cmd = %s ", command->cmd);
-	printf("option = ");
-	while (command->option[i])
+	while (temp[i])
 	{
-		printf("%s ", command->option[i]);
+		j = 0;
+		printf("cmd = %s ", temp[i]->cmd);
+		printf("option = ");
+		while (temp[j]->option[j])
+		{
+			printf("%s ", temp[j]->option[j]);
+			j++;
+		}
+		printf("\n");
 		i++;
 	}
-	printf("\n");
 }
