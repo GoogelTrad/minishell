@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 13:16:11 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:51:37 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_command	*separate_cmd(char *cmd)
 	i = 0;
 	if (ft_strcmp(cmd, "exit") == 0)
 		exit(0);
-	res_tot = double_quote(cmd, '|');
+	res_tot = separate_quote(cmd, '|');
 	while (res_tot[i])
 		i++;
 	command = malloc(sizeof(t_command) * (i + 1));
@@ -37,4 +37,9 @@ t_command	*separate_cmd(char *cmd)
 	command[i].cmd = NULL;
 	affiche(command);
 	return (command);
+}
+
+char *var_env(char *ligne, char **env)
+{
+	
 }

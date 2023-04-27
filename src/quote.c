@@ -6,20 +6,16 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/26 16:11:43 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:41:21 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*char	**simple_quote(char *str, int *i, int *n, char **split)
-{
-	return (split);
-}*/
-
 int count_words_quote(char *str, char sep)
 {
 	int	i;
+	char quote;
 	int	nb;
 
 	i = 0;
@@ -34,8 +30,9 @@ int count_words_quote(char *str, char sep)
 		{
 			if (str[i] == '"' || str[i] == '\'')
 			{
+				quote = str[i];
 				i++;
-				while (str[i] && (str[i] != '"' || str[i] != '\''))
+				while (str[i] && str[i] != quote)
 					i++;
 				i++;
 			}
@@ -46,15 +43,17 @@ int count_words_quote(char *str, char sep)
 	return (nb);
 }
 
-char	**double_quote(char *str, char sep)
+char	**separate_quote(char *str, char sep)
 {
 	char **res;
+	char quote;
 	int	i;
 	int	j;
 	int n;
 
 	i = 0;
 	n = 0;
+	printf("nb = %i", count_words_quote(str, sep) + 1);
 	res = malloc(sizeof(char *) * (count_words_quote(str, sep) + 1));
 	while(str[i])
 	{
@@ -63,10 +62,11 @@ char	**double_quote(char *str, char sep)
 		j = i;
 		while (!char_is_sep(str[i], sep) && str[i])
 		{
-			if (str[i] == '"' || str[i] == '\'')
+			if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
 			{
+				quote = str[i];
 				i++;
-				while (str[i] && (str[i] != '"' || str[i] != '\''))
+				while (str[i] && str[i] != quote && str[i - 1] != '\\')
 					i++;
 				i++;
 			}

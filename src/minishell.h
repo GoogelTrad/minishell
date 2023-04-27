@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 13:11:20 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:51:55 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*readline (const char *prompt);
 
 //parsing.c
 t_command	*separate_cmd(char *cmd);
+char		*var_env(char *ligne, char **env);
 
 //utils.c
 int		ft_strcmp(char *s1, char *s2);
@@ -49,8 +50,7 @@ int		char_is_sep(char c, char sep);
 int		count_words(const char *str, char sep);
 
 //quote.c
-char	**simple_quote(char *str);
-char	**double_quote(char *str, char sep);
+char	**separate_quote(char *str, char sep);
 int		count_words_quote(char *str, char sep);
 
 #endif
