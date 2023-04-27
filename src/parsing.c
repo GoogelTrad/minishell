@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 14:51:37 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:20:34 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,29 @@ t_command	*separate_cmd(char *cmd)
 }
 
 char *var_env(char *ligne, char **env)
+{
+	int i;
+	int j;
+	char *var;
+
+	i = 0;
+	(void)env;
+	while (ligne[i])
+	{
+		if (ligne[i] == '$')
+		{
+			j = i;
+			while (ligne[i] && ligne[i] != ' ')
+				i++;
+			var = ft_strndup(ligne + j + 1, i - j);
+		}
+		i++;
+	}
+	replace_var(var, env);
+	return (var);
+}
+
+char	*replace_var(char *var, char **env)
 {
 	
 }

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 14:51:55 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:20:31 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*readline (const char *prompt);
 //parsing.c
 t_command	*separate_cmd(char *cmd);
 char		*var_env(char *ligne, char **env);
+char		*replace_var(char *var, char **env);
 
 //utils.c
 int		ft_strcmp(char *s1, char *s2);

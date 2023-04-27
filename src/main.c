@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 14:51:42 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:04:47 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(int ac, char **av, char **env)
 	t_command	*command;
 	char		*ligne;
 	
-	(void) ac, av;
+	(void)av;
+	(void)ac;
 	while(1)
 	{
 		ligne = readline("MiniShell> ");
