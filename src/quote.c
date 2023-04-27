@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 14:41:21 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 00:22:02 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	**separate_quote(char *str, char sep)
 
 	i = 0;
 	n = 0;
-	printf("nb = %i", count_words_quote(str, sep) + 1);
 	res = malloc(sizeof(char *) * (count_words_quote(str, sep) + 1));
 	while(str[i])
 	{

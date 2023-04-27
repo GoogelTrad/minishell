@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 13:14:34 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 00:04:21 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int ft_strncmp(char *s1, char *s2, size_t n)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i] && n > 0)
+	{
+		i++;
+		n--;
+	}
+	if (n == 0)
+		return (0);
+	return (s1[i] - s2[i]);
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {

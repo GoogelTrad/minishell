@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 22:20:34 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 01:07:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_command	*separate_cmd(char *cmd)
 		i++;
 	}
 	command[i].cmd = NULL;
-	affiche(command);
+	//affiche(command);
 	return (command);
 }
 
@@ -44,9 +44,9 @@ char *var_env(char *ligne, char **env)
 	int i;
 	int j;
 	char *var;
+	char *replace;
 
 	i = 0;
-	(void)env;
 	while (ligne[i])
 	{
 		if (ligne[i] == '$')
@@ -58,11 +58,58 @@ char *var_env(char *ligne, char **env)
 		}
 		i++;
 	}
-	replace_var(var, env);
+	replace = replace_var(var, env);
+	replace_value(replace, ligne);
 	return (var);
 }
 
 char	*replace_var(char *var, char **env)
 {
-	
+	int i;
+	int j;
+	int lenght_env;
+	int lenght_var;
+	char *res;
+
+	i = 0;
+	lenght_var = ft_strlen(var);
+	while(env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
+		i++;
+	j = i;
+	i = 0;
+	while (env[j] && env[j][i] != '=')
+		i++;
+	printf("coucou avant le while\n");
+	lenght_env = ft_strlen(env[j]) - ++i;
+	printf("coucou apres le strlen\n");
+	res = ft_strndup(env[j] + i, lenght_env);
+	return (res);
 }
+
+char	*replace_value(char *var, char *ligne)
+{
+	char *temp;
+	char *res;
+	int i;
+	int j;
+
+	i = 0;
+	while (ligne[i] && ligne[i] != '$')
+		i++;
+	j = i;
+	while (ligne[i] && ligne[i] != ' ')
+		i++;
+	temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
+	printf("temp = %s\n", temp);
+	res = ft_strndup(ligne, j);
+	res = ft_strjoin(res, var);
+	res = ft_strjoin(res, temp);
+	printf("res = %s\n", res);
+	return (res);
+}
+
+/*
+Il y a un seg fault au  niveau du strlen dans replace_env, regarde si on depasse pas le tableau de env et si on
+regarde pas au mauvais endroit
+Il faut aussi gerer le cas ou y'a pas de variable d'env dans la commande.
+*/

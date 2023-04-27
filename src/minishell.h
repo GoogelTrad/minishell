@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/27 22:20:31 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 00:50:31 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ char	*readline (const char *prompt);
 t_command	*separate_cmd(char *cmd);
 char		*var_env(char *ligne, char **env);
 char		*replace_var(char *var, char **env);
+char		*replace_value(char *var, char *ligne);
 
 //utils.c
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strndup(char *str, int n);
 int		ft_strlen(char *str);
 void	affiche(t_command *command);
+int		ft_strncmp(char *s1, char *s2, size_t n);
+
+//ft_strjoin.c
+char	*ft_strjoin(char *s1, char *s2);
 
 //ft_split.c
 char	**ft_split(char *str, char sep);
