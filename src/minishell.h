@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/26 19:07:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/27 13:11:20 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ typedef struct s_redirection
 char	*readline (const char *prompt);
 
 //parsing.c
-t_command	**separate_cmd(t_command **command, char *cmd);
+t_command	*separate_cmd(char *cmd);
 
 //utils.c
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strndup(char *str, int n);
 int		ft_strlen(char *str);
-void	affiche(t_command **command);
+void	affiche(t_command *command);
 
 //ft_split.c
 char	**ft_split(char *str, char sep);
