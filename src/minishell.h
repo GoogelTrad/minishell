@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 12:24:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 15:05:21 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_minishell
 	char *ligne;
 	t_command *command;
 }	t_minishell;
+
+t_minishell g_minishell;
 
 char	*readline (const char *prompt);
 
