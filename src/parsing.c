@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 01:07:01 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 11:24:48 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ char	*replace_var(char *var, char **env)
 	i = 0;
 	while (env[j] && env[j][i] != '=')
 		i++;
-	printf("coucou avant le while\n");
-	lenght_env = ft_strlen(env[j]) - ++i;
-	printf("coucou apres le strlen\n");
+	write(1, "1", 1);
+	lenght_env = ft_strlen(&env[j][++i]);
+	write(1, "2", 1);
 	res = ft_strndup(env[j] + i, lenght_env);
 	return (res);
 }
@@ -104,8 +104,13 @@ char	*replace_value(char *var, char *ligne)
 	res = ft_strndup(ligne, j);
 	res = ft_strjoin(res, var);
 	res = ft_strjoin(res, temp);
-	printf("res = %s\n", res);
+	printf("res3 = %s\n", res);
 	return (res);
+}
+
+char **copy_env(char **env)
+{
+	
 }
 
 /*

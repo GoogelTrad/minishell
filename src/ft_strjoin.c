@@ -36,5 +36,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	while (n < (len_s1 + len_s2))
 		result[n++] = s2[i++];
+	result[n] = 0;
 	return (result);
 }

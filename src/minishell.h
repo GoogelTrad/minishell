@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 00:50:31 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 11:23:46 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,26 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-typedef struct s_command
-{
-	char	*cmd;
-	char	**option;
-}	t_command;
-
 typedef struct s_redirection
 {
 	char	*type;
 	char	*word;
 	struct	s_redirection *next_redi;
 }	t_redirection;
+
+typedef struct s_command
+{
+	char	*cmd;
+	char	**option;
+	t_redirection **redi;
+}	t_command;
+
+typedef struct s_minishell
+{
+	char **env;
+	char *ligne;
+	t_command *command;
+}	t_minishell;
 
 char	*readline (const char *prompt);
 
