@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 11:24:48 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 13:07:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_command	*separate_cmd(char *cmd)
 		i++;
 	}
 	command[i].cmd = NULL;
-	//affiche(command);
+	affiche(command);
 	return (command);
 }
 
@@ -51,23 +51,23 @@ char *var_env(char *ligne, char **env)
 	{
 		if (ligne[i] == '$')
 		{
-			j = i;
-			while (ligne[i] && ligne[i] != ' ')
+			j = i++;
+			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$')
 				i++;
-			var = ft_strndup(ligne + j + 1, i - j);
+			var = ft_strndup(ligne + j + 1, i - j - 1);
+			replace = replace_var(var, env);
+			ligne = replace_value(replace, ligne);
+			i = -1;
 		}
 		i++;
 	}
-	replace = replace_var(var, env);
-	replace_value(replace, ligne);
-	return (var);
+	return (ligne);
 }
 
 char	*replace_var(char *var, char **env)
 {
 	int i;
 	int j;
-	int lenght_env;
 	int lenght_var;
 	char *res;
 
@@ -75,14 +75,14 @@ char	*replace_var(char *var, char **env)
 	lenght_var = ft_strlen(var);
 	while(env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
 		i++;
+	if (!env[i])
+		return ("");
 	j = i;
 	i = 0;
-	while (env[j] && env[j][i] != '=')
+	while (env[j][i] && env[j][i] != '=')
 		i++;
-	write(1, "1", 1);
-	lenght_env = ft_strlen(&env[j][++i]);
-	write(1, "2", 1);
-	res = ft_strndup(env[j] + i, lenght_env);
+	i++;
+	res = ft_strdup(env[j] + i);
 	return (res);
 }
 
@@ -96,21 +96,33 @@ char	*replace_value(char *var, char *ligne)
 	i = 0;
 	while (ligne[i] && ligne[i] != '$')
 		i++;
-	j = i;
-	while (ligne[i] && ligne[i] != ' ')
+	j = i++;
+	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$')
 		i++;
 	temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
-	printf("temp = %s\n", temp);
 	res = ft_strndup(ligne, j);
 	res = ft_strjoin(res, var);
 	res = ft_strjoin(res, temp);
-	printf("res3 = %s\n", res);
 	return (res);
 }
 
 char **copy_env(char **env)
 {
+	int i;
+	char **copy;
 	
+	i = 0;
+	while (env[i])
+		i++;
+	copy = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		copy[i] = ft_strdup(env[i]);
+		i++;
+	}
+	copy[i] = 0;
+	return (copy);
 }
 
 /*

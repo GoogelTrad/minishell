@@ -39,3 +39,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	result[n] = 0;
 	return (result);
 }
+
+char	*ft_strdup(char *str)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	dest = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while (str[i])
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
+}

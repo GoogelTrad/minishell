@@ -6,13 +6,13 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 11:24:03 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 12:30:00 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_minishell *g_minishell;
+t_minishell g_minishell;
 
 int	main(int ac, char **av, char **env)
 {
@@ -21,10 +21,11 @@ int	main(int ac, char **av, char **env)
 	
 	(void)av;
 	(void)ac;
+	g_minishell.env = copy_env(env);
 	while(1)
 	{
 		ligne = readline("MiniShell> ");
-		ligne = var_env(ligne, env);
+		ligne = var_env(ligne, g_minishell.env);
 		command = separate_cmd(ligne);
 		if (ligne[0])
 			add_history(ligne);

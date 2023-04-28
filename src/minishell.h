@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 11:23:46 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/04/28 12:24:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_command	*separate_cmd(char *cmd);
 char		*var_env(char *ligne, char **env);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne);
+char		**copy_env(char **env);
 
 //utils.c
 int		ft_strcmp(char *s1, char *s2);
@@ -57,6 +58,7 @@ int		ft_strncmp(char *s1, char *s2, size_t n);
 
 //ft_strjoin.c
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *str);
 
 //ft_split.c
 char	**ft_split(char *str, char sep);
