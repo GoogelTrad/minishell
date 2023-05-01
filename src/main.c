@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 15:00:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:28:16 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av, char **env)
 		if (ligne[0])
 			add_history(ligne);
 		ligne = var_env(ligne, g_minishell.env);
+		printf("ligne = %s\n", ligne);
 		command = separate_cmd(ligne);
 	}
 	(void)command;
