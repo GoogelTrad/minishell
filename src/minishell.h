@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 15:05:21 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/01 16:33:44 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ int		ft_strlen(char *str);
 void	affiche(t_command *command);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 
+//utils_builtins.c
+int		check_option_echo(char	*str);
+void	ft_putstr(char *s);
+
 //ft_strjoin.c
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *str);
@@ -70,5 +74,8 @@ int		count_words(const char *str, char sep);
 //quote.c
 char	**separate_quote(char *str, char sep);
 int		count_words_quote(char *str, char sep);
+
+//builtins.c
+void		echo(t_command command);
 
 #endif
