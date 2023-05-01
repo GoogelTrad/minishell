@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 15:05:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:26:46 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char	**separate_quote(char *str, char sep)
 			if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
 			{
 				quote = str[i];
-				if (quote == '"')
-					str = var_env(str, g_minishell.env);
+				printf("str = %s\n", str);
+				printf("str = %s\n", str);
 				i++;
 				while (str[i] && str[i] != quote && str[i - 1] != '\\')
 					i++;
