@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/01 17:35:34 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/05 15:47:59 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,25 @@ char *var_env(char *ligne, char **env)
 {
 	int i;
 	int j;
+	char quote;
 	char *var;
 	char *replace;
 
 	i = 0;
+	quote = ' ';
 	while (ligne[i])
 	{
+		if (ligne[i] == '"')
+					quote = '"';
 		if (ligne[i] == '$')
 		{
 			j = i++;
-			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$')
+			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != quote)
+			{
+				if (ligne[i] == '"' && quote == '"')
+					quote = ' ';
 				i++;
+			}
 			var = ft_strndup(ligne + j + 1, i - j - 1);
 			replace = replace_var(var, env);
 			ligne = replace_value(replace, ligne);
@@ -97,7 +105,7 @@ char	*replace_value(char *var, char *ligne)
 	while (ligne[i] && ligne[i] != '$')
 		i++;
 	j = i++;
-	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$')
+	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != '"')
 		i++;
 	temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
 	res = ft_strndup(ligne, j);
@@ -124,9 +132,3 @@ char **copy_env(char **env)
 	copy[i] = 0;
 	return (copy);
 }
-
-/*
-Il y a un seg fault au  niveau du strlen dans replace_env, regarde si on depasse pas le tableau de env et si on
-regarde pas au mauvais endroit
-Il faut aussi gerer le cas ou y'a pas de variable d'env dans la commande.
-*/

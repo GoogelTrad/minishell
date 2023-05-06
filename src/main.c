@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/01 17:35:28 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/05 17:18:05 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_minishell g_minishell;
 
 int	main(int ac, char **av, char **env)
 {
-	t_command	*command;
 	char		*ligne;
 	
 	(void)av;
@@ -26,12 +25,13 @@ int	main(int ac, char **av, char **env)
 	{
 		ligne = readline("MiniShell> ");
 		if (ligne[0])
+		{
 			add_history(ligne);
-		ligne = var_env(ligne, g_minishell.env);
-		printf("ligne = %s\n", ligne);
-		command = separate_cmd(ligne);
-		echo(command[0]);
+			ligne = var_env(ligne, g_minishell.env);
+			g_minishell.command = separate_cmd(ligne);
+			//printf("ligne = %s\n", ligne);
+			exec();
+		}
 	}
-	(void)command;
     return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/01 16:33:44 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/05 16:06:05 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct s_minishell
 	char *ligne;
 	t_command *command;
 }	t_minishell;
-
-t_minishell g_minishell;
 
 char	*readline (const char *prompt);
 
@@ -77,5 +75,8 @@ int		count_words_quote(char *str, char sep);
 
 //builtins.c
 void		echo(t_command command);
+
+//exec.c
+void exec(void);
 
 #endif
