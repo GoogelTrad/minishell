@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/04/28 12:38:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/17 15:31:09 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int	ft_strlen(char *str)
 
 	i = 0;
 	while (str[i])
-	{
-		//write(1, &str[i], 1);
 		i++;
-	}
 	return (i);
 }
 
