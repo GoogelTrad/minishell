@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/05 16:06:05 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/17 13:03:38 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_minishell
 	t_command *command;
 }	t_minishell;
 
-char	*readline (const char *prompt);
+char		*readline (const char *prompt);
 
 //parsing.c
 t_command	*separate_cmd(char *cmd);
@@ -50,33 +50,39 @@ char		*replace_value(char *var, char *ligne);
 char		**copy_env(char **env);
 
 //utils.c
-int		ft_strcmp(char *s1, char *s2);
-char	*ft_strndup(char *str, int n);
-int		ft_strlen(char *str);
-void	affiche(t_command *command);
-int		ft_strncmp(char *s1, char *s2, size_t n);
+int			ft_strcmp(char *s1, char *s2);
+char		*ft_strndup(char *str, int n);
+int			ft_strlen(char *str);
+void		affiche(t_command *command);
+int			ft_strncmp(char *s1, char *s2, size_t n);
 
 //utils_builtins.c
-int		check_option_echo(char	*str);
-void	ft_putstr(char *s);
+int			check_option_echo(char	*str);
+void		ft_putstr(char *s);
+int			ft_isalnum(int c);
+int			ft_atoi(const char *str);
 
 //ft_strjoin.c
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(char *str);
+char		*ft_strjoin(char *s1, char *s2);
+char		*ft_strdup(char *str);
 
 //ft_split.c
-char	**ft_split(char *str, char sep);
-int		char_is_sep(char c, char sep);
-int		count_words(const char *str, char sep);
+char		**ft_split(char *str, char sep);
+int			char_is_sep(char c, char sep);
+int			count_words(const char *str, char sep);
 
 //quote.c
-char	**separate_quote(char *str, char sep);
-int		count_words_quote(char *str, char sep);
+char		**separate_quote(char *str, char sep);
+int			count_words_quote(char *str, char sep);
 
 //builtins.c
-void		echo(t_command command);
+void		echo(void);
+
+//builtins2.c
+void		ft_exit(void);
+
 
 //exec.c
-void exec(void);
+void 		exec(void);
 
 #endif
