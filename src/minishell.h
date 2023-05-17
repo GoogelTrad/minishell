@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/17 13:03:38 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:23:59 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_command
 
 typedef struct s_minishell
 {
+	int status;
 	char **env;
 	char *ligne;
 	t_command *command;
@@ -59,7 +60,7 @@ int			ft_strncmp(char *s1, char *s2, size_t n);
 //utils_builtins.c
 int			check_option_echo(char	*str);
 void		ft_putstr(char *s);
-int			ft_isalnum(int c);
+int			ft_isalnum(char *str);
 int			ft_atoi(const char *str);
 
 //ft_strjoin.c

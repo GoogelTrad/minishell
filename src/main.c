@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/05 17:18:05 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/17 14:58:38 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 			add_history(ligne);
 			ligne = var_env(ligne, g_minishell.env);
 			g_minishell.command = separate_cmd(ligne);
-			//printf("ligne = %s\n", ligne);
+			printf("ligne = %s\n", ligne);
 			exec();
 		}
 	}

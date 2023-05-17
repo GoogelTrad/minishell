@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:07:53 by elisa             #+#    #+#             */
-/*   Updated: 2023/05/17 12:23:44 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:21:59 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ void	ft_putstr(char *s)
 	}
 }
 
-int	ft_isalnum(int c)
+int	ft_isalnum(char *str)
 {
-	if ((48 <= c && 57 >= c) || (65 <= c && 90 >= c) || (97 <= c && 122 >= c))
-		return (1);
-	return (0);
+	int	i;
+	
+	i = 0;
+	while (str[i])
+	{
+		if (!((48 <= str[i] && 57 >= str[i]) || (65 <= str[i] && 90 >= str[i]) || (97 <= str[i] && 122 >= str[i])))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 void	overflow(void)
