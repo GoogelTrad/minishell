@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/17 15:31:12 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/19 15:03:11 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_command	*separate_cmd(char *cmd)
 	t_command	*command;
 
 	i = 0;
-	if (ft_strcmp(cmd, "exit") == 0)
-		exit(0);
 	res_tot = separate_quote(cmd, '|');
 	while (res_tot[i])
 		i++;
@@ -35,7 +33,6 @@ t_command	*separate_cmd(char *cmd)
 		i++;
 	}
 	command[i].cmd = NULL;
-	//affiche(command);
 	return (command);
 }
 
@@ -51,14 +48,18 @@ char *var_env(char *ligne, char **env)
 	quote = ' ';
 	while (ligne[i])
 	{
-		if (ligne[i] == '"')
+		if (ligne[i] == '\'')
+			quote = '\'';
+		if (ligne[i] == '"' && quote != '\'')
 					quote = '"';
-		if (ligne[i] == '$')
+		if (ligne[i] == '$' && quote != '\'')
 		{
 			j = i++;
 			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != quote)
 			{
 				if (ligne[i] == '"' && quote == '"')
+					quote = ' ';
+				if (ligne[i] == '\'' && quote == '\'')
 					quote = ' ';
 				i++;
 			}
@@ -67,6 +68,8 @@ char *var_env(char *ligne, char **env)
 			ligne = replace_value(replace, ligne);
 			i = -1;
 		}
+		if (ligne[i] == '\'' && quote != '\'')
+			quote = ' ';
 		i++;
 	}
 	return (ligne);
@@ -81,7 +84,7 @@ char	*replace_var(char *var, char **env)
 
 	i = 0;
 	lenght_var = ft_strlen(var);
-	while(env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
+	while (env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
 		i++;
 	if (!env[i])
 		return ("");

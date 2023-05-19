@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 RM = rm -f
 
-SRCS = src/main.c src/prompt.c src/parsing.c src/builtins.c src/builtins2.c src/utils.c src/utils_builtins.c src/ft_split.c src/quote.c src/ft_strjoin.c src/exec.c
+SRCS = src/main.c src/prompt.c src/parsing.c src/builtins.c src/builtins2.c src/utils.c src/utils_builtins.c src/ft_split.c src/quote.c src/ft_strjoin.c src/exec.c src/redirection/simple_droite.c
 
 OBJC = ${SRCS:.c=.o}
 
