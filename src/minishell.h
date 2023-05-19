@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/17 15:23:59 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/19 15:40:37 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_command
 {
 	char	*cmd;
 	char	**option;
-	t_redirection **redi;
+	t_redirection *redi;
 }	t_command;
 
 typedef struct s_minishell
@@ -82,6 +82,8 @@ void		echo(void);
 //builtins2.c
 void		ft_exit(void);
 
+//simple.c
+char *parse_redi(char *ligne, t_command *command, int n);
 
 //exec.c
 void 		exec(void);
