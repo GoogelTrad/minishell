@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 15:22:33 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:41:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	separate_cmd(char *cmd)
 	while (res_tot[i])
 		i++;
 	g_minishell.command = malloc(sizeof(t_command) * (i + 1));
+	g_minishell.command->redi = malloc(sizeof(t_redirection));
 	i = 0;
 	while (res_tot[i])
 	{

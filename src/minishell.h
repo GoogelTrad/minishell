@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 16:31:09 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 18:04:56 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <fcntl.h>
 
 typedef struct s_redirection
 {
@@ -86,6 +87,9 @@ void		ft_exit(void);
 
 //utils_redi.c
 void parse_redi(char **ligne);
+
+//simple.c
+void simple_droite(void);
 
 //exec.c
 void 		exec(void);
