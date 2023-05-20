@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:51:29 by elisa             #+#    #+#             */
-/*   Updated: 2023/05/17 15:01:42 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/20 12:53:51 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ extern t_minishell g_minishell;
 
 void	ft_exit(void)
 {
-	if (g_minishell.command->option[1])
+	if (g_minishell.command->option[0])
 	{
-		if (!ft_isalnum(g_minishell.command->option[1]))
+		if (!ft_isalnum(g_minishell.command->option[0]))
 		{
 			ft_putstr("exit\n");
-			printf("exit: %s: numeric argument required\n", g_minishell.command->option[1]);
+			printf("exit: %s: numeric argument required\n", g_minishell.command->option[0]);
 			exit(1);
 		}
 		else
-			g_minishell.status = ft_atoi(g_minishell.command->option[1]);
+			g_minishell.status = ft_atoi(g_minishell.command->option[0]);
 	}
 	ft_putstr("exit\n");
 	exit(0);
