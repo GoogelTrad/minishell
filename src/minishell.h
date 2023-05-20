@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 16:56:40 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/20 18:06:24 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_minishell
 char		*readline (const char *prompt);
 
 //parsing.c
-t_command	*separate_cmd(char *cmd);
+void		separate_cmd(char *cmd);
 char		*var_env(char *ligne, char **env);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne);
@@ -85,8 +85,8 @@ void		pwd(void);
 void		ft_exit(void);
 void		env(void);
 
-//simple.c
-char *parse_redi(char *ligne, t_command *command, int n);
+//utils_redi.c
+void parse_redi(char **ligne);
 
 //exec.c
 void 		exec(void);

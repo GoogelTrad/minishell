@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/17 15:31:09 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:18:04 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ void affiche(t_command *command)
 		printf("option = ");
 		while(command[i].option[j])
 			printf("%s ", command[i].option[j++]);
+		if (command[i].redi->type)
+			printf("type = %s ", command[i].redi->type);
+		if (command[i].redi->word)
+		printf("word = %s ", command[i].redi->word);
 		printf("\n");
 		i++;
 	}
