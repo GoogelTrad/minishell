@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 18:04:56 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 18:07:30 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		pwd(void);
 
 //builtins2.c
 void		ft_exit(void);
+void		env(void);
 
 //utils_redi.c
 void parse_redi(char **ligne);
