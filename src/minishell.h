@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 15:25:58 by elisa            ###   ########.fr       */
+/*   Updated: 2023/05/20 16:56:40 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		pwd(void);
 
 //builtins2.c
 void		ft_exit(void);
+void		env(void);
 
 //simple.c
 char *parse_redi(char *ligne, t_command *command, int n);

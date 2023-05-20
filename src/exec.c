@@ -22,4 +22,6 @@ void exec(void)
         ft_exit();
     if (ft_strcmp(g_minishell.command->cmd, "pwd") == 0)
         pwd();
+    if (ft_strcmp(g_minishell.command->cmd, "env") == 0)
+        env();
 }
