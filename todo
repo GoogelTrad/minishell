@@ -1,0 +1,14 @@
+builtins 
+
+fini ✅ :
+
+echo + option -n
+pwd 
+exit 
+
+a faire :
+
+cd 
+export 
+unset
+env 

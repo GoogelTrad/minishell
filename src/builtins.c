@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:32:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/05/17 15:52:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 15:33:27 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,13 @@ void	echo(void)
 	if (!(g_minishell.command->option[0][0] == '-') && !(g_minishell.command->option[0][1] == 'n'))
 		ft_putstr("\n");
 }
+
+void	pwd(void)
+{
+	char	*result;
+
+	result = var_env("$PWD", g_minishell.env);
+	if (result != NULL)
+		printf("%s\n", result);
+}
+
