@@ -20,4 +20,6 @@ void exec(void)
         echo();
     if (ft_strcmp(g_minishell.command->cmd, "exit") == 0)
         ft_exit();
+    if (ft_strcmp(g_minishell.command->cmd, "pwd") == 0)
+        pwd();
 }
