@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/19 15:35:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:24:25 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,3 +14,7 @@
 
 extern t_minishell g_minishell;
 
+void simple_droite(void)
+{
+	
+}

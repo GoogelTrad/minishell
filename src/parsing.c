@@ -6,35 +6,34 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/19 15:47:38 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 15:22:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*separate_cmd(char *cmd)
+extern t_minishell g_minishell;
+
+void	separate_cmd(char *cmd)
 {
 	int			i;
 	char		**res_tot = NULL;
 	char		**res_ligne;
-	t_command	*command;
 
 	i = 0;
 	res_tot = separate_quote(cmd, '|');
 	while (res_tot[i])
 		i++;
-	command = malloc(sizeof(t_command) * (i + 1));
+	g_minishell.command = malloc(sizeof(t_command) * (i + 1));
 	i = 0;
 	while (res_tot[i])
 	{
 		res_ligne = ft_split(res_tot[i], ' ');
-		command[i].cmd = res_ligne[0];
-		//res_ligne[i] = parse_redi(res_ligne[i], command, i);
-		command[i].option = res_ligne + 1;
+		g_minishell.command->cmd = res_ligne[0];
+		parse_redi(res_ligne + 1);
 		i++;
 	}
-	command[i].cmd = NULL;
-	return (command);
+	g_minishell.command[i].cmd = NULL;
 }
 
 char *var_env(char *ligne, char **env)

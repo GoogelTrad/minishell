@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/19 15:39:49 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:18:17 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,38 @@
 
 extern t_minishell g_minishell;
 
-char *parse_redi(char *ligne, t_command *command, int n)
+void parse_redi(char **ligne)
 {
-	int i;
 	int j;
-	char *res;
+	int n;
 	char *str;
 
-	i = 0;
-	while (ligne[i])
+	j = 0;
+	n = 0;
+	while (ligne[n] && ligne[n][0] != '<' && ligne[n][0] != '>')
+		n++;
+	g_minishell.command->option = malloc(sizeof(char *) + (n + 1));
+	while(j < n)
 	{
-		if (ligne[i] == '>' || ligne[i] == '<')
-		{
-			break ;
-		}
-		i++;
+		str = ft_strndup(ligne[j], ft_strlen(ligne[j]));
+		g_minishell.command->option[j] = str;
+		j++;
 	}
-	res = ft_strndup(ligne, i);
-	j = i;
-	while(ligne[j] && ligne[j] != ' ')
-		j++;
-	str = ft_strndup(ligne + i, j);
-	command[n].redi->type = str;
-	while (ligne[j] && ligne[j] == ' ')
-		j++;
-	i = j;
-	while (ligne[i] && ligne[i] != ' ')
-		i++;
-	str = ft_strndup(ligne + j, i);
-	command[n].redi->word = str;
-	return (res);
+	while (ligne[n])
+	{
+		g_minishell.command->redi = malloc(sizeof(t_redirection));
+		if(ligne[n][0] == '<' || ligne[n][0] == '>')
+		{
+			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
+			printf("str = %s\n", str);
+			g_minishell.command->redi->type = str;
+		}
+		else
+		{
+			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
+			g_minishell.command->redi->word = str;
+		}
+		n++;
+	}
+	//affiche(g_minishell.command);
 }
