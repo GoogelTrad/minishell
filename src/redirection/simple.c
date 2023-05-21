@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/21 15:45:45 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/22 01:49:17 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@ void simple_droite(void)
 	int i;
 
 	i = 0;
-	fd = open(".", O_CREAT);
+    fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR);
+    if (!fd)
+        printf("Probleme lors de l'ouverture du fichier !\n");
+    ligne = malloc(1);
+    ligne = "\0";
 	while (g_minishell.command->option[i])
 	{
 		ligne = ft_strjoin(ligne, g_minishell.command->option[i]);
-		ligne = ft_strjoin(ligne, " ");
+        if (ligne[i + 1])
+		    ligne = ft_strjoin(ligne, " ");
 		i++;
 	}
 	i = 0;

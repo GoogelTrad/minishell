@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 16:53:12 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/22 01:49:22 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ void parse_redi(char **ligne)
 	while (ligne[n] && ligne[n][0] != '<' && ligne[n][0] != '>')
 		n++;
 	g_minishell.command->option = malloc(sizeof(char *) + (n + 1));
-	while(j < n)
+	while(ligne[j] && j < n)
 	{
 		str = ft_strndup(ligne[j], ft_strlen(ligne[j]));
 		g_minishell.command->option[j] = malloc(sizeof(char) + (ft_strlen(str) + 1));
 		g_minishell.command->option[j] = str;
 		j++;
 	}
+	g_minishell.command->option[j] = NULL;
 	while (ligne[n])
 	{
 		if(ligne[n][0] == '<' || ligne[n][0] == '>')
