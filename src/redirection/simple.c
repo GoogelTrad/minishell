@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 18:04:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/21 15:45:45 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void simple_droite(void)
 	int i;
 
 	i = 0;
-	fd = open(var_env("$PWD", g_minishell.env), O_CREAT);
+	fd = open(".", O_CREAT);
 	while (g_minishell.command->option[i])
 	{
 		ligne = ft_strjoin(ligne, g_minishell.command->option[i]);
@@ -34,4 +34,5 @@ void simple_droite(void)
 		write(fd, &ligne[i], 1);
 		i++;
 	}
+	close(fd);
 }

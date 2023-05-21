@@ -12,3 +12,14 @@ cd
 export 
 unset
 env 
+
+
+Parsing :
+
+- Redirection
+	- simple droite
+	- simple gauche
+	- double droite
+	- double gauche
+
+- Supprimer les quotes pour les commandes et les options
