@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 18:11:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/22 02:01:23 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void parse_redi(char **ligne);
 
 //simple.c
 void simple_droite(void);
+
+//double.c
+void double_droite(void);
 
 //exec.c
 void 		exec(void);

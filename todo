@@ -16,10 +16,14 @@ env
 
 Parsing :
 
+- Bug sur les variables d'environnement
+
 - Redirection
-	- simple droite
+	- simple droite ✅
 	- simple gauche
 	- double droite
 	- double gauche
 
 - Supprimer les quotes pour les commandes et les options
+
+- Gerer les pipes
