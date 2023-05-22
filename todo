@@ -27,3 +27,5 @@ Parsing :
 - Supprimer les quotes pour les commandes et les options
 
 - Gerer les pipes
+
+- Getenv

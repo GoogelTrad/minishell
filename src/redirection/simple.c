@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/22 01:49:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/22 16:41:20 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ void simple_droite(void)
 		i++;
 	}
 	i = 0;
-	while (ligne[i])
+	
+	while (ligne[i + 1])
 	{
 		write(fd, &ligne[i], 1);
 		i++;
 	}
+	write(fd, "\n", 1);
 	close(fd);
+	free(ligne);
 }

@@ -18,11 +18,10 @@ void double_droite(void)
 {
     int fd;
 	char *ligne;
-    char *readed;
 	int i;
 
 	i = 0;
-    fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR);
+    fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR | O_APPEND);
     if (!fd)
         printf("Probleme lors de l'ouverture du fichier !\n");
     ligne = malloc(1);
@@ -34,11 +33,13 @@ void double_droite(void)
 		    ligne = ft_strjoin(ligne, " ");
 		i++;
 	}
-    readed = NULL;
-    while(read(fd, readed, 1));
-    if (ft_strlen(readed))
-    {
-        //supprimer + reecrire dessus
-    }
+    i = 0;
+    while (ligne[i + 1])
+	{
+		write(fd, &ligne[i], 1);
+		i++;
+	}
+    write(fd, "\n", 1);
 	close(fd);
+    free(ligne);
 }

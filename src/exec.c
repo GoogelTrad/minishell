@@ -18,8 +18,10 @@ void exec(void)
 {
     if (ft_strcmp(g_minishell.command->cmd, "echo") == 0)
     {
-        exec_redi();
-        echo();
+        //if (g_minishell.command->redi->type)
+        //    exec_redi();
+        //else
+            echo();
     }
     if (ft_strcmp(g_minishell.command->cmd, "exit") == 0)
         ft_exit();
@@ -33,4 +35,6 @@ void exec_redi(void)
 {
     if (ft_strcmp(g_minishell.command->redi->type, ">") == 0)
         simple_droite();
+    else if (ft_strcmp(g_minishell.command->redi->type, ">>") == 0)
+        double_droite();
 }
