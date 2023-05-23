@@ -18,9 +18,9 @@ void exec(void)
 {
     if (ft_strcmp(g_minishell.command->cmd, "echo") == 0)
     {
-        //if (g_minishell.command->redi->type)
-        //    exec_redi();
-        //else
+        if (g_minishell.command->redi->type)
+            exec_redi();
+        else
             echo();
     }
     if (ft_strcmp(g_minishell.command->cmd, "exit") == 0)
