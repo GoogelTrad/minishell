@@ -16,7 +16,7 @@ extern t_minishell g_minishell;
 
 void double_droite(void (*cmd)(int))
 {
-    g_minishell.fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR | O_APPEND | O_TRUNC);
+    g_minishell.fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
     if (!g_minishell.fd)
         printf("Probleme lors de l'ouverture du fichier !\n");
     (*cmd)(g_minishell.fd);
