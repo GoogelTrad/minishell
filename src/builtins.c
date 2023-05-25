@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:32:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/05/25 03:19:22 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/25 06:12:57 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 extern t_minishell g_minishell;
 
-void	echo(void)
+void	echo(int fd)
 {
 	int	i;
+	int j;
 	int	new_line;
 
 	new_line = 0;	
@@ -26,13 +27,15 @@ void	echo(void)
 	i = 0 + new_line;
 	while (g_minishell.command[g_minishell.num].option[i])
 	{
-		ft_putstr(g_minishell.command[g_minishell.num].option[i]);
+		j = 0;
+		while (g_minishell.command[g_minishell.num].option[i][j])
+			write(fd, &g_minishell.command[g_minishell.num].option[i][j++], 1);
 		if (g_minishell.command[g_minishell.num].option[i + 1] != NULL)
-			ft_putstr(" ");
+			write(fd, " ", 1);
 		i++;
 	}
 	if (!(g_minishell.command[g_minishell.num].option[0][0] == '-') && !(g_minishell.command[g_minishell.num].option[0][1] == 'n'))
-		ft_putstr("\n");
+		write(fd, "\n", 1);
 }
 
 void	pwd(int fd)

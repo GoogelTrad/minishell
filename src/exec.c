@@ -17,7 +17,7 @@ extern t_minishell g_minishell;
 void exec(int fd)
 {
     if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "echo") == 0)
-        echo();
+        echo(fd);
     else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "exit") == 0)
         ft_exit();
     else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "pwd") == 0)
