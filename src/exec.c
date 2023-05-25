@@ -14,27 +14,31 @@
 
 extern t_minishell g_minishell;
 
-void exec(void)
+void exec(int fd)
 {
-    if (ft_strcmp(g_minishell.command->cmd, "echo") == 0)
-    {
-        if (g_minishell.command->redi->type)
-            exec_redi();
-        else
-            echo();
-    }
-    if (ft_strcmp(g_minishell.command->cmd, "exit") == 0)
+    if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "echo") == 0)
+        echo();
+    else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "exit") == 0)
         ft_exit();
-    if (ft_strcmp(g_minishell.command->cmd, "pwd") == 0)
-        pwd();
-    if (ft_strcmp(g_minishell.command->cmd, "env") == 0)
-        env();
+    else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "pwd") == 0)
+        pwd(fd);
+    else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "env") == 0)
+        env(fd);
 }
 
 void exec_redi(void)
 {
-    if (ft_strcmp(g_minishell.command->redi->type, ">") == 0)
-        simple_droite();
-    else if (ft_strcmp(g_minishell.command->redi->type, ">>") == 0)
-        double_droite();
+    if(g_minishell.command[g_minishell.num].redi->type)
+    {
+        if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">") == 0)
+            simple_droite(&exec);
+        else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">>") == 0)
+            double_droite(&exec);
+        else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<") == 0)
+            printf("coucou\n");
+        else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<<") == 0)
+            printf("Coucou\n");
+    }
+    else
+        exec(1);
 }

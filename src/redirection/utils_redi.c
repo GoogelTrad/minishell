@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/22 01:49:22 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/24 18:54:24 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_minishell g_minishell;
 
-void parse_redi(char **ligne)
+void parse_redi(char **ligne, int i)
 {
 	int j;
 	int n;
@@ -24,26 +24,26 @@ void parse_redi(char **ligne)
 	n = 0;
 	while (ligne[n] && ligne[n][0] != '<' && ligne[n][0] != '>')
 		n++;
-	g_minishell.command->option = malloc(sizeof(char *) + (n + 1));
+	g_minishell.command[i].option = malloc(sizeof(char *) + (n + 1));
 	while(ligne[j] && j < n)
 	{
 		str = ft_strndup(ligne[j], ft_strlen(ligne[j]));
-		g_minishell.command->option[j] = malloc(sizeof(char) + (ft_strlen(str) + 1));
-		g_minishell.command->option[j] = str;
+		g_minishell.command[i].option[j] = malloc(sizeof(char) + (ft_strlen(str) + 1));
+		g_minishell.command[i].option[j] = str;
 		j++;
 	}
-	g_minishell.command->option[j] = NULL;
+	g_minishell.command[i].option[j] = NULL;
 	while (ligne[n])
 	{
 		if(ligne[n][0] == '<' || ligne[n][0] == '>')
 		{
 			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
-			g_minishell.command->redi->type = str;
+			g_minishell.command[i].redi->type = str;
 		}
 		else
 		{
 			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
-			g_minishell.command->redi->word = str;
+			g_minishell.command[i].redi->word = str;
 		}
 		n++;
 	}

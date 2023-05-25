@@ -1,3 +1,41 @@
-coucou
-coucou
-coucou
+/Users/celianmichez/Desktop/Cours/42/Cursus/minishell
+03
+__CFBundleIdentifier=com.microsoft.VSCode
+PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin
+LOGNAME=celianmichez
+DISPLAY=/private/tmp/com.apple.launchd.yd90V5zCvU/org.xquartz:0
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.1KtIXzzazR/Listeners
+HOME=/Users/celianmichez
+SHELL=/bin/zsh
+TMPDIR=/var/folders/td/b9vc9g7j41l4xdpwxtk30rbh0000gn/T/
+__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x1
+XPC_SERVICE_NAME=0
+XPC_FLAGS=0x0
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+SHLVL=1
+PWD=/Users/celianmichez/Desktop/Cours/42/Cursus/minishell
+OLDPWD=/Users/celianmichez/Desktop/Cours/42/Cursus
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_REPOSITORY=/opt/homebrew
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/homebrew/share/man::
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+ZSH=/Users/celianmichez/.oh-my-zsh
+PAGER=less
+LESS=-R
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+TERM_PROGRAM=vscode
+TERM_PROGRAM_VERSION=1.78.2
+LANG=en_US.UTF-8
+COLORTERM=truecolor
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_IPC_HANDLE=/var/folders/td/b9vc9g7j41l4xdpwxtk30rbh0000gn/T/vscode-git-74460e892c.sock
+VSCODE_INJECTION=1
+ZDOTDIR=/Users/celianmichez
+USER_ZDOTDIR=/Users/celianmichez
+TERM=xterm-256color
+_=/Users/celianmichez/Desktop/Cours/42/Cursus/minishell/./minishell

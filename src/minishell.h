@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/22 02:01:23 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/25 03:22:19 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_minishell
 	int status;
 	char **env;
 	char *ligne;
+	int fd;
+	int num;
 	t_command *command;
 }	t_minishell;
 
@@ -79,24 +81,24 @@ int			count_words_quote(char *str, char sep);
 
 //builtins.c
 void		echo(void);
-void		pwd(void);
+void		pwd(int);
 
 
 //builtins2.c
 void		ft_exit(void);
-void		env(void);
+void		env(int fd);
 
 //utils_redi.c
-void parse_redi(char **ligne);
+void parse_redi(char **ligne, int i);
 
 //simple.c
-void simple_droite(void);
+void simple_droite(void (*cmd)(int));
 
 //double.c
-void double_droite(void);
+void double_droite(void (*cmd)(int));
 
 //exec.c
-void 		exec(void);
+void exec(int fd);
 void exec_redi(void);
 
 #endif

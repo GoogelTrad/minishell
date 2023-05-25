@@ -14,32 +14,11 @@
 
 extern t_minishell g_minishell;
 
-void double_droite(void)
+void double_droite(void (*cmd)(int))
 {
-    int fd;
-	char *ligne;
-	int i;
-
-	i = 0;
-    fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR | O_APPEND);
-    if (!fd)
+    g_minishell.fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR | O_APPEND | O_TRUNC);
+    if (!g_minishell.fd)
         printf("Probleme lors de l'ouverture du fichier !\n");
-    ligne = malloc(1);
-    ligne = "\0";
-	while (g_minishell.command->option[i])
-	{
-		ligne = ft_strjoin(ligne, g_minishell.command->option[i]);
-        if (ligne[i + 1])
-		    ligne = ft_strjoin(ligne, " ");
-		i++;
-	}
-    i = 0;
-    while (ligne[i + 1])
-	{
-		write(fd, &ligne[i], 1);
-		i++;
-	}
-    write(fd, "\n", 1);
-	close(fd);
-    free(ligne);
+    (*cmd)(g_minishell.fd);
+	close(g_minishell.fd);
 }

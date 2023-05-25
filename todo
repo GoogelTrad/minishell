@@ -19,9 +19,9 @@ Parsing :
 - Bug sur les variables d'environnement
 
 - Redirection
-	- simple droite ✅
+	- simple droite ✅ (manque juste a clear le fichier avant)
 	- simple gauche
-	- double droite
+	- double droite ✅
 	- double gauche
 
 - Supprimer les quotes pour les commandes et les options
