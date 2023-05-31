@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/26 20:16:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/31 15:36:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,16 @@ char	**separate_quote(char *str, char sep)
 char *replace(char *str, int start, int end, char quote)
 {
 	int i;
-	int pair;
 	
-	pair = -1;
 	while (str[start] && start < end)
 	{
 		i = start;
 		if (str[start] == quote)
 		{
-			pair *= -1;
-			while (str[i] && pair == 1)
+			while (str[i])
 			{
 				str[i] = str[i + 1];
 				i++;
-				if (str[i] == quote)
-				{
-					str[i] = str[i + 1];
-					pair *= -1;
-				}
 			}
 		}
 		start++;		

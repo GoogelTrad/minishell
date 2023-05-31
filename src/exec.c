@@ -28,7 +28,7 @@ void exec(int fd)
 
 void exec_redi(void)
 {
-    if(g_minishell.command[g_minishell.num].redi->type)
+    if(g_minishell.command[g_minishell.num].redi->there)
     {
         if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">") == 0)
             simple_droite(&exec);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/24 18:54:24 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/31 16:09:53 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void parse_redi(char **ligne, int i)
 	while(ligne[j] && j < n)
 	{
 		str = ft_strndup(ligne[j], ft_strlen(ligne[j]));
-		g_minishell.command[i].option[j] = malloc(sizeof(char) + (ft_strlen(str) + 1));
 		g_minishell.command[i].option[j] = str;
 		j++;
 	}
@@ -39,6 +38,7 @@ void parse_redi(char **ligne, int i)
 		{
 			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
 			g_minishell.command[i].redi->type = str;
+			g_minishell.command[i].redi->there = 1;
 		}
 		else
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/29 16:22:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/31 16:09:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	separate_cmd(char *cmd)
 	{
 		res_ligne = ft_split(res_tot[i], ' ');
 		g_minishell.command[i].cmd = res_ligne[0];
+		g_minishell.command[i].redi->there = 0;
 		parse_redi(res_ligne + 1, i);
 		i++;
 	}
