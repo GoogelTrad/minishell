@@ -24,7 +24,7 @@ Parsing :
 	- double droite ✅
 	- double gauche
 
-- Supprimer les quotes pour les commandes et les options
+- Supprimer les quotes pour les commandes et les options (refaire les pairs) (almost)
 
 - Gerer les pipes
 

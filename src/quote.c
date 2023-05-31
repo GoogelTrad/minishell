@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/05 15:09:32 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/26 20:16:27 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	**separate_quote(char *str, char sep)
 	char **res;
 	char quote;
 	int	i;
+	int limite[2];
 	int	j;
 	int n;
 
@@ -63,11 +64,14 @@ char	**separate_quote(char *str, char sep)
 		{
 			if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
 			{
+				limite[0] = i;
 				quote = str[i];
 				i++;
 				while (str[i] && str[i] != quote && str[i - 1] != '\\')
 					i++;
 				i++;
+				limite[1] = i;
+				str = replace(str, limite[0], limite[1], quote);
 			}
 			else	
 				i++;
@@ -78,4 +82,32 @@ char	**separate_quote(char *str, char sep)
 	}
 	res[n] = 0;
 	return (res);
+}
+
+char *replace(char *str, int start, int end, char quote)
+{
+	int i;
+	int pair;
+	
+	pair = -1;
+	while (str[start] && start < end)
+	{
+		i = start;
+		if (str[start] == quote)
+		{
+			pair *= -1;
+			while (str[i] && pair == 1)
+			{
+				str[i] = str[i + 1];
+				i++;
+				if (str[i] == quote)
+				{
+					str[i] = str[i + 1];
+					pair *= -1;
+				}
+			}
+		}
+		start++;		
+	}
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/24 18:53:24 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/29 16:22:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*replace_var(char *var, char **env)
 	while (env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
 		i++;
 	if (!env[i])
-		return ("");
+		return (var);
 	j = i;
 	i = 0;
 	while (env[j][i] && env[j][i] != '=')

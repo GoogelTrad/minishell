@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/25 06:13:12 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:15:42 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int			count_words(const char *str, char sep);
 //quote.c
 char		**separate_quote(char *str, char sep);
 int			count_words_quote(char *str, char sep);
+char		*replace(char *str, int start, int end, char quote);
 
 //builtins.c
 void		echo(int fd);
