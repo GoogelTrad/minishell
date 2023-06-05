@@ -24,6 +24,8 @@ void exec(int fd)
         pwd(fd);
     else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "env") == 0)
         env(fd);
+    else
+        execve("/bin/sh", g_minishell.command[g_minishell.num].option, g_minishell.env);
 }
 
 void exec_redi(void)

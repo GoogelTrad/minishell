@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/31 15:36:33 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/05 18:57:22 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,17 @@ char	**separate_quote(char *str, char sep)
 char *replace(char *str, int start, int end, char quote)
 {
 	int i;
+	int n;
 	
-	while (str[start] && start < end)
+	i = 0;
+	n = 0;
+	while (str[i])
+	{
+		if (str[i] == quote)
+			n++;
+		i++;		
+	}
+	while (str[start] && start < end && n % 2 == 0)
 	{
 		i = start;
 		if (str[start] == quote)

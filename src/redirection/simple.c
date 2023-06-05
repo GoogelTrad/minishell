@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/05 17:59:00 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/05 18:53:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void simple_gauche(void (*cmd)(int))
 	g_minishell.fd = open(g_minishell.command[g_minishell.num].redi->word, O_RDONLY);
 	if (g_minishell.fd == 0)
 		printf("Il y a eu un probleme lors de l'ouverture du fichier.\n");
-	(*cmd)(g_minishell.fd);
+	(*cmd)(g_minishell.fd);	
 	close(g_minishell.fd);
 }
