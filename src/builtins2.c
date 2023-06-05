@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:51:29 by elisa             #+#    #+#             */
-/*   Updated: 2023/06/05 20:27:43 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/05 23:25:59 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ void	ft_exit(void)
 		{
 			ft_putstr("exit\n");
 			printf("exit: %s: numeric argument required\n", g_minishell.command[g_minishell.num].option[0]);
+			free_all();
 			exit(1);
 		}
 		else
 			g_minishell.status = ft_atoi(g_minishell.command[g_minishell.num].option[0 ]);
 	}
 	ft_putstr("exit\n");
+	free_all();
 	exit(0); 
 }
 
