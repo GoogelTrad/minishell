@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:32:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/05/31 20:04:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/05 17:48:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	echo(int fd)
 	int	new_line;
 
 	new_line = 0;	
-	if (g_minishell.command[g_minishell.num].option && g_minishell.command[g_minishell.num].option[0][0] == '-'
+	if (g_minishell.command[g_minishell.num].option[0] && g_minishell.command[g_minishell.num].option[0][0] == '-'
 		&& check_option_echo(g_minishell.command[g_minishell.num].option[0] + 1))
 		new_line = 1;
 	i = 0 + new_line;
@@ -34,7 +34,7 @@ void	echo(int fd)
 			write(fd, " ", 1);
 		i++;
 	}
-	if (!(g_minishell.command[g_minishell.num].option[0][0] == '-') && !(g_minishell.command[g_minishell.num].option[0][1] == 'n'))
+	if (g_minishell.command[g_minishell.num].option[0] == NULL || !(g_minishell.command[g_minishell.num].option[0][0] == '-' && g_minishell.command[g_minishell.num].option[0][1] == 'n'))
 		write(fd, "\n", 1);
 }
 
