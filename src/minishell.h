@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/31 16:08:33 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/05 22:37:09 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_redirection
 {
@@ -39,7 +41,7 @@ typedef struct s_minishell
 {
 	int status;
 	char **env;
-	char *ligne;
+	char **fusion;
 	int fd;
 	int num;
 	t_command *command;
@@ -101,6 +103,9 @@ void double_droite(void (*cmd)(int));
 
 //exec.c
 void exec(int fd);
+void fusion_exec();
 void exec_redi(void);
+void    exec_others(void);
+void exec_fork(char *fichier);
 
 #endif

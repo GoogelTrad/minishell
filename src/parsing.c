@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/31 16:09:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/05 20:26:15 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern t_minishell g_minishell;
 void	separate_cmd(char *cmd)
 {
 	int			i;
-	char		**res_tot = NULL;
+	char		**res_tot;
 	char		**res_ligne;
 
 	i = 0;

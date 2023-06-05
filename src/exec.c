@@ -25,7 +25,7 @@ void exec(int fd)
     else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "env") == 0)
         env(fd);
     else
-        execve("/bin/sh", g_minishell.command[g_minishell.num].option, g_minishell.env);
+        exec_others();
 }
 
 void exec_redi(void)
@@ -43,4 +43,65 @@ void exec_redi(void)
     }
     else
         exec(1);
+}
+
+void    exec_others(void)
+{
+    char **path;
+    char *fusion;
+    int i;
+
+    i = 0;
+    if (open(g_minishell.command[g_minishell.num].cmd, O_RDONLY) > -1)
+        exec_fork(g_minishell.command[g_minishell.num].cmd);
+    else
+    {
+        path = ft_split(var_env("PATH", g_minishell.env), ':');
+        while (path[i])
+        {
+            fusion = ft_strjoin(path[i], "/");
+            fusion = ft_strjoin(fusion, g_minishell.command[g_minishell.num].cmd);
+            if (open(fusion, O_RDONLY) > -1)
+            {
+                exec_fork(fusion);
+                break ;
+            }
+            i++;
+        }
+    }
+    //free path
+}
+
+void exec_fork(char *fichier)
+{
+    int pid;
+    int status;
+
+    pid = fork();
+    fusion_exec();
+    if (pid == 0)
+    {
+        execve(fichier, g_minishell.fusion, g_minishell.env);
+        exit(0);
+    }
+    else
+        waitpid(pid, &status, 0);
+}
+
+void fusion_exec()
+{
+    int i;
+
+    i = 0;
+    while (g_minishell.command[g_minishell.num].option[i])
+        i++;
+    g_minishell.fusion = malloc(sizeof(char *) + (i + 2));
+    i = 0;
+    g_minishell.fusion[0] = g_minishell.command[g_minishell.num].cmd;
+    while (g_minishell.command[g_minishell.num].option[i])
+    {
+        g_minishell.fusion[i + 1] = ft_strdup(g_minishell.command[g_minishell.num].option[i]);
+        i++;
+    }
+    g_minishell.fusion[i + 1] = NULL;
 }

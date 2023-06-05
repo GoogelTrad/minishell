@@ -51,6 +51,6 @@ char	*ft_strdup(char *str)
 		dest[i] = str[i];
 		i++;
 	}
-	dest[i] = 0;
+	dest[i] = 0; 
 	return (dest);
 }
