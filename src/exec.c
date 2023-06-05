@@ -56,7 +56,7 @@ void    exec_others(void)
         exec_fork(g_minishell.command[g_minishell.num].cmd);
     else
     {
-        path = ft_split(var_env("PATH", g_minishell.env), ':');
+        path = ft_split(var_env("$PATH", g_minishell.env), ':');
         while (path[i])
         {
             fusion = ft_strjoin(path[i], "/");
