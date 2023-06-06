@@ -14,7 +14,7 @@
 
 extern t_minishell g_minishell;
 
-/*void free_env()
+void free_env()
 {
     int i;
 
@@ -24,7 +24,7 @@ extern t_minishell g_minishell;
     free(g_minishell.env);
     i = 0;
     while (g_minishell.fusion[i])
-        free(g_minishell.fd[i++]);
+        free(g_minishell.fusion[i++]);
     free(g_minishell.fusion);
 }
 
@@ -36,7 +36,7 @@ void free_cmd()
     t_redirection *actu;
 
     i = 0;
-    while(g_minishell.command[i])
+    while(i <= g_minishell.num)
     {
         j = 0;
         actu = g_minishell.command[i].redi;
@@ -51,7 +51,6 @@ void free_cmd()
             free(tmp->word);
         }
         free(g_minishell.command[i].redi);
-        free(g_minishell.command[i]);
         i++;
     }
     free(g_minishell.command);
@@ -62,4 +61,3 @@ void free_all()
     free_env();
     free_cmd();
 }
-*/

@@ -26,6 +26,7 @@ void exec(int fd)
         env(fd);
     else
         exec_others();
+    g_minishell.num++;
 }
 
 void exec_redi(void)
