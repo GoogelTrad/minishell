@@ -31,19 +31,26 @@ void exec(int fd)
 
 void exec_redi(void)
 {
-    if(g_minishell.command[g_minishell.num].redi->there)
+    while (g_minishell.command[g_minishell.num].cmd)
     {
-        if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">") == 0)
-            simple_droite(&exec);
-        else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">>") == 0)
-            double_droite(&exec);
-        else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<") == 0)
-            printf("coucou\n");
-        else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<<") == 0)
-            printf("Coucou\n");
+        //if (g_minishell.command[g_minishell.num + 1].cmd)
+        //{
+            
+        //}
+        if(g_minishell.command[g_minishell.num].redi->there)
+        {
+            if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">") == 0)
+                simple_droite(&exec);
+            else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">>") == 0)
+                double_droite(&exec);
+            else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<") == 0)
+                printf("coucou\n");
+            else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<<") == 0)
+                printf("coucou\n");
+        }
+        else
+            exec(1);
     }
-    else
-        exec(1);
 }
 
 void    exec_others(void)
@@ -70,7 +77,6 @@ void    exec_others(void)
             i++;
         }
     }
-    //free path
 }
 
 void exec_fork(char *fichier)

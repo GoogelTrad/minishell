@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double.c                                           :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 01:51:01 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/22 01:51:01 by cmichez          ###   ########.fr       */
+/*   Created: 2023/06/07 01:07:07 by cmichez           #+#    #+#             */
+/*   Updated: 2023/06/07 01:07:07 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 extern t_minishell g_minishell;
 
-void double_droite(void (*cmd)(int))
+void exec_pipe(void)
 {
-    g_minishell.fd = open(g_minishell.command->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
-    if (!g_minishell.fd)
-        printf("Probleme lors de l'ouverture du fichier !\n");
-    (*cmd)(g_minishell.fd);
-    g_minishell.num++;
-	close(g_minishell.fd);
+    
 }

@@ -5,18 +5,16 @@ fini ✅ :
 echo + option -n
 pwd 
 exit 
+env
 
 a faire :
 
-cd 
-export 
+cd
+export
 unset
-env 
 
 
 Parsing :
-
-- Bug sur les variables d'environnement
 
 - Redirection
 	- simple droite ✅
@@ -24,8 +22,5 @@ Parsing :
 	- double droite ✅
 	- double gauche
 
-- Supprimer les quotes pour les commandes et les options (refaire les pairs) (almost)
-
 - Gerer les pipes
 
-- Getenv

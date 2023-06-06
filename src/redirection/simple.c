@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/05 18:53:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/07 00:59:03 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void simple_droite(void (*cmd)(int))
 	if (g_minishell.fd == 0)
 		printf("Il y a eu un probleme lors de l'ouverture du fichier.\n");
 	(*cmd)(g_minishell.fd);
+	g_minishell.num++;
 	close(g_minishell.fd);
 }
 
@@ -29,5 +30,6 @@ void simple_gauche(void (*cmd)(int))
 	if (g_minishell.fd == 0)
 		printf("Il y a eu un probleme lors de l'ouverture du fichier.\n");
 	(*cmd)(g_minishell.fd);	
+	g_minishell.num++;
 	close(g_minishell.fd);
 }
