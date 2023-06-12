@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/07 00:59:03 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/12 18:33:44 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,12 @@
 
 extern t_minishell g_minishell;
 
-void simple_droite(void (*cmd)(int))
+void simple_droite(t_command *c)
 {
-   	g_minishell.fd = open(g_minishell.command[g_minishell.num].redi->word, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (g_minishell.fd == 0)
-		printf("Il y a eu un probleme lors de l'ouverture du fichier.\n");
-	(*cmd)(g_minishell.fd);
-	g_minishell.num++;
-	close(g_minishell.fd);
+    c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_TRUNC, 0644);
 }
 
-void simple_gauche(void (*cmd)(int))
+void simple_gauche(t_command *c)
 {
-	g_minishell.fd = open(g_minishell.command[g_minishell.num].redi->word, O_RDONLY);
-	if (g_minishell.fd == 0)
-		printf("Il y a eu un probleme lors de l'ouverture du fichier.\n");
-	(*cmd)(g_minishell.fd);	
-	g_minishell.num++;
-	close(g_minishell.fd);
+	c->fd_out = open(c->redi->word, O_RDONLY);
 }

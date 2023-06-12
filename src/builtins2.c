@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:51:29 by elisa             #+#    #+#             */
-/*   Updated: 2023/06/05 23:25:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/11 01:13:51 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 extern t_minishell g_minishell;
 
-void	ft_exit(void)
+void	ft_exit(t_command *c)
 {
-	if (g_minishell.command[g_minishell.num].option[0])
+	if (c->option[0])
 	{
-		if (!ft_isalnum(g_minishell.command[g_minishell.num].option[0]))
+		if (!ft_isalnum(c->option[0]))
 		{
 			ft_putstr("exit\n");
-			printf("exit: %s: numeric argument required\n", g_minishell.command[g_minishell.num].option[0]);
+			printf("exit: %s: numeric argument required\n", c->option[0]);
 			free_all();
 			exit(1);
 		}
 		else
-			g_minishell.status = ft_atoi(g_minishell.command[g_minishell.num].option[0 ]);
+			g_minishell.status = ft_atoi(c->option[0 ]);
 	}
 	ft_putstr("exit\n");
 	free_all();
 	exit(0); 
 }
 
-void	env(int fd)
+void	env(int fd, t_command *c)
 {
 	int	i;
 	int j;
 
 	i = 0;
-	if (g_minishell.command[g_minishell.num].option[0])
+	if (c->option[0])
 		ft_putstr("No such file or directory\n");
 	else
 	{

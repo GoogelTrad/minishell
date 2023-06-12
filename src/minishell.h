@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/05 23:25:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/12 20:10:18 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_redirection
 
 typedef struct s_command
 {
+	int		fd_in;
+	int		fd_out;
 	char	*cmd;
 	char	**option;
 	t_redirection *redi;
@@ -50,7 +52,7 @@ typedef struct s_minishell
 char		*readline (const char *prompt);
 
 //parsing.c
-void		separate_cmd(char *cmd);
+void		separate_cmd(char *ligne);
 char		*var_env(char *ligne, char **env);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne);
@@ -84,28 +86,30 @@ int			count_words_quote(char *str, char sep);
 char		*replace(char *str, int start, int end, char quote);
 
 //builtins.c
-void		echo(int fd);
+void		echo(int fd, t_command *c);
 void		pwd(int fd);
 
 //builtins2.c
-void		ft_exit(void);
-void		env(int fd);
+void		ft_exit(t_command *c);
+void		env(int fd, t_command *c);
 
 //utils_redi.c
-void parse_redi(char **ligne, int i);
+void parse_redi(char **ligne, t_command *c);
 
 //simple.c
-void simple_droite(void (*cmd)(int));
+void simple_droite(t_command *c);
+void simple_gauche(t_command *c);
 
 //double.c
-void double_droite(void (*cmd)(int));
+void double_droite(t_command *c);
 
 //exec.c
-void exec(int fd);
-void fusion_exec();
-void exec_redi(void);
-void exec_others(void);
-void exec_fork(char *fichier);
+void belle_exec(t_command *c);
+void exec(int fd, t_command *c);
+void fusion_exec(t_command *c);
+void exec_redi(t_command *c);
+void exec_others(t_command *c);
+void exec_fork(char *fichier, t_command *c);
 
 //free.c
 void free_all();

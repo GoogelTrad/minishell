@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/05 20:26:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/12 20:14:50 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 extern t_minishell g_minishell;
 
-void	separate_cmd(char *cmd)
+void	separate_cmd(char *ligne)
 {
 	int			i;
 	char		**res_tot;
 	char		**res_ligne;
 
 	i = 0;
-	res_tot = separate_quote(cmd, '|');
+	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])
 		i++;
 	g_minishell.command = malloc(sizeof(t_command) * (i + 1));
-	g_minishell.command->redi = malloc(sizeof(t_redirection));
 	i = 0;
 	while (res_tot[i])
 	{
+		g_minishell.command[i].redi = malloc(sizeof(t_redirection));
 		res_ligne = ft_split(res_tot[i], ' ');
 		g_minishell.command[i].cmd = res_ligne[0];
+		g_minishell.command[i].fd_in = 0;
+		g_minishell.command[i].fd_out = 1;
 		g_minishell.command[i].redi->there = 0;
-		parse_redi(res_ligne + 1, i);
+		parse_redi(res_ligne + 1, &g_minishell.command[i]);
 		i++;
 	}
 	g_minishell.command[i].cmd = NULL;

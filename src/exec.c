@@ -14,64 +14,70 @@
 
 extern t_minishell g_minishell;
 
-void exec(int fd)
+void belle_exec(t_command *c)
 {
-    if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "echo") == 0)
-        echo(fd);
-    else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "exit") == 0)
-        ft_exit();
-    else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "pwd") == 0)
-        pwd(fd);
-    else if (ft_strcmp(g_minishell.command[g_minishell.num].cmd, "env") == 0)
-        env(fd);
-    else
-        exec_others();
-    g_minishell.num++;
+    int pipes[2];
+
+    exec_redi(c);
+    pipe(pipes);
+    if ((c + 1)->cmd)
+    {
+        c->fd_out = pipes[1];
+        (c + 1)->fd_in = pipes[0];
+    }
+    exec(c->fd_out, c);
+    if ((c + 1)->cmd)
+        belle_exec(c + 1);
 }
 
-void exec_redi(void)
+void exec(int fd, t_command *c)
 {
-    while (g_minishell.command[g_minishell.num].cmd)
+    if (ft_strcmp(c->cmd, "echo") == 0)
+        echo(fd, c);
+    else if (ft_strcmp(c->cmd, "exit") == 0)
+        ft_exit(c);
+    else if (ft_strcmp(c->cmd, "pwd") == 0)
+        pwd(fd);
+    else if (ft_strcmp(c->cmd, "env") == 0)
+        env(fd, c);
+    else
+        exec_others(c);
+}
+
+void exec_redi(t_command *c)
+{
+    if(c->redi->there)
     {
-        //if (g_minishell.command[g_minishell.num + 1].cmd)
-        //{
-            
-        //}
-        if(g_minishell.command[g_minishell.num].redi->there)
-        {
-            if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">") == 0)
-                simple_droite(&exec);
-            else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, ">>") == 0)
-                double_droite(&exec);
-            else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<") == 0)
-                printf("coucou\n");
-            else if (ft_strcmp(g_minishell.command[g_minishell.num].redi->type, "<<") == 0)
-                printf("coucou\n");
-        }
-        else
-            exec(1);
+        if (ft_strcmp(c->redi->type, ">") == 0)
+            simple_droite(c);
+        else if (ft_strcmp(c->redi->type, ">>") == 0)
+            double_droite(c);
+        else if (ft_strcmp(c->redi->type, "<") == 0)
+            printf("coucou\n");
+        else if (ft_strcmp(c->redi->type, "<<") == 0)
+            printf("coucou\n");
     }
 }
 
-void    exec_others(void)
+void    exec_others(t_command *c)
 {
     char **path;
     char *fusion;
     int i;
 
     i = 0;
-    if (open(g_minishell.command[g_minishell.num].cmd, O_RDONLY) > -1)
-        exec_fork(g_minishell.command[g_minishell.num].cmd);
+    if (open(c->cmd, O_RDONLY) > -1)
+        exec_fork(c->cmd, c);
     else
     {
         path = ft_split(var_env("$PATH", g_minishell.env), ':');
         while (path[i])
         {
             fusion = ft_strjoin(path[i], "/");
-            fusion = ft_strjoin(fusion, g_minishell.command[g_minishell.num].cmd);
+            fusion = ft_strjoin(fusion, c->cmd);
             if (open(fusion, O_RDONLY) > -1)
             {
-                exec_fork(fusion);
+                exec_fork(fusion, c);
                 break ;
             }
             i++;
@@ -79,35 +85,41 @@ void    exec_others(void)
     }
 }
 
-void exec_fork(char *fichier)
+void exec_fork(char *fichier, t_command *c)
 {
     int pid;
     int status;
 
     pid = fork();
-    fusion_exec();
+    fusion_exec(c);
     if (pid == 0)
     {
+        if (c->cmd)
+            dup2(c->fd_out, 1);
+        if (c->fd_in != 0)
+            dup2(c->fd_in, 0);
         execve(fichier, g_minishell.fusion, g_minishell.env);
         exit(0);
     }
     else
         waitpid(pid, &status, 0);
+    if (c->fd_out != 1)
+        close(c->fd_out);
 }
 
-void fusion_exec()
+void fusion_exec(t_command *c)
 {
     int i;
 
     i = 0;
-    while (g_minishell.command[g_minishell.num].option[i])
+    while (c->option[i])
         i++;
     g_minishell.fusion = malloc(sizeof(char *) + (i + 2));
     i = 0;
-    g_minishell.fusion[0] = g_minishell.command[g_minishell.num].cmd;
-    while (g_minishell.command[g_minishell.num].option[i])
+    g_minishell.fusion[0] = c->cmd;
+    while (c->option[i])
     {
-        g_minishell.fusion[i + 1] = ft_strdup(g_minishell.command[g_minishell.num].option[i]);
+        g_minishell.fusion[i + 1] = ft_strdup(c->option[i]);
         i++;
     }
     g_minishell.fusion[i + 1] = NULL;
