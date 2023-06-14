@@ -1,3 +1,5 @@
-b
-c
-a
+Makefile
+minishell
+prout.txt
+src
+todo

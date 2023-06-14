@@ -55,7 +55,7 @@ void exec_redi(t_command *c)
         else if (ft_strcmp(c->redi->type, "<") == 0)
             simple_gauche(c);
         else if (ft_strcmp(c->redi->type, "<<") == 0)
-            printf("coucou\n");
+            double_gauche(c);
     }
 }
 

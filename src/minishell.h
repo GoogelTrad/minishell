@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/12 20:10:18 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/12 22:00:20 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	int status;
+	char *ligne;
 	char **env;
 	char **fusion;
 	int fd;
@@ -102,6 +103,9 @@ void simple_gauche(t_command *c);
 
 //double.c
 void double_droite(t_command *c);
+void double_gauche(t_command *c);
+int check_env(char *ligne);
+char *coucou(char *ligne);
 
 //exec.c
 void belle_exec(t_command *c);

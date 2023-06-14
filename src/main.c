@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/12 19:56:25 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/12 22:07:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av, char **env)
 		if (ligne[0])
 		{
 			add_history(ligne);
+			g_minishell.ligne = ft_strdup(ligne);
 			ligne = var_env(ligne, g_minishell.env);
 			separate_cmd(ligne);
 			belle_exec(g_minishell.command);
