@@ -1,5 +1,1 @@
-Makefile
-minishell
-prout.txt
-src
-todo
+test1

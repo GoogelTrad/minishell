@@ -22,16 +22,32 @@ void double_droite(t_command *c)
 void double_gauche(t_command *c)
 {
     char *ligne;
+    int i;
 
+    i = 0;
     if (check_env(g_minishell.ligne))
         c->redi->word = ft_strdup(coucou(g_minishell.ligne));
     ligne = readline("> ");
     while (ft_strcmp(ligne, c->redi->word) != 0)
     {
         ligne = readline("> ");
+        double_read(ligne, c);
+        i++;
     }
 }
 
+void double_read(char *ligne, t_command *c)
+{
+	int pipes[2];
+    int i;
+
+    i = 0;
+	pipe(pipes);
+	c->fd_in = pipes[0];
+    while(ligne[i])
+        write(pipes[1], &ligne[i++], 1);
+	close(pipes[1]);
+}
 char *coucou(char *ligne)
 {
     int i;
@@ -68,3 +84,4 @@ int check_env(char *ligne)
     }
     return (0);
 }
+

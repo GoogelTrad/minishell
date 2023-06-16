@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/12 22:00:20 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/16 15:24:02 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void double_droite(t_command *c);
 void double_gauche(t_command *c);
 int check_env(char *ligne);
 char *coucou(char *ligne);
+void double_read(char *ligne, t_command *c);
 
 //exec.c
 void belle_exec(t_command *c);
