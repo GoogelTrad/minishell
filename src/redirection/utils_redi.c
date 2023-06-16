@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/11 01:18:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/16 22:33:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void parse_redi(char **ligne, t_command *c)
 	int j;
 	int n;
 	char *str;
+	t_redirection *tmp;
 
 	j = 0;
 	n = 0;
@@ -32,6 +33,7 @@ void parse_redi(char **ligne, t_command *c)
 		j++;
 	}
 	c->option[j] = NULL;
+	tmp = c->redi;
 	while (ligne[n])
 	{
 		if(ligne[n][0] == '<' || ligne[n][0] == '>')
@@ -44,7 +46,9 @@ void parse_redi(char **ligne, t_command *c)
 		{
 			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
 			c->redi->word = str;
+			c->redi = c->redi->next_redi;
 		}
 		n++;
 	}
+	c->redi = tmp;
 }
