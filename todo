@@ -18,10 +18,10 @@ Parsing :
 
 - Redirection
 	- simple droite ✅
-	- simple gauche
+	- simple gauche ✅
 	- double droite ✅
-	- double gauche
+	- double gauche ✅
 
-- Gerer les pipes
+- Gerer les pipes ✅
 
-Mourir.
+Mourir. ✅

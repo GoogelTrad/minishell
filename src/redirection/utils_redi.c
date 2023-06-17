@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/16 22:33:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/16 23:25:57 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,43 @@
 
 extern t_minishell g_minishell;
 
+void parse_redi(char **ligne, t_command *c)
+{
+	int i;
+	t_redirection *tmp;
+
+	i = 0;
+	c->option = malloc(sizeof(char *) + 1);
+	while (ligne[i] && ligne[i][0] != '>' && ligne[i][0] != '<')
+	{
+		c->option = malloc(sizeof(char *) * (i + 1));
+		c->option[i] = ft_strdup(ligne[i]);
+		i++;
+	}
+	c->option[i] = NULL;
+	tmp = c->redi;
+	while (ligne [i])
+	{
+		c->redi->type = ft_strdup(ligne[i]);
+		c->redi->there = 1;
+		i++;
+		if (ligne[i])
+		{
+			c->redi->word = ft_strdup(ligne[i]);
+			if(ligne[i + 1])
+			{
+				c->redi->next_redi = malloc(sizeof(t_redirection));
+				c->redi = c->redi->next_redi;
+				c->redi->there = 0;
+			}
+		}
+		i++;
+	}
+	c->redi->next_redi = malloc(sizeof(t_redirection));
+	c->redi = tmp;
+}
+
+/*
 void parse_redi(char **ligne, t_command *c)
 {
 	int j;
@@ -52,3 +89,4 @@ void parse_redi(char **ligne, t_command *c)
 	}
 	c->redi = tmp;
 }
+*/

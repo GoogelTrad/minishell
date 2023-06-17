@@ -46,7 +46,7 @@ void exec(int fd, t_command *c)
 
 void exec_redi(t_command *c)
 {
-    if(c->redi->there)
+    while (c->redi->there)
     {
         if (ft_strcmp(c->redi->type, ">") == 0)
             simple_droite(c);
@@ -56,6 +56,7 @@ void exec_redi(t_command *c)
             simple_gauche(c);
         else if (ft_strcmp(c->redi->type, "<<") == 0)
             double_gauche(c);
+        c->redi = c->redi->next_redi;
     }
 }
 

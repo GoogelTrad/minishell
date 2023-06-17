@@ -23,9 +23,12 @@ void free_env()
         free(g_minishell.env[i++]);
     free(g_minishell.env);
     i = 0;
-    while (g_minishell.fusion[i])
-        free(g_minishell.fusion[i++]);
-    free(g_minishell.fusion);
+    if (g_minishell.fusion)
+    {
+        while (g_minishell.fusion[i])
+            free(g_minishell.fusion[i++]);
+        free(g_minishell.fusion);
+    }
 }
 
 void free_cmd()
@@ -36,7 +39,7 @@ void free_cmd()
     t_redirection *actu;
 
     i = 0;
-    while(i <= g_minishell.num)
+    while(g_minishell.command[i].cmd)
     {
         j = 0;
         actu = g_minishell.command[i].redi;
@@ -53,6 +56,7 @@ void free_cmd()
         free(g_minishell.command[i].redi);
         i++;
     }
+    printf("coucou\n");
     free(g_minishell.command);
 }
 
