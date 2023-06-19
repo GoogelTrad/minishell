@@ -2,14 +2,14 @@ builtins
 
 fini ✅ :
 
-echo + option -n
-pwd 
-exit 
-env
+echo + option -n ✅
+pwd ✅
+exit ✅
+env ✅
 
 a faire :
 
-cd
+cd ✅ (by celian)
 export
 unset
 
@@ -25,3 +25,5 @@ Parsing :
 - Gerer les pipes ✅
 
 Mourir. ✅
+
+-Multis redirection y'a un seg fault.

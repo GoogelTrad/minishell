@@ -48,7 +48,7 @@ void exec(int fd, t_command *c)
 
 void exec_redi(t_command *c)
 {
-    while (c->redi->there && c->redi)
+    while (c->redi->there)
     {
         if (ft_strcmp(c->redi->type, ">") == 0)
             simple_droite(c);

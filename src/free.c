@@ -46,15 +46,12 @@ void free_cmd()
         while(g_minishell.command[i].option[j])
             free(g_minishell.command[i].option[j++]);
         free(g_minishell.command[i].cmd);
-        while(g_minishell.command[i].redi)
+        while(g_minishell.command[i].redi->there)
         {
             tmp = actu;
             actu = actu->next_redi;
-            if (tmp->there)
-            {
-                free(tmp->type);
-                free(tmp->word);
-            }
+            free(tmp->type);
+            free(tmp->word);
         }
         free(g_minishell.command[i].redi);
         i++;
