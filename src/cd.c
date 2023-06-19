@@ -58,7 +58,7 @@ void    pwd_front(char *path, int i)
     char *cpy;
 
     j = 0;
-    while(path[j] != '/')
+    while (path[j] != '/')
         j++;
     g_minishell.env[i] = ft_strjoin(g_minishell.env[i], "/");
     cpy = ft_strndup(path, j);
