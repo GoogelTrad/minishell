@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/12 22:07:33 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:00:19 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char **av, char **env)
 	g_minishell.env = copy_env(env);
 	while(1)
 	{
-		g_minishell.num = 0;
 		ligne = readline("MiniShell> ");
 		if (ligne[0])
 		{

@@ -50,13 +50,15 @@ void free_cmd()
         {
             tmp = actu;
             actu = actu->next_redi;
-            free(tmp->type);
-            free(tmp->word);
+            if (tmp->there)
+            {
+                free(tmp->type);
+                free(tmp->word);
+            }
         }
         free(g_minishell.command[i].redi);
         i++;
     }
-    printf("coucou\n");
     free(g_minishell.command);
 }
 

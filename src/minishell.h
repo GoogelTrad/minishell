@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/16 23:35:35 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:08:52 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef struct s_redirection
 {
@@ -92,6 +93,8 @@ void		pwd(int fd);
 //builtins2.c
 void		ft_exit(t_command *c);
 void		env(int fd, t_command *c);
+void		cd(t_command *c);
+void		change_pwd(char *path);
 
 //utils_redi.c
 void parse_redi(char **ligne, t_command *c);

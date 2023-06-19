@@ -40,13 +40,15 @@ void exec(int fd, t_command *c)
         pwd(fd);
     else if (ft_strcmp(c->cmd, "env") == 0)
         env(fd, c);
+    else if (ft_strcmp(c->cmd, "cd") == 0)
+        cd(c);
     else
         exec_others(c);
 }
 
 void exec_redi(t_command *c)
 {
-    while (c->redi->there)
+    while (c->redi->there && c->redi)
     {
         if (ft_strcmp(c->redi->type, ">") == 0)
             simple_droite(c);
