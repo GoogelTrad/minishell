@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/19 14:08:52 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/19 22:12:04 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ void		pwd(int fd);
 //builtins2.c
 void		ft_exit(t_command *c);
 void		env(int fd, t_command *c);
-void		cd(t_command *c);
-void		change_pwd(char *path);
+
 
 //utils_redi.c
 void parse_redi(char **ligne, t_command *c);
@@ -120,5 +119,9 @@ void exec_fork(char *fichier, t_command *c);
 
 //free.c
 void free_all();
+
+//cd.c
+void		cd(t_command *c);
+void		change_pwd(char *path);
 
 #endif
