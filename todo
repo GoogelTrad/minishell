@@ -9,10 +9,13 @@ env ✅
 
 a faire :
 
-cd ✅ (by celian)
+cd ✅ (by celian) faire l'exception de supprimer le repertoire courant.
 export
 unset
 
+autre :
+
+Gere le env -i
 
 Parsing :
 
@@ -27,3 +30,5 @@ Parsing :
 Mourir. ✅
 
 -Multis redirection y'a un seg fault.
+
+-Gerer les signaux
