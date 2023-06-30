@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/19 22:12:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/30 19:01:28 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char		**copy_env(char **env);
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_strndup(char *str, int n);
 int			ft_strlen(char *str);
-void		affiche(t_command *command);
+void		affiche(t_command *c);
 int			ft_strncmp(char *s1, char *s2, size_t n);
 
 //utils_builtins.c

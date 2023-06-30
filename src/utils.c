@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/05/20 16:18:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/06/30 19:02:57 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,15 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void affiche(t_command *command)
+void affiche(t_command *c)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (command[i].cmd)
+	printf("cmd = %s\n", c->cmd);
+	while(c->option[i])
 	{
-		j = 0;
-		printf("cmd = %s ", command[i].cmd);
-		printf("option = ");
-		while(command[i].option[j])
-			printf("%s ", command[i].option[j++]);
-		if (command[i].redi->type)
-			printf("type = %s ", command[i].redi->type);
-		if (command[i].redi->word)
-		printf("word = %s ", command[i].redi->word);
-		printf("\n");
+		printf("option = %s\n", c->option[i]);
 		i++;
 	}
 }

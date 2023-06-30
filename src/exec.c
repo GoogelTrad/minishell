@@ -101,6 +101,9 @@ void exec_fork(char *fichier, t_command *c)
             dup2(c->fd_out, 1);
         if (c->fd_in != 0)
             dup2(c->fd_in, 0);
+        int i = 0;
+        while(g_minishell.fusion[i])
+            printf("fusion = %s\n", g_minishell.fusion[i++]);
         execve(fichier, g_minishell.fusion, g_minishell.env);
         exit(0);
     }
