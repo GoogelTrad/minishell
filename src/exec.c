@@ -78,8 +78,10 @@ void    exec_others(t_command *c)
         {
             fusion = ft_strjoin(path[i], "/");
             fusion = ft_strjoin(fusion, c->cmd);
+            //printf("fusion = %s\n", fusion);
             if (open(fusion, O_RDONLY) > -1)
             {
+                
                 exec_fork(fusion, c);
                 break ;
             }
@@ -93,17 +95,14 @@ void exec_fork(char *fichier, t_command *c)
     int pid;
     int status;
 
-    pid = fork();
     fusion_exec(c);
+    pid = fork();
     if (pid == 0)
     {
         if (c->cmd)
             dup2(c->fd_out, 1);
         if (c->fd_in != 0)
             dup2(c->fd_in, 0);
-        int i = 0;
-        while(g_minishell.fusion[i])
-            printf("fusion = %s\n", g_minishell.fusion[i++]);
         execve(fichier, g_minishell.fusion, g_minishell.env);
         exit(0);
     }
@@ -123,6 +122,7 @@ void fusion_exec(t_command *c)
     g_minishell.fusion = malloc(sizeof(char *) + (i + 2));
     i = 0;
     g_minishell.fusion[0] = c->cmd;
+    //affiche(c);
     while (c->option[i])
     {
         g_minishell.fusion[i + 1] = ft_strdup(c->option[i]);

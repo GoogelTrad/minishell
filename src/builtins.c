@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:32:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/06/19 12:58:21 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/01 13:44:49 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	echo(int fd, t_command *c)
 	int j;
 	int	new_line;
 
-	new_line = 0;	
+	new_line = 0;
 	if (c->option[0] && c->option[0][0] == '-' && check_option_echo(c->option[0] + 1))
 		new_line = 1;
 	i = 0 + new_line;

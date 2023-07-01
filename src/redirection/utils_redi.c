@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/19 12:36:19 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/01 15:13:38 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void parse_redi(char **ligne, t_command *c)
 	t_redirection *tmp;
 
 	i = 0;
-	c->option = malloc(sizeof(char *) + 1);
+	while (ligne[i] && ligne[i][0] != '>' && ligne[i][0] != '<')
+		i++;
+	c->option = malloc(sizeof(char *) * (i + 1));
+	i = 0;
 	while (ligne[i] && ligne[i][0] != '>' && ligne[i][0] != '<')
 	{
-		c->option = malloc(sizeof(char *) * (i + 1));
 		c->option[i] = ft_strdup(ligne[i]);
 		i++;
 	}
