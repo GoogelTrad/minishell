@@ -34,3 +34,11 @@ Mourir. ✅
 -Gerer les signaux.
 
 -($PWD=) doit avoir le = a la fin.
+
+- cat << k > prout.txt | cat prout.txt seg fault, a savoir pourquoi.✅
+Ca crash dans la redi directement.✅
+Au moment de l'exec_redi.✅
+
+
+- cat << k > prout.txt | cat prout.txt, n'a pas le bon fonctionnement.
+prout.txt est vide est rien ne s'affiche sur l'execution de la commande.

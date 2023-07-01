@@ -41,7 +41,6 @@ void double_gauche(t_command *c)
         }
     } while (ft_strcmp(ligne, c->redi->word) != 0);
     close(pipes[1]);
-    
 }
 
 char *coucou(char *ligne)

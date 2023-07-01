@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:51:29 by elisa             #+#    #+#             */
-/*   Updated: 2023/06/19 22:11:29 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/02 00:29:11 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_exit(t_command *c)
 			exit(1);
 		}
 		else
-			g_minishell.status = ft_atoi(c->option[0 ]); 
+			g_minishell.status = ft_atoi(c->option[0]); 
 	}
 	ft_putstr("exit\n");
 	free_all();
-	exit(0); 
+	exit(1); 
 }
 
 void	env(int fd, t_command *c)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/01 15:13:38 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/02 00:22:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void parse_redi(char **ligne, t_command *c)
 		i++;
 	}
 	c->redi->next_redi = malloc(sizeof(t_redirection));
+	c->redi->next_redi->there = 0;
 	c->redi = tmp;
 }
 
