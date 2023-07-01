@@ -31,4 +31,6 @@ Mourir. ✅
 
 -Multis redirection y'a un seg fault.
 
--Gerer les signaux
+-Gerer les signaux.
+
+-($PWD=) doit avoir le = a la fin.

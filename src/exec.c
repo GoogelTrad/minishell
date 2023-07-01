@@ -119,10 +119,10 @@ void fusion_exec(t_command *c)
     i = 0;
     while (c->option[i])
         i++;
-    g_minishell.fusion = malloc(sizeof(char *) + (i + 2));
+    g_minishell.fusion = malloc(sizeof(char *) + (i + 1));
     i = 0;
-    g_minishell.fusion[0] = c->cmd;
-    //affiche(c);
+    g_minishell.fusion[0] = ft_strdup(c->cmd);
+
     while (c->option[i])
     {
         g_minishell.fusion[i + 1] = ft_strdup(c->option[i]);
