@@ -44,7 +44,7 @@ void    pwd_back(char *path, int i, int j, int n)
     char *cpy;
 
     j--;
-    while (g_minishell.env[i][j] != '/')
+    while (g_minishell.env[i][j] && g_minishell.env[i][j] != '/')
         j--;
     cpy = ft_strndup(g_minishell.env[i] + n, j - n);
     g_minishell.env[i] = ft_strdup(ft_strjoin(ft_strndup(g_minishell.env[i], n), cpy));
@@ -58,7 +58,7 @@ void    pwd_front(char *path, int i)
     char *cpy;
 
     j = 0;
-    while (path[j] != '/')
+    while (path[j] && path[j] != '/')
         j++;
     g_minishell.env[i] = ft_strjoin(g_minishell.env[i], "/");
     cpy = ft_strndup(path, j);
