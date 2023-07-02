@@ -11,7 +11,7 @@ a faire :
 
 cd ✅ (by celian) faire l'exception de supprimer le repertoire courant.
 export
-unset
+unset ✅ (by celian)
 
 autre :
 
@@ -31,7 +31,10 @@ Mourir. ✅
 
 -Multis redirection y'a un seg fault.✅
 
--Gerer les signaux.
+Signaux : 
+	-ctrl-c✅
+	-ctrl-d (faut detourner le ctrl-\ pour le mettre sur le ctrl-d)
+	-ctrl-\ (tej son signal de base pour le desactiver (NULL))
 
 -($PWD=) doit avoir le = a la fin.
 
@@ -43,3 +46,4 @@ Au moment de l'exec_redi.✅
 - cat << k > prout.txt | cat prout.txt, n'a pas le bon fonctionnement.✅
 prout.txt est vide est rien ne s'affiche sur l'execution de la commande.✅
 
+-echo "$ coucou" n'as pas le bon fonctionnement

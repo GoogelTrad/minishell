@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/06/30 19:02:57 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/02 18:13:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,22 @@ void affiche(t_command *c)
 	{
 		printf("option = %s\n", c->option[i]);
 		i++;
+	}
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*str;
+	size_t	i;
+
+	str = s;
+	i = 0;
+	if (n)
+	{
+		while (i < n)
+		{
+			str[i] = '\0';
+			i++;
+		}
 	}
 }

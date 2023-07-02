@@ -43,6 +43,8 @@ void exec(int fd, t_command *c)
         env(fd, c);
     else if (ft_strcmp(c->cmd, "cd") == 0)
         cd(c);
+    else if (ft_strcmp(c->cmd, "unset") == 0)
+        unset(c);
     else
         exec_others(c);
 }
