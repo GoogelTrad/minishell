@@ -29,7 +29,7 @@ Parsing :
 
 Mourir. ✅
 
--Multis redirection y'a un seg fault.
+-Multis redirection y'a un seg fault.✅
 
 -Gerer les signaux.
 
@@ -40,5 +40,6 @@ Ca crash dans la redi directement.✅
 Au moment de l'exec_redi.✅
 
 
-- cat << k > prout.txt | cat prout.txt, n'a pas le bon fonctionnement.
-prout.txt est vide est rien ne s'affiche sur l'execution de la commande.
+- cat << k > prout.txt | cat prout.txt, n'a pas le bon fonctionnement.✅
+prout.txt est vide est rien ne s'affiche sur l'execution de la commande.✅
+

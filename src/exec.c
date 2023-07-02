@@ -18,11 +18,12 @@ void belle_exec(t_command *c)
 {
     int pipes[2];
 
-    exec_redi(c);
     pipe(pipes);
+    exec_redi(c);
     if ((c + 1)->cmd)
     {
-        c->fd_out = pipes[1];
+        if (c->fd_out == 1)
+            c->fd_out = pipes[1];
         (c + 1)->fd_in = pipes[0];
     }
     exec(c->fd_out, c);
