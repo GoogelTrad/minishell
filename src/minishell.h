@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/02 20:04:19 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/03 16:56:34 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,7 @@ void		free_all();
 void		cd(t_command *c);
 void		change_pwd(char *path);
 
-//signal.c
-void		set_signal_action(void);
-void		get_signal(int signal);
+//main.c
+void		get_sigint(int signal);
 
 #endif
