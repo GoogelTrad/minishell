@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/03 16:56:34 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/03 18:13:56 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ void		change_pwd(char *path);
 
 //main.c
 void		get_sigint(int signal);
+void		bworded(t_command *c);
 
 #endif

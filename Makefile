@@ -18,7 +18,6 @@ SRCS =  src/main.c \
 		src/redirection/utils_redi.c \
 		src/redirection/double.c \
 		src/cd.c \
-		src/signal.c
 
 OBJC = ${SRCS:.c=.o}
 
