@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/03 20:03:33 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/03 20:12:08 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	g_minishell.env = copy_env(env);
 	signal(SIGINT, &get_sigint);
-	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		ligne = readline("MiniShell> ");
@@ -37,6 +36,7 @@ int	main(int ac, char **av, char **env)
 			g_minishell.ligne = ft_strdup(ligne);
 			ligne = var_env(ligne, g_minishell.env);
 			separate_cmd(ligne);
+			affiche(g_minishell.command);
 			bworded(g_minishell.command);
 			belle_exec(g_minishell.command);
 		}
