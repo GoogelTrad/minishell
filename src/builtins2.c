@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:51:29 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/02 00:29:11 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:00:46 by epraduro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,35 @@ void	env(int fd, t_command *c)
 			j = 0;
 			while (g_minishell.env[i][j])
 				write(fd, &g_minishell.env[i][j++], 1);
+			write(g_minishell.fd, "\n", 1);
+			i++;
+		}
+	}
+}
+
+void export(int fd, t_command *c)
+{
+	int i = 0;
+	int j;
+
+	if (!c->option[0])
+	{
+		while (g_minishell.env[i])
+		{
+			j = 0;
+			write(g_minishell.fd, "declare -x ", 11);
+			while (g_minishell.env[i][j])
+			{
+				if (g_minishell.env[i][j] == '=')
+				{
+					write(fd, &g_minishell.env[i][j], 1);
+					j++;
+					write(fd, "\"", 1);	
+				}
+				write(fd, &g_minishell.env[i][j], 1);
+				j++;
+			}
+			write(1, "\"", 1);
 			write(g_minishell.fd, "\n", 1);
 			i++;
 		}
