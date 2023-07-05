@@ -45,6 +45,8 @@ void exec(int fd, t_command *c)
         cd(c);
     else if (ft_strcmp(c->cmd, "unset") == 0)
         unset(c);
+    else if (ft_strcmp(c->cmd, "export") == 0)
+        export(fd, c);
     else
         exec_others(c);
 }
