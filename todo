@@ -48,5 +48,6 @@ prout.txt est vide est rien ne s'affiche sur l'execution de la commande.✅
 
 -echo "$ coucou" n'as pas le bon fonctionnement
 
--cat est bloquant gere l'exception sur le ctrl-\
-on sort du cat mais le signal ne reprend pas son comportement qu'il faut
+-cat est bloquant gere l'exception sur le ctrl-\✅
+on sort du cat mais le signal ne reprend pas son comportement qu'il faut✅
+-faut faire sur les autres fonctions bloquantes mais pas toute.

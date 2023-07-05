@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/02 16:45:54 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:00:45 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ char *var_env(char *ligne, char **env)
 		if (ligne[i] == '\'')
 			quote = '\'';
 		if (ligne[i] == '"' && quote != '\'')
-					quote = '"';
-		if (ligne[i] == '$' && quote != '\'')
+			quote = '"';
+		if (ligne[i] == '$' && quote != '\'' && !ft_isalnum(ligne + 1))
 		{
 			j = i++;
 			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != quote)
@@ -76,6 +76,7 @@ char *var_env(char *ligne, char **env)
 			quote = ' ';
 		i++;
 	}
+	printf("ligne = %s\n", ligne);
 	return (ligne);
 }
 

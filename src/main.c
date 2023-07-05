@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/03 20:12:08 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/05 17:54:37 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGINT, &get_sigint);
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
 		ligne = readline("MiniShell> ");
 		if(ligne == NULL)
 		{
@@ -36,7 +37,6 @@ int	main(int ac, char **av, char **env)
 			g_minishell.ligne = ft_strdup(ligne);
 			ligne = var_env(ligne, g_minishell.env);
 			separate_cmd(ligne);
-			affiche(g_minishell.command);
 			bworded(g_minishell.command);
 			belle_exec(g_minishell.command);
 		}
@@ -55,14 +55,14 @@ void get_sigint(int signal)
 
 void blocksig(int signal)
 {
-	printf("Quit : 3");
-	get_sigint(signal);
+	(void)signal;
+	printf("Quit : 3\n");
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 void bworded(t_command *c)
 {
 	if (ft_strcmp(c->cmd, "cat") == 0 && c->option[0] == NULL)
 		signal(SIGQUIT, &blocksig);
-	else
-		signal(SIGQUIT, SIG_IGN);
 }
