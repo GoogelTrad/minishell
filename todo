@@ -33,10 +33,10 @@ Mourir. ✅
 
 Signaux : 
 	-ctrl-c✅
-	-ctrl-d (faut detourner le ctrl-\ pour le mettre sur le ctrl-d)
-	-ctrl-\ (tej son signal de base pour le desactiver (NULL))
+	-ctrl-d (faut detourner le ctrl-\ pour le mettre sur le ctrl-d)✅
+	-ctrl-\ (tej son signal de base pour le desactiver (NULL))✅
 
--($PWD=) doit avoir le = a la fin.
+-($PWD=) doit avoir le = a la fin.✅
 
 - cat << k > prout.txt | cat prout.txt seg fault, a savoir pourquoi.✅
 Ca crash dans la redi directement.✅
@@ -46,8 +46,13 @@ Au moment de l'exec_redi.✅
 - cat << k > prout.txt | cat prout.txt, n'a pas le bon fonctionnement.✅
 prout.txt est vide est rien ne s'affiche sur l'execution de la commande.✅
 
--echo "$ coucou" n'as pas le bon fonctionnement
+-echo "$ coucou" n'as pas le bon fonctionnement✅
 
 -cat est bloquant gere l'exception sur le ctrl-\✅
 on sort du cat mais le signal ne reprend pas son comportement qu'il faut✅
 -faut faire sur les autres fonctions bloquantes mais pas toute.
+
+echo $assas...
+affiche "..."
+echo $..
+affiche "$.."

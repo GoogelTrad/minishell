@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/05 18:00:45 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/06 00:54:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	separate_cmd(char *ligne)
 	{
 		g_minishell.command[i].redi = malloc(sizeof(t_redirection));
 		res_ligne = ft_split(res_tot[i], ' ');
+		res_ligne = display_quote(res_ligne);
 		g_minishell.command[i].cmd = res_ligne[0];
 		g_minishell.command[i].fd_in = 0;
 		g_minishell.command[i].fd_out = 1;
@@ -41,6 +42,54 @@ void	separate_cmd(char *ligne)
 }
 
 char *var_env(char *ligne, char **env)
+{
+	int i;
+	int j;
+	char quote;
+	char *var;
+	char *replace;
+
+	if (env)
+		i = 0;
+	i = 0;
+	quote = ' ';
+	while (ligne[i])
+	{
+		if (ligne[i] == '\'')
+			quote = '\'';
+		if (ligne[i] == '"' && quote != '\'')
+			quote = '"';
+		if (ligne[i] == '$' && quote != '\'')
+		{
+			j = i++;
+			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != quote && isCharAlnum(ligne[i]))
+			{
+				if (ligne[i] == '"' && quote == '"')
+					quote = ' ';
+				if (ligne[i] == '\'' && quote == '\'')
+					quote = ' ';
+				i++;
+			}
+			var = ft_strndup(ligne + j, i - j);
+			replace = getenv(var + 1);
+			if (!replace)
+			{
+				if (!ft_isalnum(var + 1))
+					replace = ft_strdup(var + 1);
+				else if (ft_isdigit(var[1]))
+					replace = ft_strdup(var_arg(g_minishell.av, var));
+			}
+			ligne = replace_value(replace, ligne, j);
+			i = j + 1;
+		}
+		if (ligne[i] == '\'' && quote != '\'')
+			quote = ' ';
+		i++;
+	}
+	return (ligne);
+}
+
+/*char *var_env(char *ligne, char **env)
 {
 	int i;
 	int j;
@@ -76,9 +125,8 @@ char *var_env(char *ligne, char **env)
 			quote = ' ';
 		i++;
 	}
-	printf("ligne = %s\n", ligne);
 	return (ligne);
-}
+}*/ 
 
 char	*replace_var(char *var, char **env)
 {
@@ -102,18 +150,14 @@ char	*replace_var(char *var, char **env)
 	return (res);
 }
 
-char	*replace_value(char *var, char *ligne)
+char	*replace_value(char *var, char *ligne, int i)
 {
 	char *temp;
 	char *res;
-	int i;
 	int j;
 
-	i = 0;
-	while (ligne[i] && ligne[i] != '$')
-		i++;
 	j = i++;
-	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != '"')
+	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != '"' && isCharAlnum(ligne[i]))
 		i++;
 	temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
 	res = ft_strndup(ligne, j);

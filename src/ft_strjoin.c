@@ -54,3 +54,17 @@ char	*ft_strdup(char *str)
 	dest[i] = 0; 
 	return (dest);
 }
+
+int isCharAlnum(char c)
+{
+	if (!((48 <= c && 57 >= c) || (65 <= c && 90 >= c) || (97 <= c && 122 >= c)))
+		return (0);
+	return (1);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}

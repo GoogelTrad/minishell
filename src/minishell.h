@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/05 18:04:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/06 00:36:16 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_minishell
 	char *ligne;
 	char **env;
 	char **fusion;
+	char **av;
 	int fd;
 	t_command *command;
 }	t_minishell;
@@ -58,7 +59,7 @@ void    	rl_replace_line(const char *text, int clear_undo);
 void		separate_cmd(char *ligne);
 char		*var_env(char *ligne, char **env);
 char		*replace_var(char *var, char **env);
-char		*replace_value(char *var, char *ligne);
+char		*replace_value(char *var, char *ligne, int i);
 char		**copy_env(char **env);
 
 //utils.c
@@ -78,6 +79,8 @@ int			ft_atoi(const char *str);
 //ft_strjoin.c
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strdup(char *str);
+int			isCharAlnum(char c);
+int			ft_isdigit(int c);
 
 //ft_split.c
 char		**ft_split(char *str, char sep);
@@ -87,7 +90,6 @@ int			count_words(const char *str, char sep);
 //quote.c
 char		**separate_quote(char *str, char sep);
 int			count_words_quote(char *str, char sep);
-char		*replace(char *str, int start, int end, char quote);
 
 //builtins.c
 void		echo(int fd, t_command *c);
@@ -102,6 +104,8 @@ void 		export(int fd, t_command *c);
 
 //utils_redi.c
 void		parse_redi(char **ligne, t_command *c);
+char		**display_quote(char **str);
+char		*replace(char *str, int start, int end);
 
 //simple.c
 void		simple_droite(t_command *c);
@@ -132,5 +136,7 @@ void		change_pwd(char *path);
 //main.c
 void		get_sigint(int signal);
 void		bworded(t_command *c);
+void		blocksig(int signal);
+char 		*var_arg(char **av, char *ligne);
 
 #endif

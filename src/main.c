@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/05 18:04:38 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/06 00:46:58 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	main(int ac, char **av, char **env)
 {
 	char	*ligne;
 	
-	(void)av;
 	(void)ac;
 	g_minishell.env = copy_env(env);
 	signal(SIGINT, &get_sigint);
+	g_minishell.av = copy_env(av);
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -65,4 +65,30 @@ void bworded(t_command *c)
 {
 	if (ft_strcmp(c->cmd, "cat") == 0 && c->option[0] == NULL)
 		signal(SIGQUIT, &blocksig);
+}
+
+char *var_arg(char **av, char *ligne)
+{
+	char *res;
+	char *tmp;
+	int i;
+	int nb;
+
+	i = 0;
+	while (ligne[i])
+	{
+		if (ligne[i] == '$' && ft_isdigit(ligne[i + 1]))
+		{
+			tmp = ft_strndup(ligne, i - 1);
+			nb = ligne[i + 1] - '0';
+			if (av[nb])
+				res = ft_strdup(av[nb]);
+			else
+				res = "";
+			tmp = ft_strjoin(tmp, res);
+			ligne = ft_strjoin(tmp, ligne + i + 2);
+		}
+		i++;
+	}
+	return (ligne);
 }

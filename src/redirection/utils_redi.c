@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/02 16:46:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/05 21:31:17 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,43 +53,58 @@ void parse_redi(char **ligne, t_command *c)
 	c->redi = tmp;
 }
 
-/*
-void parse_redi(char **ligne, t_command *c)
+char **display_quote(char **str)
 {
+	char quote;
+	int i;
 	int j;
-	int n;
-	char *str;
-	t_redirection *tmp;
-
-	j = 0;
-	n = 0;
-	while (ligne[n] && ligne[n][0] != '<' && ligne[n][0] != '>')
-		n++;
-	c->option = malloc(sizeof(char *) + (n + 1));
-	while(ligne[j] && j < n)
+	int k;
+	
+	i = 0;
+	while (str[i])
 	{
-		str = ft_strndup(ligne[j], ft_strlen(ligne[j]));
-		c->option[j] = str;
-		j++;
-	}
-	c->option[j] = NULL;
-	tmp = c->redi;
-	while (ligne[n])
-	{
-		if(ligne[n][0] == '<' || ligne[n][0] == '>')
+		j = 0;
+		while (str[i][j])
 		{
-			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
-			c->redi->type = str;
-			c->redi->there = 1;
+			if ((str[i][j] == '"' || str[i][j] == '\'') && str[i][j - 1] != '\\')
+			{
+				k = ++j;
+				quote = str[i][j - 1];
+				while (str[i][j] && str[i][j] != quote && str[i][j - 1] != '\\')
+					j++;
+				str[i] = replace(str[i], k - 1, j + 1);
+			}
+			j++;
 		}
-		else
-		{
-			str = ft_strndup(ligne[n], ft_strlen(ligne[n]));
-			c->redi->word = str;
-			c->redi = c->redi->next_redi;
-		}
-		n++;
+		i++;
 	}
-	c->redi = tmp;
+	return (str);
 }
-*/
+
+char *replace(char *str, int start, int end)
+{
+	int i;
+	
+	i = 0;
+	while (i < start && start)
+		i++;
+	start = -1;
+	while (str[i])
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
+	i = 0;
+	while(i < end && end)
+		i++;
+	end = -1;
+	if (!str[i])
+		str[i - 2] = 0;
+	while (str[i])
+	{
+		printf("str[i] = %c\n", str[i]);
+		str[i] = str[i + 1];
+		i++;
+	}
+	return (str);
+}
