@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/06 00:36:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/06 18:20:50 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	int status;
+	int ac;
 	char *ligne;
 	char **env;
 	char **fusion;
@@ -137,6 +138,6 @@ void		change_pwd(char *path);
 void		get_sigint(int signal);
 void		bworded(t_command *c);
 void		blocksig(int signal);
-char 		*var_arg(char **av, char *ligne);
+char 		*var_arg(char **av, char *ligne, int ac);
 
 #endif
