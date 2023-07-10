@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:07:23 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:28:28 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void    	rl_replace_line(const char *text, int clear_undo);
 
 //parsing.c
 void		separate_cmd(char *ligne);
-char		*var_env(char *ligne);
+char		*var_env(char *ligne, int j);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne, int i);
 char		**copy_env(char **env);

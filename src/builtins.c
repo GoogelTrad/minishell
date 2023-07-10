@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:32:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/02 17:45:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:30:13 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	pwd(int fd)
 	int i;
 
 	i = 0;
-	result = var_env("$PWD", g_minishell.env);
+	result = var_env("$PWD", 0);
 	if (result != NULL)
 	{
 		while (result[i])
@@ -57,7 +57,7 @@ void unset(t_command *c)
 	int i;
 
 	i = 0;
-	if (var_env(c->option[0], g_minishell.env))
+	if (var_env(c->option[0], 0))
 	{
 		while(g_minishell.env[i] && ft_strncmp(c->option[0], g_minishell.env[i], ft_strlen(c->option[0])) != 0)
 			i++;

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:24:48 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:26:49 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ char *dolar_dolar(void)
 	char *res;
 
 	pid = getpid();
-	printf("coucou\n");
 	res = ft_itoa(pid);
-	printf("res = %s\n", res);
 	return (res);
 }
