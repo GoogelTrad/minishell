@@ -78,7 +78,7 @@ void	exec_others(t_command *c)
 		exec_fork(c->cmd, c);
 	else
 	{
-		path = ft_split(var_env("$PATH", g_minishell.env), ':');
+		path = ft_split(var_env("$PATH", 0), ':');
 		while (path[i])
 		{
 			fusion = ft_strjoin(path[i], "/");

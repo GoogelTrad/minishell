@@ -57,3 +57,4 @@ echo $assas...
 affiche "..."
 echo $..
 affiche "$.."
+echo $$ -> dans replace value j'ai echo ID$$ et non echo ID en sortie.

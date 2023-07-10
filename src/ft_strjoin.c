@@ -55,7 +55,7 @@ char	*ft_strdup(char *str)
 	return (dest);
 }
 
-int	ischaralnum(char c)
+int	isCharAlnum(char c)
 {
 	if (!((48 <= c && 57 >= c) || (65 <= c && 90 >= c)
 			|| (97 <= c && 122 >= c)))
