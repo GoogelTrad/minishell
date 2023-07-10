@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/06 00:36:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/06 11:58:29 by epraduro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		unset(t_command *c);
 //builtins2.c
 void		ft_exit(t_command *c);
 void		env(int fd, t_command *c);
-void 		export(int fd, t_command *c);
+void 		export(t_command *c);
 
 
 //utils_redi.c

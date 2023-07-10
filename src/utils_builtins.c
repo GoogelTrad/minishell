@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:07:53 by elisa             #+#    #+#             */
-/*   Updated: 2023/06/05 20:27:47 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:30:39 by epraduro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ void	ft_putstr(char *s)
 int	ft_isalnum(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{
-		if (!((48 <= str[i] && 57 >= str[i]) || (65 <= str[i] && 90 >= str[i]) || (97 <= str[i] && 122 >= str[i])))
+		if (!((48 <= str[i] && 57 >= str[i]) || (65 <= str[i] && 90 >= str[i])
+				|| (97 <= str[i] && 122 >= str[i])))
 			return (0);
 		i++;
 	}
@@ -74,8 +75,8 @@ int	ft_atoi(const char *str)
 		i++;
 	if (str[i] == '-')
 	{
-			element *= -1;
-			i++;
+		element *= -1;
+		i++;
 	}
 	else if (str[i] == '+')
 		i++;

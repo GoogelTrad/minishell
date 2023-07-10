@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-extern t_minishell g_minishell;
+extern t_minishell	g_minishell;
 
 void	cd(t_command *c)
 {
-	int verif;
-	
+	int	verif;
+
 	if (c->option[0])
 	{
 		verif = chdir(c->option[0]);
@@ -28,50 +28,51 @@ void	cd(t_command *c)
 	}
 }
 
-void    old_pwd(int i)
+void	old_pwd(int i)
 {
-    int j;
+	int	j;
 
-    j = 0;
-    while (ft_strncmp(g_minishell.env[j], "OLDPWD", 6) != 0)
-        j++;
-    g_minishell.env[j] = ft_strjoin(ft_strndup(g_minishell.env[j], 7), 
-        ft_strdup(g_minishell.env[i] + 4));
+	j = 0;
+	while (ft_strncmp(g_minishell.env[j], "OLDPWD", 6) != 0)
+		j++;
+	g_minishell.env[j] = ft_strjoin(ft_strndup(g_minishell.env[j], 7), 
+			ft_strdup(g_minishell.env[i] + 4));
 }
 
-void    pwd_back(char *path, int i, int j, int n)
+void	pwd_back(char *path, int i, int j, int n)
 {
-    char *cpy;
+	char	*cpy;
 
-    j--;
-    while (g_minishell.env[i][j] && g_minishell.env[i][j] != '/')
-        j--;
-    cpy = ft_strndup(g_minishell.env[i] + n, j - n);
-    g_minishell.env[i] = ft_strdup(ft_strjoin(ft_strndup(g_minishell.env[i], n), cpy));
-    if (path[2])
-        change_pwd(path + 3);
+	j--;
+	while (g_minishell.env[i][j] && g_minishell.env[i][j] != '/')
+		j--;
+	cpy = ft_strndup(g_minishell.env[i] + n, j - n);
+	g_minishell.env[i] = ft_strdup(ft_strjoin
+			(ft_strndup(g_minishell.env[i], n), cpy));
+	if (path[2])
+		change_pwd(path + 3);
 }
 
-void    pwd_front(char *path, int i)
+void	pwd_front(char *path, int i)
 {
-    int j;
-    char *cpy;
+	int		j;
+	char	*cpy;
 
-    j = 0;
-    while (path[j] && path[j] != '/')
-        j++;
-    g_minishell.env[i] = ft_strjoin(g_minishell.env[i], "/");
-    cpy = ft_strndup(path, j);
-    g_minishell.env[i] = ft_strjoin(g_minishell.env[i], cpy);
-    if (path[j + 1])
-        change_pwd(path + j + 1);
+	j = 0;
+	while (path[j] && path[j] != '/')
+		j++;
+	g_minishell.env[i] = ft_strjoin(g_minishell.env[i], "/");
+	cpy = ft_strndup(path, j);
+	g_minishell.env[i] = ft_strjoin(g_minishell.env[i], cpy);
+	if (path[j + 1])
+		change_pwd(path + j + 1);
 }
 
 void	change_pwd(char *path)
 {
-	int i;
-	int j;
-	int n;
+	int	i;
+	int	j;
+	int	n;
 
 	i = 0;
 	n = 0;
@@ -80,12 +81,13 @@ void	change_pwd(char *path)
 	j = ft_strlen(g_minishell.env[i]);
 	while (g_minishell.env[i][n] != '/')
 		n++;
-    old_pwd(i);
+	old_pwd(i);
 	if (path[0] == '/')
-	{	
+	{
 		if (path[ft_strlen(path) - 1] == '/')
 			path = ft_strndup(path, ft_strlen(path) - 1);
-		g_minishell.env[i] = ft_strdup(ft_strjoin(ft_strndup(g_minishell.env[i], n), path));
+		g_minishell.env[i] = ft_strdup(ft_strjoin
+				(ft_strndup(g_minishell.env[i], n), path));
 	}
 	else
 	{
