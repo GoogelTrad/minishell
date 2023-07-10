@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/06 18:20:50 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:07:23 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,16 @@ void    	rl_replace_line(const char *text, int clear_undo);
 
 //parsing.c
 void		separate_cmd(char *ligne);
-char		*var_env(char *ligne, char **env);
+char		*var_env(char *ligne);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne, int i);
 char		**copy_env(char **env);
+
+//utils_parsing.c
+char		choose_quote(char c, char quote);
+char		*write_var(char *ligne, char *var, char *replace, int i, int j);
+int			while_env(char *ligne, int i[2], char *replace, char *var, char quote);
+void		treat_env(int i[2], char **ligne);
 
 //utils.c
 int			ft_strcmp(char *s1, char *s2);
@@ -87,10 +93,12 @@ int			ft_isdigit(int c);
 char		**ft_split(char *str, char sep);
 int			char_is_sep(char c, char sep);
 int			count_words(const char *str, char sep);
+char		*ft_itoa(int n);
 
 //quote.c
 char		**separate_quote(char *str, char sep);
 int			count_words_quote(char *str, char sep);
+char		*dolar_dolar(void);
 
 //builtins.c
 void		echo(int fd, t_command *c);

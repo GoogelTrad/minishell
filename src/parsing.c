@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/06 18:23:52 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:13:53 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,52 +41,51 @@ void	separate_cmd(char *ligne)
 	g_minishell.command[i].cmd = NULL;
 }
 
-char *var_env(char *ligne, char **env)
+char *var_env(char *ligne)
 {
-	int i;
-	int j;
+	int i[2];
+	int incr;
 	char quote;
 	char *var;
 	char *replace;
 
-	if (env)
-		i = 0;
-	i = 0;
+	i[0] = 0;
 	quote = ' ';
-	while (ligne[i])
+	while (ligne[i[0]])
 	{
-		if (ligne[i] == '\'')
-			quote = '\'';
-		if (ligne[i] == '"' && quote != '\'')
-			quote = '"';
-		if (ligne[i] == '$' && quote != '\'')
+		quote = choose_quote(ligne[i[0]], quote);
+		if (ligne[i[0]] == '$' && quote != '\'')
 		{
-			j = i++;
-			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != quote && isCharAlnum(ligne[i]))
+			i[1] = i[0]++;
+			while (ligne[i[0]] && ligne[i[0]] != ' ' && ligne[i[0]] != '$' && ligne[i[0]] != quote && isCharAlnum(ligne[i[0]]))
 			{
-				if (ligne[i] == '"' && quote == '"')
-					quote = ' ';
-				if (ligne[i] == '\'' && quote == '\'')
-					quote = ' ';
-				i++;
+				quote = choose_quote(ligne[i[0]], quote);
+				i[0]++;
 			}
-			var = ft_strndup(ligne + j, i - j);
-			replace = getenv(var + 1);
-			if (!replace)
+			if (ligne[i[0]] == '$')
 			{
-				if (!ft_isalnum(var + 1))
-					replace = ft_strdup(var + 1);
-				else if (ft_isdigit(var[1]))
+				replace = dolar_dolar();
+				incr = 2;
+			}
+			else
+			{
+				var = ft_strndup(ligne + i[1], i[0] - i[1]);
+				replace = getenv(var + 1);
+				if (!replace)
 				{
-					replace = ft_strdup(var_arg(g_minishell.av, var, g_minishell.ac));
+					if (!ft_isalnum(var + 1))
+						replace = ft_strdup(var + 1);
+					else if (ft_isdigit(var[1]))
+					{
+						replace = ft_strdup(var_arg(g_minishell.av, var, g_minishell.ac));
+					}
 				}
+				incr = 1;
 			}
-			ligne = replace_value(replace, ligne, j);
-			i = j + 1;
+			ligne = replace_value(replace, ligne, i[1]);
+			i[0] = i[1] + incr;
 		}
-		if (ligne[i] == '\'' && quote != '\'')
-			quote = ' ';
-		i++;
+		i[0]++;
 	}
 	return (ligne);
 }
