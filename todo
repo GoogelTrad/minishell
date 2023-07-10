@@ -50,25 +50,10 @@ prout.txt est vide est rien ne s'affiche sur l'execution de la commande.✅
 
 -cat est bloquant gere l'exception sur le ctrl-\✅
 on sort du cat mais le signal ne reprend pas son comportement qu'il faut✅
+
 -faut faire sur les autres fonctions bloquantes mais pas toute.
 
 echo $assas...
 affiche "..."
 echo $..
 affiche "$.."
-
-
-norme :
-
-double.c : 16 erreurs dues a do
-simple  ✅
-builtins ✅
-builtins2 ✅ (manque la fonction export qui fait plus de 25 lignes)
-cd ✅ (manque la fonction change_pwd qui fait plus de 25 lignes)
-exec ✅ (trop de fonction dans le fichier)
-free ✅
-ft_split ✅ (split fait plus de 25 lignes)
-ft_strjoin ✅
-quote ✅ (count_words_quote fait plus de 25 lignes, commentaire dans la fonction separate_quote et elle fait plus de 25 lignes)
-utils_builtins ✅ (trop de fonctions dans le fichier)
-utils ✅ (trop de fonctions dans le fichier)

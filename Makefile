@@ -18,6 +18,8 @@ SRCS =  src/main.c \
 		src/redirection/utils_redi.c \
 		src/redirection/double.c \
 		src/cd.c \
+		src/utils_parsing.c \
+		
 
 OBJC = ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/06 00:46:58 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:01:59 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	main(int ac, char **av, char **env)
 {
 	char	*ligne;
 	
-	(void)ac;
 	g_minishell.env = copy_env(env);
 	signal(SIGINT, &get_sigint);
 	g_minishell.av = copy_env(av);
+	g_minishell.ac = ac;
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **env)
 		{
 			add_history(ligne);
 			g_minishell.ligne = ft_strdup(ligne);
-			ligne = var_env(ligne, g_minishell.env);
+			ligne = var_env(ligne);
 			separate_cmd(ligne);
 			bworded(g_minishell.command);
 			belle_exec(g_minishell.command);
@@ -67,7 +67,7 @@ void bworded(t_command *c)
 		signal(SIGQUIT, &blocksig);
 }
 
-char *var_arg(char **av, char *ligne)
+char *var_arg(char **av, char *ligne, int ac)
 {
 	char *res;
 	char *tmp;
@@ -81,7 +81,7 @@ char *var_arg(char **av, char *ligne)
 		{
 			tmp = ft_strndup(ligne, i - 1);
 			nb = ligne[i + 1] - '0';
-			if (av[nb])
+			if (nb <= ac)
 				res = ft_strdup(av[nb]);
 			else
 				res = "";

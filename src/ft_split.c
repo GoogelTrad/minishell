@@ -6,11 +6,58 @@
 /*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:46:59 by cmichez           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/10 17:16:06 by epraduro         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/10 16:06:53 by cmichez          ###   ########.fr       */
+>>>>>>> bb1999effc759303a39a8d4a7cb6585d2dc8e3ba
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	count_size(int n)
+{
+	int	i;
+
+	i = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		i++;
+	}
+	while (n / 10)
+	{
+		i++;
+		n /= 10;
+	}
+	return (i + 1);
+}
+
+char	*ft_itoa(int n)
+{
+	int		i;
+	char	*str;
+	long	nb;
+
+	i = count_size(n);
+	nb = n;
+	str = malloc(sizeof(char) * i + 1);
+	if (!str)
+		return (0);
+	if (n < 0)
+		nb *= -1;
+	str[i--] = '\0';
+	while (i >= 0)
+	{
+		str[i] = nb % 10 + 48;
+		nb /= 10;
+		i--;
+	}
+	if (n < 0)
+		str[0] = '-';
+	return (str);
+}
 
 int	char_is_sep(char c, char sep)
 {
