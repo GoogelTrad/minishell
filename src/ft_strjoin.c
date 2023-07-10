@@ -19,7 +19,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		n;
 	int		i;
 	int		len_s2;
-	
+
 	n = 0;
 	i = 0;
 	len_s1 = ft_strlen(s1);
@@ -28,7 +28,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	else
 		result = malloc(sizeof(char) * (len_s1 + len_s2) + 1);
-	while(n < len_s1)
+	while (n < len_s1)
 	{
 		result[n] = s1[n];
 		n++;
@@ -55,9 +55,10 @@ char	*ft_strdup(char *str)
 	return (dest);
 }
 
-int isCharAlnum(char c)
+int	ischaralnum(char c)
 {
-	if (!((48 <= c && 57 >= c) || (65 <= c && 90 >= c) || (97 <= c && 122 >= c)))
+	if (!((48 <= c && 57 >= c) || (65 <= c && 90 >= c)
+			|| (97 <= c && 122 >= c)))
 		return (0);
 	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:51:29 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/05 18:00:46 by epraduro         ###   ########.fr       */
+/*   Updated: 2023/07/10 17:04:34 by epraduro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_minishell g_minishell;
+extern t_minishell	g_minishell;
 
 void	ft_exit(t_command *c)
 {
@@ -36,7 +36,7 @@ void	ft_exit(t_command *c)
 void	env(int fd, t_command *c)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	if (c->option[0])
@@ -54,26 +54,27 @@ void	env(int fd, t_command *c)
 	}
 }
 
-void export(int fd, t_command *c)
+void	export(t_command *c)
 {
-	int i = 0;
-	int j;
+	int	i;
+	int	j;
 
+	i = 0;
 	if (!c->option[0])
 	{
 		while (g_minishell.env[i])
 		{
 			j = 0;
-			write(g_minishell.fd, "declare -x ", 11);
+			write(c->fd_out, "declare -x ", 11);
 			while (g_minishell.env[i][j])
 			{
 				if (g_minishell.env[i][j] == '=')
 				{
-					write(fd, &g_minishell.env[i][j], 1);
+					write(c->fd_out, &g_minishell.env[i][j], 1);
 					j++;
-					write(fd, "\"", 1);	
+					write(c->fd_out, "\"", 1);
 				}
-				write(fd, &g_minishell.env[i][j], 1);
+				write(c->fd_out, &g_minishell.env[i][j], 1);
 				j++;
 			}
 			write(1, "\"", 1);

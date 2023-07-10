@@ -6,17 +6,17 @@
 /*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:26:49 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:42:13 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int count_words_quote(char *str, char sep)
+int	count_words_quote(char *str, char sep)
 {
-	int	i;
-	char quote;
-	int	nb;
+	int		i;
+	char	quote;
+	int		nb;
 
 	i = 0;
 	nb = 0;
@@ -54,9 +54,9 @@ char	**separate_quote(char *str, char sep)
 	i = 0;
 	n = 0;
 	res = malloc(sizeof(char *) * (count_words_quote(str, sep) + 1));
-	while(str[i])
+	while (str[i])
 	{
-		while(str[i] && char_is_sep(str[i], sep))
+		while (str[i] && char_is_sep(str[i], sep))
 			i++;
 		j = i;
 		while (!char_is_sep(str[i], sep) && str[i])
@@ -69,7 +69,7 @@ char	**separate_quote(char *str, char sep)
 					i++;
 				i++;
 			}
-			else	
+			else
 				i++;
 		}
 		res[n++] = ft_strndup(str + j, i - j);

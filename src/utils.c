@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/05 19:38:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:32:12 by epraduro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_strncmp(char *s1, char *s2, size_t n)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
 	int	i;
 
@@ -69,13 +69,13 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void affiche(t_command *c)
+void	affiche(t_command *c)
 {
 	int	i;
 
 	i = 0;
 	printf("cmd = %s\n", c->cmd);
-	while(c->option[i])
+	while (c->option[i])
 	{
 		printf("option = %s\n", c->option[i]);
 		i++;
