@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/11 00:20:30 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/11 23:02:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char *var_env(char *ligne, int j)
 			}
 			else
 			{
-				printf("coucou");
 				var = ft_strndup(ligne + j, i - j);
 				replace = getenv(var + 1);
 				if (!replace)
@@ -83,10 +82,7 @@ char *var_env(char *ligne, int j)
 				}
 				incr = 1;
 			}
-			printf("replace = %s\n", replace);
 			ligne = replace_value(replace, ligne, j);
-			printf("ligne = %s\n", ligne);
-			while (1);
 			quote = choose_quote(ligne[i], quote);
 			if (ligne[j + incr])
 				i = j + incr;
@@ -131,17 +127,15 @@ char	*replace_value(char *var, char *ligne, int i)
 		verif = 1;
 	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != '"' && isCharAlnum(ligne[i]))
 		i++;
-	if (verif)
+	if (ligne[i] == '$' && ligne[i - 1] == '$')
+		verif = 1;
+	if (verif == 1)
 		temp = ft_strndup(ligne + j, ft_strlen(ligne) - j);
 	else
 		temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
-	printf("temp = %s\n", temp);
 	res = ft_strndup(ligne, j);
-	printf("res = %s\n", res);
 	res = ft_strjoin(res, var);
-	printf("res = %s\n", res);
 	res = ft_strjoin(res, temp);
-	printf("res = %s\n", res);
 	free(temp);
 	return (res);
 }
