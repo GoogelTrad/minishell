@@ -2,6 +2,8 @@ NAME = minishell
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 RM = rm -f
+COMPIL_42 = libreadline.a
+COMPIL_CELIAN = -L/opt/homebrew/Cellar/readline/8.2.1/lib/
 
 SRCS =  src/main.c \
 		src/free.c \
@@ -26,7 +28,7 @@ OBJC = ${SRCS:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJC}
-	${CC} ${CFLAGS} ${OBJC} libreadline.a -lreadline -lncurses -o ${NAME}
+	${CC} ${CFLAGS} ${OBJC} ${COMPIL_CELIAN} -lreadline -lncurses -o ${NAME}
 
 clean: 
 	 ${RM} ${OBJC}

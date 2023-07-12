@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/11 23:02:14 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/12 14:10:30 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,11 @@ char	*replace_value(char *var, char *ligne, int i)
 	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != '"' && isCharAlnum(ligne[i]))
 		i++;
 	if (ligne[i] == '$' && ligne[i - 1] == '$')
-		verif = 1;
+		verif = 2;
 	if (verif == 1)
 		temp = ft_strndup(ligne + j, ft_strlen(ligne) - j);
+	else if (verif == 2)
+		temp = ft_strndup(ligne + j + 2, ft_strlen(ligne) - j);
 	else
 		temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
 	res = ft_strndup(ligne, j);

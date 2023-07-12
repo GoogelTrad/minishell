@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:28:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/12 14:11:10 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **env)
 	char	*ligne;
 	
 	g_minishell.env = copy_env(env);
-	//signal(SIGINT, &get_sigint);
+	signal(SIGINT, &get_sigint);
 	g_minishell.av = copy_env(av);
 	g_minishell.ac = ac;
 	while (1)
