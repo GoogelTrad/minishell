@@ -106,13 +106,18 @@ void	exec_fork(char *fichier, t_command *c)
 			dup2(c->fd_out, 1);
 		if (c->fd_in != 0)
 			dup2(c->fd_in, 0);
-		execve(fichier, g_minishell.fusion, g_minishell.env);
+		if (execve(fichier, g_minishell.fusion, g_minishell.env) == -1)
+			perror(fichier);
 		exit(0);
 	}
 	else
+	{
 		waitpid(pid, &status, 0);
+		g_minishell.status = WEXITSTATUS(status);
+	}
 	if (c->fd_out != 1)
 		close(c->fd_out);
+	free(fichier);
 }
 
 void	fusion_exec(t_command *c)

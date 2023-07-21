@@ -64,3 +64,9 @@ void	free_all(void)
 	free_env();
 	free_cmd();
 }
+
+void check_error(int error)
+{
+	if (error < 0)
+		perror("");
+}

@@ -28,7 +28,7 @@ OBJC = ${SRCS:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJC}
-	${CC} ${CFLAGS} ${OBJC} ${COMPIL_CELIAN} -lreadline -lncurses -o ${NAME}
+	${CC} ${CFLAGS} ${OBJC} ${COMPIL_42} -lreadline -lncurses -o ${NAME}
 
 clean: 
 	 ${RM} ${OBJC}

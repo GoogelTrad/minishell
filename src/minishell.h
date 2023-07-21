@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:42:21 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/21 12:41:15 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_minishell
 	char **fusion;
 	char **av;
 	int fd;
+	
 	t_command *command;
 }	t_minishell;
 
@@ -137,6 +138,7 @@ void		exec_fork(char *fichier, t_command *c);
 
 //free.c
 void		free_all();
+void		check_error(int error);
 
 //cd.c
 void		cd(t_command *c);
