@@ -8,10 +8,9 @@ COMPIL_CELIAN = -L/opt/homebrew/Cellar/readline/8.2.1/lib/
 SRCS =  src/main.c \
 		src/free.c \
 		src/parsing.c \
-		src/builtins.c \
-		src/builtins2.c \
+		src/utils_parsing.c \
 		src/utils.c \
-		src/utils_builtins.c \
+		src/builtins/utils_builtins.c \
 		src/ft_split.c \
 		src/quote.c \
 		src/ft_strjoin.c \
@@ -19,8 +18,15 @@ SRCS =  src/main.c \
 		src/redirection/simple.c \
 		src/redirection/utils_redi.c \
 		src/redirection/double.c \
-		src/cd.c \
-		src/utils_parsing.c \
+		src/builtins/cd.c \
+		src/builtins/env.c \
+		src/builtins/echo.c \
+		src/builtins/pwd.c \
+		src/builtins/exit.c \
+		src/builtins/unset.c \
+		src/builtins/export.c \
+		src/builtins/builtins.c \
+		src/builtins/utils_export.c \
 		
 
 OBJC = ${SRCS:.c=.o}

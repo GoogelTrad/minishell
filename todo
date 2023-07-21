@@ -10,7 +10,7 @@ env ✅
 a faire :
 
 cd ✅ (by celian) faire l'exception de supprimer le repertoire courant.
-export
+export (trier par ordre ascii + rectifier les erreurs comme "export name =test" qui ne renvoie pas la bonne valeur)
 unset ✅ (by celian)
 
 autre :

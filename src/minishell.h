@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:42:21 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:24:06 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_command
 {
 	int		fd_in;
 	int		fd_out;
+	char	*word;
 	char	*cmd;
 	char	**option;
 	t_redirection *redi;
@@ -47,6 +48,7 @@ typedef struct s_minishell
 	int ac;
 	char *ligne;
 	char **env;
+	int size_env;
 	char **fusion;
 	char **av;
 	int fd;
@@ -108,8 +110,6 @@ void		unset(t_command *c);
 //builtins2.c
 void		ft_exit(t_command *c);
 void		env(int fd, t_command *c);
-void 		export(t_command *c);
-
 
 //utils_redi.c
 void		parse_redi(char **ligne, t_command *c);
@@ -141,6 +141,22 @@ void		free_all();
 //cd.c
 void		cd(t_command *c);
 void		change_pwd(char *path);
+
+//export.c
+
+void 		export(t_command *c);
+void		export_alone(int fd, char **tab);
+
+
+//utils_export.c
+
+int			ft_isalpha(int c);
+int			ft_valid_arg(char *str);
+char		*set_value(char *word, char *value);
+char		**copy_tab(char **tab);
+char		*get_char(char *cmd, size_t start, size_t end);
+int			add_var_env(char *word, char *value);
+void		aff_export_alone(int fd);
 
 //main.c
 void		get_sigint(int signal);

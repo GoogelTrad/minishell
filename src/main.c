@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/12 14:11:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:52:07 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_minishell g_minishell;
+
+int len_env(char **env)
+{
+	int i;
+
+	i = 0;
+	while(env[i])
+		i++;
+	return (i);
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -22,6 +32,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGINT, &get_sigint);
 	g_minishell.av = copy_env(av);
 	g_minishell.ac = ac;
+	g_minishell.size_env = len_env(env);
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
