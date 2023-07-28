@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:40 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:09:57 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/25 14:52:00 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,12 @@ char choose_quote(char c, char quote)
 	else if (c == '\'' && quote != '\'')
 		quote = ' ';
 	return (quote);
+}
+
+
+int put_error(int type)
+{
+	write(2, strerror(type), ft_strlen(strerror(type)));
+	write(2, "\n", 1);
+	return (type);
 }

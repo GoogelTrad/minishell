@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/21 17:46:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/25 14:46:10 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <fcntl.h>
@@ -23,6 +24,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <signal.h>
+# include <string.h>
 
 typedef struct s_redirection
 {
@@ -68,9 +70,7 @@ char		**copy_env(char **env);
 
 //utils_parsing.c
 char		choose_quote(char c, char quote);
-char		*write_var(char *ligne, char *var, char *replace, int i, int j);
-int			while_env(char *ligne, int i[2], char *replace, char *var, char quote);
-void		treat_env(int i[2], char **ligne);
+int			put_error(int type);
 
 //utils.c
 int			ft_strcmp(char *s1, char *s2);

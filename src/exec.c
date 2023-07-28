@@ -90,13 +90,18 @@ void	exec_others(t_command *c)
 			}
 			i++;
 		}
+		g_minishell.status = 127;
+		write(2, "cd: ", 4);
+		write(2, c->option[0], ft_strlen(c->option[0]));
+		write(2, ": ", 3);
+		write(2, "command not found\n", 18);
 	}
 }
 
 void	exec_fork(char *fichier, t_command *c)
 {
 	int	pid;
-	int	status;
+	int status;
 
 	fusion_exec(c);
 	pid = fork();
@@ -107,14 +112,11 @@ void	exec_fork(char *fichier, t_command *c)
 		if (c->fd_in != 0)
 			dup2(c->fd_in, 0);
 		if (execve(fichier, g_minishell.fusion, g_minishell.env) == -1)
-			perror(fichier);
+			g_minishell.status = put_error(errno);
 		exit(0);
 	}
 	else
-	{
 		waitpid(pid, &status, 0);
-		g_minishell.status = WEXITSTATUS(status);
-	}
 	if (c->fd_out != 1)
 		close(c->fd_out);
 	free(fichier);

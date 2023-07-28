@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/20 15:48:27 by elisa            ###   ########.fr       */
+/*   Updated: 2023/07/25 14:35:15 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ char *var_env(char *ligne, int j)
 				quote = choose_quote(ligne[i], quote);
 				i++;
 			}
-			if (ligne[i] == '$')
+			if (ligne[i] == '?')
+			{
+				replace = ft_itoa(g_minishell.status);
+				incr = 2;
+			}
+			else if (ligne[i] == '$')
 			{
 				replace = dolar_dolar();
 				incr = 2;
@@ -127,7 +132,7 @@ char	*replace_value(char *var, char *ligne, int i)
 		verif = 1;
 	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != '"' && isCharAlnum(ligne[i]))
 		i++;
-	if (ligne[i] == '$' && ligne[i - 1] == '$')
+	if ((ligne[i] == '$' || ligne[i] == '?') && ligne[i - 1] == '$')
 		verif = 2;
 	if (verif == 1)
 		temp = ft_strndup(ligne + j, ft_strlen(ligne) - j);

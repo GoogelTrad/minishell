@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/20 15:52:07 by elisa            ###   ########.fr       */
+/*   Updated: 2023/07/25 14:28:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int ac, char **av, char **env)
 void get_sigint(int signal)
 {
 	(void)signal;
+	g_minishell.status = 127;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
