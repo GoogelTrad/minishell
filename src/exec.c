@@ -70,10 +70,12 @@ void	exec_redi(t_command *c)
 void	exec_others(t_command *c)
 {
 	char	**path;
+	int		verif;
 	char	*fusion;
 	int		i;
 
 	i = 0;
+	verif = 0;
 	if (open(c->cmd, O_RDONLY) > -1)
 		exec_fork(c->cmd, c);
 	else
@@ -86,15 +88,18 @@ void	exec_others(t_command *c)
 			if (open(fusion, O_RDONLY) > -1)
 			{
 				exec_fork(fusion, c);
+				verif = 1;
 				break ;
 			}
 			i++;
 		}
-		g_minishell.status = 127;
-		write(2, "cd: ", 4);
-		write(2, c->option[0], ft_strlen(c->option[0]));
-		write(2, ": ", 3);
-		write(2, "command not found\n", 18);
+		if (!verif)
+		{
+			g_minishell.status = 127;
+			write(2, c->cmd, ft_strlen(c->cmd));
+			write(2, ": ", 2);
+			write(1, "command not found\n", 18);
+		}
 	}
 }
 

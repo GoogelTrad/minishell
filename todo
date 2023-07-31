@@ -53,8 +53,10 @@ on sort du cat mais le signal ne reprend pas son comportement qu'il faut✅
 
 -faut faire sur les autres fonctions bloquantes mais pas toute.
 
-echo $assas...
-affiche "..."
-echo $..
-affiche "$.."
-echo $$ -> dans replace value j'ai echo ID$$ et non echo ID en sortie.
+echo $assas... ✅
+affiche "..." ✅
+echo $.. ✅
+affiche "$.." ✅
+echo $$ -> dans replace value j'ai echo ID$$ et non echo ID en sortie. ✅
+
+echo ''"coucou" ne s'affiche comme il le faudrait, le deuxieme ' ne disparait pas et casse tout. ✅

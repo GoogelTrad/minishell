@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/05 21:31:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/31 15:03:16 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ char **display_quote(char **str)
 				quote = str[i][j - 1];
 				while (str[i][j] && str[i][j] != quote && str[i][j - 1] != '\\')
 					j++;
-				str[i] = replace(str[i], k - 1, j + 1);
+				if (str[i][j] == quote)
+				{
+					str[i] = replace(str[i], k - 1, j + 1);
+					j = -1;
+				}
 			}
 			j++;
 		}
@@ -86,6 +90,8 @@ char *replace(char *str, int start, int end)
 	int i;
 	
 	i = 0;
+	if (str[start] == str[start + 1])
+		end = start;
 	while (i < start && start)
 		i++;
 	start = -1;
@@ -95,14 +101,13 @@ char *replace(char *str, int start, int end)
 		i++;
 	}
 	i = 0;
-	while(i < end && end)
+	while (i < end && end)
 		i++;
 	end = -1;
 	if (!str[i])
 		str[i - 2] = 0;
 	while (str[i])
 	{
-		printf("str[i] = %c\n", str[i]);
 		str[i] = str[i + 1];
 		i++;
 	}
