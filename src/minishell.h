@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/20 15:24:06 by elisa            ###   ########.fr       */
+/*   Updated: 2023/07/24 17:16:02 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void		change_pwd(char *path);
 
 void 		export(t_command *c);
 void		export_alone(int fd, char **tab);
+void		export_by_ascii(char **tab, int size_env);
 
 
 //utils_export.c
