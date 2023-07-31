@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/31 20:22:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/31 20:28:49 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void		change_pwd(char *path);
 
 void 		export(t_command *c);
 void		export_alone(int fd, char **tab);
+void		export_by_ascii(char **tab, int size_env);
 
 
 //utils_export.c
