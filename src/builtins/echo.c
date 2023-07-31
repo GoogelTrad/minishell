@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:41:54 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/20 14:53:33 by elisa            ###   ########.fr       */
+/*   Updated: 2023/07/25 14:29:00 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	echo(int fd, t_command *c)
 	if (c->option[0] == NULL || !(c->option[0][0] == '-'
 		&& c->option[0][1] == 'n'))
 		write(fd, "\n", 1);
+	g_minishell.status = 0;
 }

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/24 17:16:02 by elisa            ###   ########.fr       */
+=======
+/*   Updated: 2023/07/25 14:46:10 by cmichez          ###   ########.fr       */
+>>>>>>> fc151ff2b0423d85c6cf9c5476acb8f3dddae506
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +20,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <fcntl.h>
@@ -23,6 +28,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <signal.h>
+# include <string.h>
 
 typedef struct s_redirection
 {
@@ -52,6 +58,7 @@ typedef struct s_minishell
 	char **fusion;
 	char **av;
 	int fd;
+	
 	t_command *command;
 }	t_minishell;
 
@@ -67,9 +74,7 @@ char		**copy_env(char **env);
 
 //utils_parsing.c
 char		choose_quote(char c, char quote);
-char		*write_var(char *ligne, char *var, char *replace, int i, int j);
-int			while_env(char *ligne, int i[2], char *replace, char *var, char quote);
-void		treat_env(int i[2], char **ligne);
+int			put_error(int type);
 
 //utils.c
 int			ft_strcmp(char *s1, char *s2);
@@ -137,6 +142,7 @@ void		exec_fork(char *fichier, t_command *c);
 
 //free.c
 void		free_all();
+void		check_error(int error);
 
 //cd.c
 void		cd(t_command *c);

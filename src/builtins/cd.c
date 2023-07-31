@@ -22,10 +22,17 @@ void	cd(t_command *c)
 	{
 		verif = chdir(c->option[0]);
 		if (verif == -1)
-			printf("cd %s : No such file or directory\n", c->option[0]);
+		{
+			write(2, "cd: ", 4);
+			write(2, c->option[0], ft_strlen(c->option[0]));
+			write(2, ": ", 3);
+			g_minishell.status = put_error(errno);
+			return ;
+		}
 		else
 			change_pwd(c->option[0]);
 	}
+	g_minishell.status = 0;
 }
 
 void	old_pwd(int i)

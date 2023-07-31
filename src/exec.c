@@ -70,10 +70,12 @@ void	exec_redi(t_command *c)
 void	exec_others(t_command *c)
 {
 	char	**path;
+	int		verif;
 	char	*fusion;
 	int		i;
 
 	i = 0;
+	verif = 0;
 	if (open(c->cmd, O_RDONLY) > -1)
 		exec_fork(c->cmd, c);
 	else
@@ -86,9 +88,17 @@ void	exec_others(t_command *c)
 			if (open(fusion, O_RDONLY) > -1)
 			{
 				exec_fork(fusion, c);
+				verif = 1;
 				break ;
 			}
 			i++;
+		}
+		if (!verif)
+		{
+			g_minishell.status = 127;
+			write(2, c->cmd, ft_strlen(c->cmd));
+			write(2, ": ", 2);
+			write(1, "command not found\n", 18);
 		}
 	}
 }
@@ -96,7 +106,7 @@ void	exec_others(t_command *c)
 void	exec_fork(char *fichier, t_command *c)
 {
 	int	pid;
-	int	status;
+	int status;
 
 	fusion_exec(c);
 	pid = fork();
@@ -106,13 +116,15 @@ void	exec_fork(char *fichier, t_command *c)
 			dup2(c->fd_out, 1);
 		if (c->fd_in != 0)
 			dup2(c->fd_in, 0);
-		execve(fichier, g_minishell.fusion, g_minishell.env);
+		if (execve(fichier, g_minishell.fusion, g_minishell.env) == -1)
+			g_minishell.status = put_error(errno);
 		exit(0);
 	}
 	else
 		waitpid(pid, &status, 0);
 	if (c->fd_out != 1)
 		close(c->fd_out);
+	free(fichier);
 }
 
 void	fusion_exec(t_command *c)

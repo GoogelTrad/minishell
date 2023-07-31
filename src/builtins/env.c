@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/20 15:20:18 by elisa            ###   ########.fr       */
+/*   Updated: 2023/07/25 15:06:27 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ void	env(int fd, t_command *c)
 
 	i = 0;
 	if (c->option[0])
-		ft_putstr("No such file or directory\n");
+	{
+		g_minishell.status = 127;
+		write(2, "cd: ", 4);
+		write(2, c->option[0], ft_strlen(c->option[0]));
+		write(2, ": ", 3);
+		write(2, "No such file or directory\n", 26);
+		return ;
+	}
 	else
 	{
 		while (g_minishell.env[i])
@@ -33,4 +40,5 @@ void	env(int fd, t_command *c)
 			i++;
 		}
 	}
+	g_minishell.status = 0;
 }

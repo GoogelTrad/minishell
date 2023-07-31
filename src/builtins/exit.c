@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:39 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/20 14:53:38 by elisa            ###   ########.fr       */
+/*   Updated: 2023/07/25 14:15:31 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void	ft_exit(t_command *c)
 			ft_putstr("exit\n");
 			printf("exit: %s: numeric argument required\n", c->option[0]);
 			free_all();
-			exit(1);
+			g_minishell.status = 42;
+			exit(g_minishell.status);
 		}
 		else
-			g_minishell.status = ft_atoi(c->option[0]); 
+			g_minishell.status = ft_atoi(c->option[0]);
 	}
 	ft_putstr("exit\n");
 	free_all();
-	exit(1); 
+	exit(g_minishell.status);
 }
