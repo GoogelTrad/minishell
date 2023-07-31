@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/25 14:35:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/31 20:24:30 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char *var_env(char *ligne, int j)
 			else
 			{
 				var = ft_strndup(ligne + j, i - j);
-				replace = getenv(var + 1);
+				replace = get_env(var + 1, g_minishell.env);
 				if (!replace)
 				{
 					if (!ft_isalnum(var + 1))

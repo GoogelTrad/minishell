@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/25 14:46:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/31 20:22:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void		env(int fd, t_command *c);
 void		parse_redi(char **ligne, t_command *c);
 char		**display_quote(char **str);
 char		*replace(char *str, int start, int end);
+char		*get_env(char *var, char **env);
 
 //simple.c
 void		simple_droite(t_command *c);
