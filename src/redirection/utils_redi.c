@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/31 15:03:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/07/31 20:22:05 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,20 @@ char *replace(char *str, int start, int end)
 		i++;
 	}
 	return (str);
+}
+
+char	*get_env(char *var, char **env)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen((var));
+	while(env[i])
+	{
+		if (ft_strncmp(env[i], var, len) == 0)
+			return (ft_strdup(env[i] + len + 1));
+		i++;
+	}
+	return (NULL);
 }
