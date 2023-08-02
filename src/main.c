@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/31 15:17:03 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/02 11:30:56 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	main(int ac, char **av, char **env)
 {
 	char	*ligne;
 	
-	g_minishell.env = copy_env(env);
-	signal(SIGINT, &get_sigint);
 	g_minishell.av = copy_env(av);
-	g_minishell.ac = ac;
 	g_minishell.size_env = len_env(env);
+	init_env(env);
+	signal(SIGINT, &get_sigint);
+	g_minishell.ac = ac;
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);

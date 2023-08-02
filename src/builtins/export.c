@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/24 17:15:56 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/02 11:27:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,6 @@ void	export_alone(int fd, char **tab)
 	}
 }
 
-void		export_by_ascii(char **tab, int size_env)
-{
-	int		order;
-	int		i;
-	char	*tmp;
-
-	order = 0;
-	while (tab && order == 0)
-	{
-		order = 1;
-		i = 0;
-		while (i < size_env - 1)
-		{
-			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
-			{
-				tmp = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = tmp;
-				order = 0;
-			}
-			i++;
-		}
-		size_env--;
-	}
-}
-
 int	add_var_env(char *word, char *value)
 {
 	char	**var;
@@ -91,7 +65,6 @@ void	aff_export_alone(int fd)
 	char	**tab;
 
 	tab = copy_tab(g_minishell.env);
-	export_by_ascii(tab, g_minishell.size_env);
 	export_alone(fd, tab);
 }
 

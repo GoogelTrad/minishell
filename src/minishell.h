@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/31 20:28:49 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/02 11:21:09 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,8 @@ void		get_sigint(int signal);
 void		bworded(t_command *c);
 void		blocksig(int signal);
 char 		*var_arg(char **av, char *ligne, int ac);
+
+//env.c
+void		init_env(char **env);
 
 #endif
