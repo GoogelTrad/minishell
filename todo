@@ -6,16 +6,12 @@ echo + option -n ✅
 pwd ✅
 exit ✅
 env ✅
+unset ✅ (by celian)
+cd ✅ (by celian) + l'exception de supprimer le repertoire courant.
 
 a faire :
 
-cd ✅ (by celian) faire l'exception de supprimer le repertoire courant.
 export (rectifier les erreurs comme "export name =test" qui ne renvoie pas la bonne valeur)
-unset ✅ (by celian)
-
-autre :
-
-Gere le env -i
 
 Parsing :
 
