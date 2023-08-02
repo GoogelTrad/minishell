@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/24 17:15:56 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/02 13:13:00 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_valid_arg(char *str)
 			x = 1;
 			i++;
 		}
-		else if (ft_isdigit(str[i]) && x == 1)
+		else if ((str[i] == '_' || ft_isdigit(str[i])) && x == 1)
 			i++;
 		else
 			return (0);
