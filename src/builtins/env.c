@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/25 15:06:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/02 11:33:45 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,23 @@ void	env(int fd, t_command *c)
 		}
 	}
 	g_minishell.status = 0;
+}
+
+void	init_env(char **env)
+{
+	char *buf;
+
+	buf = NULL;
+	if (env[0])
+	{
+		g_minishell.env = copy_env(env);
+		return ;
+	}
+	g_minishell.env = malloc(sizeof(char *) * 4);
+	g_minishell.env[0] = ft_strjoin("PWD=", getcwd(buf, 0));
+	g_minishell.env[1] = ft_strdup("SHLVL=1");
+	g_minishell.env[2] = ft_strjoin("_=", getcwd(buf, 0));
+	g_minishell.env[2] = ft_strjoin(g_minishell.env[2], "/");
+	g_minishell.env[2] = ft_strjoin(g_minishell.env[2], g_minishell.av[0]);
+	free(buf);
 }
