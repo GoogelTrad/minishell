@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/02 20:40:39 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/03 13:01:50 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,56 +91,104 @@ int	ft_valid_arg(char *str)
 	return (1);
 }
 
-void    export(t_command *c)
+/*void    export(t_command *c)
 {
     int k;
-	int	x;
     int i;
-	int	nb_opt;
 
     i = 0;
-	x = 0;
-	nb_opt = 0;
     if (!c->option[0])
         aff_export_alone(c->fd_out);
     else
     {
-		while (c->option[i])
-		{
-			nb_opt++;
-			i++;
-		}
-		i = 0;
         while (c->option[i])
         {
             k = 0;
-			while (c->option[i][k] != '=')
-			{
-				while (i < nb_opt)
-				{
-					if (ft_isalpha(c->option[i][k]))
-					{
-						x = 1;
-						k++;
-					}
-					else if ((c->option[i][k] == '_' || ft_isdigit(c->option[i][k])) && x == 1)
-						k++;
-					else
-					{
-						printf("%s : '%s': not a valid identifier\n", c->cmd, c->option[i]);
-						g_minishell.status = 1;
-						i++;
-					}
-				}
-			}
+            while (c->option[i][k] && c->option[i][k] != '=')
+            {
+                if (!(ft_valid_arg(c->option[i])))
+                {
+                    printf("%s: '%s': not a valid identifier1\n",
+                    c->cmd, c->option[i]);
+                    g_minishell.status = 1;
+                    return ;
+                }
+                k++;
+            }
             if (c->option[i][k] == '\0')
                 add_var_env(ft_strdup(c->option[i]), NULL);
             else
-			{
                 add_var_env(get_char(c->option[i], 0, k), c->option[i] + k + 1);
-			}
             g_minishell.status = 0;
             i++;
         }
+    }
+}*/
+
+void    export(t_command *c)
+{
+    int k;
+    int i;
+	int x;
+
+    i = 0;
+	x = 0;
+    if (!c->option[0])
+        aff_export_alone(c->fd_out);
+    else
+    {
+		k = 0;
+        while (c->option[i] && c->option[i][k] && c->option[i][k] != '=')
+        {
+			if (ft_isalpha(c->option[i][k]))
+			{
+				x = 1;
+				k++;
+			}
+			else if ((c->option[i][k] == '_' || ft_isdigit(c->option[i][k])) && x == 1)
+				k++;
+			else
+			{
+				if (c->option[i][k + 1] == '=' && (!(ft_isalpha(c->option[i][k]) && ft_isdigit(c->option[i][k]))))
+				{
+					if (c->option[i][k] == '&'
+						|| c->option[i][k] == ';'
+						|| c->option[i][k] == '|')
+					{
+						printf("%s: '%s': command not found\n",
+						c->cmd, c->option[i]);
+						g_minishell.status = 1;
+						return ;
+					}
+					else if (c->option[i][k] == '(')
+					{
+						printf("%s: '%s': syntax error near unexpected token ')'\n",
+						c->cmd, c->option[i]);
+						g_minishell.status = 1;
+						return ;
+					}
+					else if (c->option[i][k] == ')')
+					{
+						printf("%s: '%s': syntax error near unexpected token '('\n",
+						c->cmd, c->option[i]);
+						g_minishell.status = 1;
+						return ;
+					}
+					else
+					{
+						printf("%s: '%s': not a valid identifier\n",
+						c->cmd, c->option[i]);
+						g_minishell.status = 1;
+						return ;
+					}
+				}
+			}
+		}
+		if (c->option[i][k] == '\0')
+			add_var_env(ft_strdup(c->option[i]), NULL);
+		else
+			add_var_env(get_char(c->option[i], 0, k), c->option[i] + k + 1);
+		g_minishell.status = 0;
+		i++; 
     }
 }
