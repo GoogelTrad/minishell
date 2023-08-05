@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/03 13:01:50 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/04 19:40:22 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,14 +162,14 @@ void    export(t_command *c)
 					}
 					else if (c->option[i][k] == '(')
 					{
-						printf("%s: '%s': syntax error near unexpected token ')'\n",
+						printf("%s: '%s': syntax error near unexpected token '('\n",
 						c->cmd, c->option[i]);
 						g_minishell.status = 1;
 						return ;
 					}
 					else if (c->option[i][k] == ')')
 					{
-						printf("%s: '%s': syntax error near unexpected token '('\n",
+						printf("%s: '%s': syntax error near unexpected token ')'\n",
 						c->cmd, c->option[i]);
 						g_minishell.status = 1;
 						return ;
