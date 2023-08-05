@@ -6,15 +6,13 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:41:54 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/25 14:29:00 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:30:16 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-extern t_minishell	g_minishell;
-
-void	echo(int fd, t_command *c)
+void	echo(int fd, t_command *c, t_minishell *minishell)
 {
 	int	i;
 	int	j;
@@ -37,5 +35,5 @@ void	echo(int fd, t_command *c)
 	if (c->option[0] == NULL || !(c->option[0][0] == '-'
 		&& c->option[0][1] == 'n'))
 		write(fd, "\n", 1);
-	g_minishell.status = 0;
+	minishell->status = 0;
 }

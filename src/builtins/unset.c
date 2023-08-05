@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 18:11:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/20 14:59:19 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/03 16:40:47 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-extern t_minishell g_minishell;
 
 size_t	env_size(char *env)
 {
@@ -32,7 +30,7 @@ void		ft_free(t_minishell *env)
 	}
 }
 
-void ft_unset(t_command *c)
+/*void ft_unset(t_command *c)
 {
 	int i = 0;
 	size_t size;
@@ -44,4 +42,4 @@ void ft_unset(t_command *c)
 			i++;
 		
 	}
-}
+}*/

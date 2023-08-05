@@ -12,14 +12,12 @@
 
 #include "../minishell.h"
 
-extern t_minishell	g_minishell;
-
 void	double_droite(t_command *c)
 {
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
 }
 
-void	double_gauche(t_command *c)
+void	double_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
 	char	*ligne;
@@ -27,8 +25,8 @@ void	double_gauche(t_command *c)
 
 	pipe(pipes);
 	c->fd_in = pipes[0];
-	if (check_env(g_minishell.ligne))
-		c->redi->word = ft_strdup(coucou(g_minishell.ligne));
+	if (check_env(minishell->ligne))
+		c->redi->word = ft_strdup(coucou(minishell->ligne));
 	do
 	{
 		i = 0;

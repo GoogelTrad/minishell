@@ -6,15 +6,23 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/02 11:33:45 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:31:56 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-extern t_minishell	g_minishell;
+int len_env(char **env)
+{
+	int i;
 
-void	env(int fd, t_command *c)
+	i = 0;
+	while(env[i])
+		i++;
+	return (i);
+}
+
+void	env(int fd, t_command *c, t_minishell *minishell)
 {
 	int	i;
 	int	j;
@@ -22,7 +30,7 @@ void	env(int fd, t_command *c)
 	i = 0;
 	if (c->option[0])
 	{
-		g_minishell.status = 127;
+		minishell->status = 127;
 		write(2, "cd: ", 4);
 		write(2, c->option[0], ft_strlen(c->option[0]));
 		write(2, ": ", 3);
@@ -31,33 +39,33 @@ void	env(int fd, t_command *c)
 	}
 	else
 	{
-		while (g_minishell.env[i])
+		while (minishell->env[i])
 		{
 			j = 0;
-			while (g_minishell.env[i][j])
-				write(fd, &g_minishell.env[i][j++], 1);
-			write(g_minishell.fd, "\n", 1);
+			while (minishell->env[i][j])
+				write(fd, &minishell->env[i][j++], 1);
+			write(minishell->fd, "\n", 1);
 			i++;
 		}
 	}
-	g_minishell.status = 0;
+	minishell->status = 0;
 }
 
-void	init_env(char **env)
+void	init_env(char **env, t_minishell *minishell)
 {
 	char *buf;
 
 	buf = NULL;
 	if (env[0])
 	{
-		g_minishell.env = copy_env(env);
+		minishell->env = copy_env(env);
 		return ;
 	}
-	g_minishell.env = malloc(sizeof(char *) * 4);
-	g_minishell.env[0] = ft_strjoin("PWD=", getcwd(buf, 0));
-	g_minishell.env[1] = ft_strdup("SHLVL=1");
-	g_minishell.env[2] = ft_strjoin("_=", getcwd(buf, 0));
-	g_minishell.env[2] = ft_strjoin(g_minishell.env[2], "/");
-	g_minishell.env[2] = ft_strjoin(g_minishell.env[2], g_minishell.av[0]);
+	minishell->env = malloc(sizeof(char *) * 4);
+	minishell->env[0] = ft_strjoin("PWD=", getcwd(buf, 0));
+	minishell->env[1] = ft_strdup("SHLVL=1");
+	minishell->env[2] = ft_strjoin("_=", getcwd(buf, 0));
+	minishell->env[2] = ft_strjoin(minishell->env[2], "/");
+	minishell->env[2] = ft_strjoin(minishell->env[2], minishell->av[0]);
 	free(buf);
 }

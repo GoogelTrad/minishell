@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 18:17:35 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/20 15:22:54 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/03 16:41:12 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-extern t_minishell g_minishell;
 
 char	**copy_tab(char **tab)
 {

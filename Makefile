@@ -27,6 +27,7 @@ SRCS =  src/main.c \
 		src/builtins/export.c \
 		src/builtins/builtins.c \
 		src/builtins/utils_export.c \
+		src/utils_exec.c \
 		
 
 OBJC = ${SRCS:.c=.o}

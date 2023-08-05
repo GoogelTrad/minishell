@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/02 11:36:01 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:40:04 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char		*readline (const char *prompt);
 void    	rl_replace_line(const char *text, int clear_undo);
 
 //parsing.c
-void		separate_cmd(char *ligne);
-char		*var_env(char *ligne, int j);
+void		separate_cmd(char *ligne, t_minishell *minishell);
+char		*var_env(char *ligne, int j, t_minishell *minishell);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne, int i);
 char		**copy_env(char **env);
@@ -91,13 +91,15 @@ int			ft_atoi(const char *str);
 //ft_strjoin.c
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strdup(char *str);
-int			isCharAlnum(char c);
+int			ischaralnum(char c);
 int			ft_isdigit(int c);
+void		bworded(t_command *c);
 
 //ft_split.c
-char		**ft_split(char *str, char sep);
+char		**ft_split(char *str, char sep, int i);
 int			char_is_sep(char c, char sep);
 int			count_words(const char *str, char sep);
+int			count_size(int n);
 char		*ft_itoa(int n);
 
 //quote.c
@@ -106,18 +108,18 @@ int			count_words_quote(char *str, char sep);
 char		*dolar_dolar(void);
 
 //builtins.c
-void		echo(int fd, t_command *c);
-void		pwd(int fd);
-void		unset(t_command *c);
+void		echo(int fd, t_command *c, t_minishell *minishell);
+void		pwd(int fd, t_minishell *minishell);
+void		unset(t_command *c, t_minishell *minishell);
 
 //builtins2.c
-void		ft_exit(t_command *c);
-void		env(int fd, t_command *c);
+void		ft_exit(t_command *c, t_minishell *minishell);
+void		env(int fd, t_command *c, t_minishell *minishell);
 
 //utils_redi.c
 void		parse_redi(char **ligne, t_command *c);
 char		**display_quote(char **str);
-char		*replace(char *str, int start, int end);
+char		*replace(char *str, char quote);
 char		*get_env(char *var, char **env);
 
 //simple.c
@@ -126,30 +128,35 @@ void		simple_gauche(t_command *c);
 
 //double.c
 void		double_droite(t_command *c);
-void		double_gauche(t_command *c);
+void		double_gauche(t_command *c, t_minishell *minishell);
 int			check_env(char *ligne);
 char		*coucou(char *ligne);
 void		double_read(t_command *c);
 
 //exec.c
-void		belle_exec(t_command *c);
-void		exec(int fd, t_command *c);
-void		fusion_exec(t_command *c);
-void		exec_redi(t_command *c);
-void		exec_others(t_command *c);
-void		exec_fork(char *fichier, t_command *c);
+void		belle_exec(t_command *c, t_minishell *minishell);
+void		exec(int fd, t_command *c, t_minishell *minishell);
+void		exec_redi(t_command *c, t_minishell *minishell);
+void		exec_others(t_command *c, int verif, t_minishell *minishell);
+void		exec_fork(char *fichier, t_command *c, t_minishell *minishell);
+
+//utils_exec.c
+void		free_double_tab(char **tab);
+void		fusion_exec(t_command *c, t_minishell *minishell);
+void		no_command(int verif, t_command *c, t_minishell *minishell);
+void		char_split(char *str, int *i, char sep, char quote);
 
 //free.c
-void		free_all();
+void		free_all(t_minishell *minishell);
 void		check_error(int error);
 
 //cd.c
-void		cd(t_command *c);
-void		change_pwd(char *path);
+void		cd(t_command *c, t_minishell *minishell);
+void		change_pwd(char *path, t_minishell *minishell);
 
 //export.c
 
-void 		export(t_command *c);
+void 		export(t_command *c, t_minishell *minishell);
 void		export_alone(int fd, char **tab);
 void		export_by_ascii(char **tab, int size_env);
 
@@ -161,16 +168,17 @@ int			ft_valid_arg(char *str);
 char		*set_value(char *word, char *value);
 char		**copy_tab(char **tab);
 char		*get_char(char *cmd, size_t start, size_t end);
-int			add_var_env(char *word, char *value);
-void		aff_export_alone(int fd);
+int			add_var_env(char *word, char *value, t_minishell *minishell);
+void		aff_export_alone(int fd, t_minishell *minishell);
 
 //main.c
 void		get_sigint(int signal);
-void		bworded(t_command *c);
 void		blocksig(int signal);
 char 		*var_arg(char **av, char *ligne, int ac);
+void		prompt(char *ligne, t_minishell *minishell);
 
 //env.c
-void		init_env(char **env);
+void		init_env(char **env, t_minishell *minishell);
+int			len_env(char **env);
 
 #endif

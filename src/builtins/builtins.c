@@ -6,31 +6,29 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:32:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/21 17:55:46 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:24:06 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-extern t_minishell	g_minishell;
-
-void	unset(t_command *c)
+void	unset(t_command *c, t_minishell *minishell)
 {
 	int	i;
 
 	i = 0;
-	if (var_env(c->option[0], 0))
+	if (var_env(c->option[0], 0, minishell))
 	{
-		while (g_minishell.env[i] && ft_strncmp(c->option[0],
-				g_minishell.env[i], ft_strlen(c->option[0])) != 0)
+		while (minishell->env[i] && ft_strncmp(c->option[0],
+				minishell->env[i], ft_strlen(c->option[0])) != 0)
 			i++;
-		if (g_minishell.env[i])
-			free(g_minishell.env[i]);
-		while (g_minishell.env[i])
+		if (minishell->env[i])
+			free(minishell->env[i]);
+		while (minishell->env[i])
 		{
-			g_minishell.env[i] = g_minishell.env[i + 1];
+			minishell->env[i] = minishell->env[i + 1];
 			i++;
 		}
 	}
-	g_minishell.status = 0;
+	minishell->status = 0;
 }

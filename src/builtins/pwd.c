@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:40:20 by elisa             #+#    #+#             */
-/*   Updated: 2023/07/31 20:31:33 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/03 16:33:58 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-extern t_minishell	g_minishell;
-
-void	pwd(int fd)
+void	pwd(int fd, t_minishell *minishell)
 {
 	char	*result;
 	int		i;
 
 	i = 0;
-	result = var_env("$PWD", 0);
+	result = var_env("$PWD", 0, minishell);
 	if (result != NULL)
 	{
 		while (result[i])

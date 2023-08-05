@@ -6,13 +6,11 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/31 20:22:05 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:16:20 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-extern t_minishell g_minishell;
 
 void parse_redi(char **ligne, t_command *c)
 {
@@ -68,13 +66,13 @@ char **display_quote(char **str)
 		{
 			if ((str[i][j] == '"' || str[i][j] == '\'') && str[i][j - 1] != '\\')
 			{
-				k = ++j;
-				quote = str[i][j - 1];
-				while (str[i][j] && str[i][j] != quote && str[i][j - 1] != '\\')
+				k = j++;
+				quote = str[i][k];
+				while (str[i][j] && str[i][j] != quote)
 					j++;
-				if (str[i][j] == quote)
+				if (str[i][j] == quote && j != k)
 				{
-					str[i] = replace(str[i], k - 1, j + 1);
+					str[i] = replace(str[i], quote);
 					j = -1;
 				}
 			}
@@ -85,32 +83,28 @@ char **display_quote(char **str)
 	return (str);
 }
 
-char *replace(char *str, int start, int end)
+char	*replace_quote(char *str, int i)
 {
-	int i;
-	
-	i = 0;
-	if (str[start] == str[start + 1])
-		end = start;
-	while (i < start && start)
-		i++;
-	start = -1;
 	while (str[i])
 	{
 		str[i] = str[i + 1];
 		i++;
 	}
+	return (str);
+}
+
+char	*replace(char *str, char quote)
+{
+	int	i;
+
 	i = 0;
-	while (i < end && end)
+	while (str[i] != quote)
 		i++;
-	end = -1;
-	if (!str[i])
-		str[i - 2] = 0;
-	while (str[i])
-	{
-		str[i] = str[i + 1];
+	str = replace_quote(str, i);
+	i = 0;
+	while (str[i] != quote)
 		i++;
-	}
+	str = replace_quote(str, i);
 	return (str);
 }
 

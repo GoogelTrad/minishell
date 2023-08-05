@@ -12,26 +12,17 @@
 
 #include "minishell.h"
 
-extern t_minishell	g_minishell;
-
-void	free_env(void)
+void	free_env(t_minishell *minishell)
 {
 	int	i;
 
 	i = 0;
-	while (g_minishell.env[i])
-		free(g_minishell.env[i++]);
-	free(g_minishell.env);
-	i = 0;
-	if (g_minishell.fusion)
-	{
-		while (g_minishell.fusion[i])
-			free(g_minishell.fusion[i++]);
-		free(g_minishell.fusion);
-	}
+	while (minishell->env[i])
+		free(minishell->env[i++]);
+	free(minishell->env);
 }
 
-void	free_cmd(void)
+void	free_cmd(t_minishell *minishell)
 {
 	int				i;
 	int				j;
@@ -39,34 +30,28 @@ void	free_cmd(void)
 	t_redirection	*actu;
 
 	i = 0;
-	while (g_minishell.command[i].cmd)
+	while (minishell->command[i].cmd)
 	{
 		j = 0;
-		actu = g_minishell.command[i].redi;
-		while (g_minishell.command[i].option[j])
-			free(g_minishell.command[i].option[j++]);
-		free(g_minishell.command[i].cmd);
-		while (g_minishell.command[i].redi->there)
+		actu = minishell->command[i].redi;
+		while (minishell->command[i].option[j])
+			free(minishell->command[i].option[j++]);
+		free(minishell->command[i].cmd);
+		while (minishell->command[i].redi->there)
 		{
 			tmp = actu;
 			actu = actu->next_redi;
 			free(tmp->type);
 			free(tmp->word);
 		}
-		free(g_minishell.command[i].redi);
+		free(minishell->command[i].redi);
 		i++;
 	}
-	free(g_minishell.command);
+	free(minishell->command);
 }
 
-void	free_all(void)
+void	free_all(t_minishell *minishell)
 {
-	free_env();
-	free_cmd();
-}
-
-void check_error(int error)
-{
-	if (error < 0)
-		perror("");
+	free_env(minishell);
+	free_cmd(minishell);
 }
