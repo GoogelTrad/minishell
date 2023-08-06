@@ -56,3 +56,5 @@ affiche "$.." ✅
 echo $$ -> dans replace value j'ai echo ID$$ et non echo ID en sortie. ✅
 
 echo ''"coucou" ne s'affiche comme il le faudrait, le deuxieme ' ne disparait pas et casse tout. ✅
+
+echo coucou | cat -e boucle infini

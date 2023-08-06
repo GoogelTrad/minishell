@@ -40,20 +40,20 @@ void	old_pwd(int i, t_minishell *minishell)
 	j = 0;
 	while (ft_strncmp(minishell->env[j], "OLDPWD", 6) != 0)
 		j++;
-	minishell->env[j] = ft_strjoin(ft_strndup(minishell->env[j], 7), 
+	minishell->env[j] = ft_strjoin(ft_strndup(minishell->env[j], 7),
 			ft_strdup(minishell->env[i] + 4));
 }
 
-void	pwd_back(char *path, int i, int j, int n, t_minishell *minishell)
+void	pwd_back(char *path, int i, int j, t_minishell *minishell)
 {
 	char	*cpy;
 
 	j--;
 	while (minishell->env[i][j] && minishell->env[i][j] != '/')
 		j--;
-	cpy = ft_strndup(minishell->env[i] + n, j - n);
+	cpy = ft_strndup(minishell->env[i] + minishell->cd_n, j - minishell->cd_n);
 	minishell->env[i] = ft_strdup(ft_strjoin
-			(ft_strndup(minishell->env[i], n), cpy));
+			(ft_strndup(minishell->env[i], minishell->cd_n), cpy));
 	if (path[2])
 		change_pwd(path + 3, minishell);
 }
@@ -77,27 +77,26 @@ void	change_pwd(char *path, t_minishell *minishell)
 {
 	int	i;
 	int	j;
-	int	n;
 
 	i = 0;
-	n = 0;
+	minishell->cd_n = 0;
 	while (ft_strncmp(minishell->env[i], "PWD", 3) != 0)
 		i++;
 	j = ft_strlen(minishell->env[i]);
-	while (minishell->env[i][n] != '/')
-		n++;
+	while (minishell->env[i][minishell->cd_n] != '/')
+		minishell->cd_n++;
 	old_pwd(i, minishell);
 	if (path[0] == '/')
 	{
 		if (path[ft_strlen(path) - 1] == '/')
 			path = ft_strndup(path, ft_strlen(path) - 1);
 		minishell->env[i] = ft_strdup(ft_strjoin
-				(ft_strndup(minishell->env[i], n), path));
+				(ft_strndup(minishell->env[i], minishell->cd_n), path));
 	}
 	else
 	{
 		if (path && ft_strncmp(path, "..", 2) == 0)
-			pwd_back(path, i, j, n, minishell);
+			pwd_back(path, i, j, minishell);
 		else if (path && ft_strncmp(path, "..", 2) != 0)
 			pwd_front(path, i, minishell);
 	}

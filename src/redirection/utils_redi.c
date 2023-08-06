@@ -6,79 +6,37 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/03 16:16:20 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:41:00 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void parse_redi(char **ligne, t_command *c)
+char	**display_quote(char **str)
 {
-	int i;
-	t_redirection *tmp;
+	char	quote;
+	int		i[2];
+	int		k;
 
-	i = 0;
-	while (ligne[i] && ligne[i][0] != '>' && ligne[i][0] != '<')
-		i++;
-	c->option = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (ligne[i] && ligne[i][0] != '>' && ligne[i][0] != '<')
+	i[0] = 0;
+	while (str[i[0]])
 	{
-		c->option[i] = ft_strdup(ligne[i]);
-		i++;
-	}
-	c->option[i] = NULL;
-	tmp = c->redi;
-	while (ligne [i])
-	{
-		c->redi->type = ft_strdup(ligne[i]);
-		c->redi->there = 1;
-		i++;
-		if (ligne[i])
+		i[1] = 0;
+		while (str[i[0]][i[1]])
 		{
-			c->redi->word = ft_strdup(ligne[i]);
-			if(ligne[i + 1])
+			if ((str[i[0]][i[1]] == '"' || str[i[0]][i[1]] == '\'') &&
+				str[i[0]][i[1] - 1] != '\\')
 			{
-				c->redi->next_redi = malloc(sizeof(t_redirection));
-				c->redi = c->redi->next_redi;
-				c->redi->there = 0;
+				k = i[1]++;
+				quote = str[i[0]][k];
+				while (str[i[0]][i[1]] && str[i[0]][i[1]] != quote)
+					i[1]++;
+				if (str[i[0]][i[1]] == quote && i[1] != k)
+					str[i[0]] = replace(str[i[0]], quote, &i[1]);
 			}
+			i[1]++;
 		}
-		i++;
-	}
-	c->redi->next_redi = malloc(sizeof(t_redirection));
-	c->redi->next_redi->there = 0;
-	c->redi = tmp;
-}
-
-char **display_quote(char **str)
-{
-	char quote;
-	int i;
-	int j;
-	int k;
-	
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-		{
-			if ((str[i][j] == '"' || str[i][j] == '\'') && str[i][j - 1] != '\\')
-			{
-				k = j++;
-				quote = str[i][k];
-				while (str[i][j] && str[i][j] != quote)
-					j++;
-				if (str[i][j] == quote && j != k)
-				{
-					str[i] = replace(str[i], quote);
-					j = -1;
-				}
-			}
-			j++;
-		}
-		i++;
+		i[0]++;
 	}
 	return (str);
 }
@@ -93,7 +51,7 @@ char	*replace_quote(char *str, int i)
 	return (str);
 }
 
-char	*replace(char *str, char quote)
+char	*replace(char *str, char quote, int *j)
 {
 	int	i;
 
@@ -105,6 +63,7 @@ char	*replace(char *str, char quote)
 	while (str[i] != quote)
 		i++;
 	str = replace_quote(str, i);
+	(*j) = -1;
 	return (str);
 }
 
@@ -115,7 +74,7 @@ char	*get_env(char *var, char **env)
 
 	i = 0;
 	len = ft_strlen((var));
-	while(env[i])
+	while (env[i])
 	{
 		if (ft_strncmp(env[i], var, len) == 0)
 			return (ft_strdup(env[i] + len + 1));

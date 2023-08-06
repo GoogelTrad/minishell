@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/03 16:40:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:37:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_minishell
 	char **fusion;
 	char **av;
 	int fd;
+	int incr;
+	int cd_n;
 	
 	t_command *command;
 }	t_minishell;
@@ -64,15 +66,17 @@ char		*readline (const char *prompt);
 void    	rl_replace_line(const char *text, int clear_undo);
 
 //parsing.c
-void		separate_cmd(char *ligne, t_minishell *minishell);
+void		separate_cmd(char *ligne, t_minishell **minishell);
 char		*var_env(char *ligne, int j, t_minishell *minishell);
 char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne, int i);
 char		**copy_env(char **env);
 
 //utils_parsing.c
-char		choose_quote(char c, char quote);
+char		choose_quote(char c, char quote, int *i, int verif);
 int			put_error(int type);
+char		*replace_var_env(char *ligne, int i, int j, t_minishell *minishell);
+char		*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
 
 //utils.c
 int			ft_strcmp(char *s1, char *s2);
@@ -105,7 +109,7 @@ char		*ft_itoa(int n);
 //quote.c
 char		**separate_quote(char *str, char sep);
 int			count_words_quote(char *str, char sep);
-char		*dolar_dolar(void);
+char		*dolar_dolar(t_minishell *minishell);
 
 //builtins.c
 void		echo(int fd, t_command *c, t_minishell *minishell);
@@ -119,7 +123,7 @@ void		env(int fd, t_command *c, t_minishell *minishell);
 //utils_redi.c
 void		parse_redi(char **ligne, t_command *c);
 char		**display_quote(char **str);
-char		*replace(char *str, char quote);
+char		*replace(char *str, char quote, int *j);
 char		*get_env(char *var, char **env);
 
 //simple.c
@@ -131,7 +135,7 @@ void		double_droite(t_command *c);
 void		double_gauche(t_command *c, t_minishell *minishell);
 int			check_env(char *ligne);
 char		*coucou(char *ligne);
-void		double_read(t_command *c);
+void		impr_double(t_command *c, int pipes[2], char *ligne);
 
 //exec.c
 void		belle_exec(t_command *c, t_minishell *minishell);

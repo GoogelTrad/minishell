@@ -6,18 +6,18 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/03 16:31:56 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/06 17:44:30 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int len_env(char **env)
+int	len_env(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 		i++;
 	return (i);
 }
@@ -53,7 +53,7 @@ void	env(int fd, t_command *c, t_minishell *minishell)
 
 void	init_env(char **env, t_minishell *minishell)
 {
-	char *buf;
+	char	*buf;
 
 	buf = NULL;
 	if (env[0])

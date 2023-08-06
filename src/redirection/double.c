@@ -21,23 +21,18 @@ void	double_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
 	char	*ligne;
-	int		i;
 
 	pipe(pipes);
 	c->fd_in = pipes[0];
 	if (check_env(minishell->ligne))
 		c->redi->word = ft_strdup(coucou(minishell->ligne));
-	do
+	ligne = readline("> ");
+	impr_double(c, pipes, ligne);
+	while (ft_strcmp(ligne, c->redi->word) != 0)
 	{
-		i = 0;
 		ligne = readline("> ");
-		if (ft_strcmp(ligne, c->redi->word) != 0)
-		{
-			while (ligne[i])
-				write(pipes[1], &ligne[i++], 1);
-			write(pipes[1], "\n", 1);
-		}
-	}	while (ft_strcmp(ligne, c->redi->word) != 0);
+		impr_double(c, pipes, ligne);
+	}
 	close(pipes[1]);
 }
 
@@ -76,4 +71,17 @@ int	check_env(char *ligne)
 		i++;
 	}
 	return (0);
+}
+
+void	impr_double(t_command *c, int pipes[2], char *ligne)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strcmp(ligne, c->redi->word) != 0)
+	{
+		while (ligne[i])
+			write(pipes[1], &ligne[i++], 1);
+		write(pipes[1], "\n", 1);
+	}
 }

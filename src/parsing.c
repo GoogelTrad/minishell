@@ -6,13 +6,13 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/03 16:22:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:26:07 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	separate_cmd(char *ligne, t_minishell *minishell)
+void	separate_cmd(char *ligne, t_minishell **minishell)
 {
 	int			i;
 	char		**res_tot;
@@ -22,73 +22,45 @@ void	separate_cmd(char *ligne, t_minishell *minishell)
 	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])
 		i++;
-	minishell->command = malloc(sizeof(t_command) * (i + 1));
+	(*minishell)->command = malloc(sizeof(t_command) * (i + 1));
 	i = 0;
 	while (res_tot[i])
 	{
-		minishell->command[i].redi = malloc(sizeof(t_redirection));
+		(*minishell)->command[i].redi = malloc(sizeof(t_redirection));
 		res_ligne = ft_split(res_tot[i], ' ', 0);
 		res_ligne = display_quote(res_ligne);
-		minishell->command[i].cmd = res_ligne[0];
-		minishell->command[i].fd_in = 0;
-		minishell->command[i].fd_out = 1;
-		minishell->command[i].redi->there = 0;
-		parse_redi(res_ligne + 1, &minishell->command[i]);
+		(*minishell)->command[i].cmd = res_ligne[0];
+		(*minishell)->command[i].fd_in = 0;
+		(*minishell)->command[i].fd_out = 1;
+		(*minishell)->command[i].redi->there = 0;
+		parse_redi(res_ligne + 1, &(*minishell)->command[i]);
 		i++;
 	}
-	minishell->command[i].cmd = NULL;
+	(*minishell)->command[i].cmd = NULL;
 }
 
-char *var_env(char *ligne, int j, t_minishell *minishell)
+char	*var_env(char *ligne, int j, t_minishell *minishell)
 {
-	int i;
-	int incr;
-	char quote;
-	char *var;
-	char *replace;
+	int		i;
+	char	quote;
+	char	*replace;
 
 	i = 0;
 	quote = ' ';
 	while (ligne[i])
 	{
-		quote = choose_quote(ligne[i], quote);
+		quote = choose_quote(ligne[i], quote, &i, 0);
 		if (ligne[i] == '$' && quote != '\'')
 		{
 			j = i++;
-			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' && ligne[i] != quote && ischaralnum(ligne[i]))
-			{
-				quote = choose_quote(ligne[i], quote);
-				i++;
-			}
-			if (ligne[i] == '?')
-			{
-				replace = ft_itoa(minishell->status);
-				incr = 2;
-			}
-			else if (ligne[i] == '$')
-			{
-				replace = dolar_dolar();
-				incr = 2;
-			}
-			else
-			{
-				var = ft_strndup(ligne + j, i - j);
-				replace = get_env(var + 1, minishell->env);
-				if (!replace)
-				{
-					if (!ft_isalnum(var + 1))
-						replace = ft_strdup(var + 1);
-					else if (ft_isdigit(var[1]))
-					{
-						replace = ft_strdup(var_arg(minishell->av, var, minishell->ac));
-					}
-				}
-				incr = 1;
-			}
+			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$'
+				&& ligne[i] != quote && ischaralnum(ligne[i]))
+				quote = choose_quote(ligne[i], quote, &i, 1);
+			replace = type_of_var(ligne, i, j, minishell);
 			ligne = replace_value(replace, ligne, j);
-			quote = choose_quote(ligne[i], quote);
-			if (ligne[j + incr])
-				i = j + incr;
+			quote = choose_quote(ligne[i], quote, &i, 0);
+			if (ligne[j + minishell->incr])
+				i = j + minishell->incr;
 		}
 		i++;
 	}
@@ -97,10 +69,10 @@ char *var_env(char *ligne, int j, t_minishell *minishell)
 
 char	*replace_var(char *var, char **env)
 {
-	int i;
-	int j;
-	int lenght_var;
-	char *res;
+	int		i;
+	int		j;
+	int		lenght_var;
+	char	*res;
 
 	i = 0;
 	lenght_var = ft_strlen(var);
@@ -119,16 +91,16 @@ char	*replace_var(char *var, char **env)
 
 char	*replace_value(char *var, char *ligne, int i)
 {
-	char *temp;
-	int verif;
-	char *res;
-	int j;
+	char	*temp;
+	int		verif;
+	char	*res;
+	int		j;
 
 	j = i++;
 	verif = 0;
 	if (!ischaralnum(ligne[j + 1]) || !ligne[j + 1])
 		verif = 1;
-	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$' 
+	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$'
 		&& ligne[i] != '"' && ischaralnum(ligne[i]))
 		i++;
 	if ((ligne[i] == '$' || ligne[i] == '?') && ligne[i - 1] == '$')
@@ -145,5 +117,3 @@ char	*replace_value(char *var, char *ligne, int i)
 	free(temp);
 	return (res);
 }
-
-
