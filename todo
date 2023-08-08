@@ -8,10 +8,7 @@ exit ✅
 env ✅
 unset ✅ (by celian)
 cd ✅ (by celian) + l'exception de supprimer le repertoire courant.
-
-a faire :
-
-export (rectifier les erreurs comme "export name =test" qui ne renvoie pas la bonne valeur)
+export ✅
 
 Parsing :
 
@@ -56,3 +53,4 @@ affiche "$.." ✅
 echo $$ -> dans replace value j'ai echo ID$$ et non echo ID en sortie. ✅
 
 echo ''"coucou" ne s'affiche comme il le faudrait, le deuxieme ' ne disparait pas et casse tout. ✅
+
