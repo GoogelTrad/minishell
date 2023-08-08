@@ -12,6 +12,25 @@
 
 #include "minishell.h"
 
+char	**copy_env(char **env)
+{
+	int		i;
+	char	**copy;
+
+	i = 0;
+	while (env[i])
+		i++;
+	copy = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		copy[i] = ft_strdup(env[i]);
+		i++;
+	}
+	copy[i] = 0;
+	return (copy);
+}
+
 void	separate_cmd(char *ligne, t_minishell **minishell)
 {
 	int			i;

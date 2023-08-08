@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:07:53 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/06 17:45:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:50:35 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	check_option_echo(char	*str)
 	if (str[i] != ' ' && str[i] != '\0')
 		return (0);
 	return (1);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }
 
 void	ft_putstr(char *s)

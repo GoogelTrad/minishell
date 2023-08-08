@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: epraduro <epraduro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 17:32:12 by epraduro         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:44:47 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,6 @@ int	ft_strcmp(char *s1, char *s2)
 	while (c[i] && c[i] == f[i])
 		i++;
 	return (c[i] - f[i]);
-}
-
-char	*ft_strndup(char *str, int n)
-{
-	char	*dest;
-	int		i;
-
-	i = 0;
-	dest = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	while (str[i] && i < n)
-	{
-		dest[i] = str[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (dest);
 }
 
 int	ft_strlen(char *str)

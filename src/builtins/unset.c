@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 18:11:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/03 16:40:47 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:58:08 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 size_t	env_size(char *env)
 {
-	size_t		i = 0;
+	size_t		i;
 
+	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
 	return (i);
 }
 
-void		ft_free(t_minishell *env)
+void	ft_free(t_minishell *env)
 {
 	if (env->env == NULL)
 	{
@@ -30,16 +31,28 @@ void		ft_free(t_minishell *env)
 	}
 }
 
-/*void ft_unset(t_command *c)
+void	ft_putchar(char c)
 {
-	int i = 0;
-	size_t size;
+	write(1, &c, 1);
+}
 
-	if (getenv(c->option[1]))
+void	unset(t_command *c, t_minishell *minishell)
+{
+	int	i;
+
+	i = 0;
+	if (var_env(c->option[0], 0, minishell))
 	{
-		size = env_size(c->option[1]);
-		while (ft_strncmp(c->option[1], g_minishell.env[i], size) != 0)
+		while (minishell->env[i] && ft_strncmp(c->option[0],
+				minishell->env[i], ft_strlen(c->option[0])) != 0)
 			i++;
-		
+		if (minishell->env[i])
+			free(minishell->env[i]);
+		while (minishell->env[i])
+		{
+			minishell->env[i] = minishell->env[i + 1];
+			i++;
+		}
 	}
-}*/
+	minishell->status = 0;
+}

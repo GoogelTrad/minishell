@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:40 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/06 17:38:51 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:45:46 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_strndup(char *str, int n)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	dest = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while (str[i] && i < n)
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
+}
 
 char	choose_quote(char c, char quote, int *i, int verif)
 {
@@ -34,25 +50,6 @@ int	put_error(int type)
 	write(2, strerror(type), ft_strlen(strerror(type)));
 	write(2, "\n", 1);
 	return (type);
-}
-
-char	**copy_env(char **env)
-{
-	int		i;
-	char	**copy;
-
-	i = 0;
-	while (env[i])
-		i++;
-	copy = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (env[i])
-	{
-		copy[i] = ft_strdup(env[i]);
-		i++;
-	}
-	copy[i] = 0;
-	return (copy);
 }
 
 char	*replace_var_env(char *ligne, int i, int j, t_minishell *minishell)
