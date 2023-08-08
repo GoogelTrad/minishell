@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 18:17:35 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/01 19:31:38 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/06 17:46:53 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-extern t_minishell g_minishell;
-
 char	**copy_tab(char **tab)
 {
 	char	**copy_tab;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (tab[i])
@@ -83,7 +81,7 @@ char	*set_value(char *word, char *value)
 
 	size_word = ft_strlen(word);
 	size_value = ft_strlen(value);
-	var = malloc(sizeof (char) * ((size_value + 1)+ (size_word + 1)));
+	var = malloc(sizeof (char) * ((size_value + 1) + (size_word + 1)));
 	i = -1;
 	j = -1;
 	while (++i < size_word)

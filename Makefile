@@ -18,6 +18,7 @@ SRCS =  src/main.c \
 		src/redirection/simple.c \
 		src/redirection/utils_redi.c \
 		src/redirection/double.c \
+		src/redirection/parse_redi.c \
 		src/builtins/cd.c \
 		src/builtins/env.c \
 		src/builtins/echo.c \
@@ -27,6 +28,7 @@ SRCS =  src/main.c \
 		src/builtins/export.c \
 		src/builtins/builtins.c \
 		src/builtins/utils_export.c \
+		src/utils_exec.c \
 		
 
 OBJC = ${SRCS:.c=.o}

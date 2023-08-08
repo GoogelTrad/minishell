@@ -6,66 +6,58 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/02 11:30:56 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:43:23 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_minishell g_minishell;
-
-int len_env(char **env)
-{
-	int i;
-
-	i = 0;
-	while(env[i])
-		i++;
-	return (i);
-}
-
 int	main(int ac, char **av, char **env)
 {
-	char	*ligne;
-	
-	g_minishell.av = copy_env(av);
-	g_minishell.size_env = len_env(env);
-	init_env(env);
+	char		*ligne;
+	t_minishell	minishell;
+
+	minishell.av = copy_env(av);
+	minishell.size_env = len_env(env);
+	init_env(env, &minishell);
 	signal(SIGINT, &get_sigint);
-	g_minishell.ac = ac;
+	minishell.ac = ac;
+	minishell.incr = 0;
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
 		ligne = readline("MiniShell> ");
-		if(ligne == NULL)
+		if (ligne == NULL)
 		{
 			printf("exit\n");
 			exit(0);
 		}
 		if (ligne[0])
-		{
-			add_history(ligne);
-			g_minishell.ligne = ft_strdup(ligne);
-			ligne = var_env(ligne, 0);
-			separate_cmd(ligne);
-			bworded(g_minishell.command);
-			belle_exec(g_minishell.command);
-		}
+			prompt(ligne, &minishell);
 	}
-    return (0);
+	return (0);
 }
 
-void get_sigint(int signal)
+void	prompt(char *ligne, t_minishell *minishell)
+{
+	add_history(ligne);
+	minishell->ligne = ft_strdup(ligne);
+	ligne = var_env(ligne, 0, minishell);
+	separate_cmd(ligne, &minishell);
+	bworded(minishell->command);
+	belle_exec(minishell->command, minishell);
+}
+
+void	get_sigint(int signal)
 {
 	(void)signal;
-	g_minishell.status = 127;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void blocksig(int signal)
+void	blocksig(int signal)
 {
 	(void)signal;
 	printf("Quit : 3\n");
@@ -73,18 +65,12 @@ void blocksig(int signal)
 	rl_redisplay();
 }
 
-void bworded(t_command *c)
+char	*var_arg(char **av, char *ligne, int ac)
 {
-	if (ft_strcmp(c->cmd, "cat") == 0 && c->option[0] == NULL)
-		signal(SIGQUIT, &blocksig);
-}
-
-char *var_arg(char **av, char *ligne, int ac)
-{
-	char *res;
-	char *tmp;
-	int i;
-	int nb;
+	char	*res;
+	char	*tmp;
+	int		i;
+	int		nb;
 
 	i = 0;
 	while (ligne[i])

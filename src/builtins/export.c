@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/05 17:50:17 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/05 19:27:35 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-extern t_minishell g_minishell;
 
 void	export_alone(int fd, char **tab)
 {
@@ -41,22 +39,22 @@ void	export_alone(int fd, char **tab)
 	}
 }
 
-int	add_var_env(char *word, char *value)
+int	add_var_env(char *word, char *value, t_minishell *minishell)
 {
 	char	**var;
 	int		i;
 
-	g_minishell.size_env += 1;
-	var = malloc(sizeof (char *) * (g_minishell.size_env + 1));
+	minishell->size_env += 1;
+	var = malloc(sizeof (char *) * (minishell->size_env + 1));
 	i = 0;
-	while (g_minishell.env[i])
+	while (minishell->env[i])
 	{
-		var[i] = ft_strdup(g_minishell.env[i]);
+		var[i] = ft_strdup(minishell->env[i]);
 		i++;
 	}
 	var[i] = set_value(word, value);
 	var[++i] = NULL;
-	g_minishell.env = var;
+	minishell->env = var;
 	return (1);
 }
 
@@ -86,12 +84,12 @@ void		export_by_ascii(char **tab, int size_env)
 	}
 }
 
-void	aff_export_alone(int fd)
+void	aff_export_alone(int fd, t_minishell *minishell)
 {
 	char	**tab;
 
-	tab = copy_tab(g_minishell.env);
-	export_by_ascii(tab, g_minishell.size_env);
+	tab = copy_tab(minishell->env);
+	export_by_ascii(tab, minishell->size_env);
 	export_alone(fd, tab);
 }
 
@@ -118,7 +116,7 @@ int	ft_valid_arg(char *str)
 	return (1);
 }
 
-void    export(t_command *c)
+void    export(t_command *c, t_minishell *minishell)
 {
     int k;
     int i;
@@ -127,7 +125,7 @@ void    export(t_command *c)
     i = 0;
 	x = 0;
     if (!c->option[0])
-        aff_export_alone(c->fd_out);
+        aff_export_alone(c->fd_out, minishell);
     else
     {
 		k = 0;
@@ -150,38 +148,38 @@ void    export(t_command *c)
 					{
 						printf("%s: '%s': command not found\n",
 						c->cmd, c->option[i]);
-						g_minishell.status = 1;
+						minishell->status = 1;
 						return ;
 					}
 					else if (c->option[i][k] == '(')
 					{
 						printf("%s: '%s': syntax error near unexpected token '('\n",
 						c->cmd, c->option[i]);
-						g_minishell.status = 1;
+						minishell->status = 1;
 						return ;
 					}
 					else if (c->option[i][k] == ')')
 					{
 						printf("%s: '%s': syntax error near unexpected token ')'\n",
 						c->cmd, c->option[i]);
-						g_minishell.status = 1;
+						minishell->status = 1;
 						return ;
 					}
 					else
 					{
 						printf("%s: '%s': not a valid identifier\n",
 						c->cmd, c->option[i]);
-						g_minishell.status = 1;
+						minishell->status = 1;
 						return ;
 					}
 				}
 			}
 		}
 		if (c->option[i][k] == '\0')
-			add_var_env(ft_strdup(c->option[i]), NULL);
+			add_var_env(ft_strdup(c->option[i]), NULL, minishell);
 		else
-			add_var_env(get_char(c->option[i], 0, k), c->option[i] + k + 1);
-		g_minishell.status = 0;
+			add_var_env(get_char(c->option[i], 0, k), c->option[i] + k + 1, minishell);
+		minishell->status = 0;
 		i++; 
     }
 }

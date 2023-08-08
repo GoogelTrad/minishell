@@ -12,46 +12,44 @@
 
 #include "minishell.h"
 
-extern t_minishell	g_minishell;
-
-void	belle_exec(t_command *c)
+void	belle_exec(t_command *c, t_minishell *minishell)
 {
 	int	pipes[2];
 
 	pipe(pipes);
-	exec_redi(c);
+	exec_redi(c, minishell);
 	if ((c + 1)->cmd)
 	{
 		if (c->fd_out == 1)
 			c->fd_out = pipes[1];
 		(c + 1)->fd_in = pipes[0];
 	}
-	exec(c->fd_out, c);
+	exec(c->fd_out, c, minishell);
 	if ((c + 1)->cmd)
-		belle_exec(c + 1);
+		belle_exec(c + 1, minishell);
 }
 
-void	exec(int fd, t_command *c)
+void	exec(int fd, t_command *c, t_minishell *minishell)
 {
 	if (ft_strcmp(c->cmd, "echo") == 0)
-		echo(fd, c);
+		echo(fd, c, minishell);
 	else if (ft_strcmp(c->cmd, "exit") == 0)
-		ft_exit(c);
+		ft_exit(c, minishell);
 	else if (ft_strcmp(c->cmd, "pwd") == 0)
-		pwd(fd);
+		pwd(fd, minishell);
 	else if (ft_strcmp(c->cmd, "env") == 0)
-		env(fd, c);
+		env(fd, c, minishell);
 	else if (ft_strcmp(c->cmd, "cd") == 0)
-		cd(c);
+		cd(c, minishell);
 	else if (ft_strcmp(c->cmd, "unset") == 0)
-		unset(c);
+		unset(c, minishell);
 	else if (ft_strcmp(c->cmd, "export") == 0)
-		export(c);
+		export(c, minishell);
 	else
-		exec_others(c);
+		exec_others(c, 0, minishell);
 }
 
-void	exec_redi(t_command *c)
+void	exec_redi(t_command *c, t_minishell *minishell)
 {
 	while (c->redi->there)
 	{
@@ -62,53 +60,45 @@ void	exec_redi(t_command *c)
 		else if (ft_strcmp(c->redi->type, "<") == 0)
 			simple_gauche(c);
 		else if (ft_strcmp(c->redi->type, "<<") == 0)
-			double_gauche(c);
+			double_gauche(c, minishell);
 		c->redi = c->redi->next_redi;
 	}
 }
 
-void	exec_others(t_command *c)
+void	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
-	int		verif;
 	char	*fusion;
 	int		i;
 
 	i = 0;
-	verif = 0;
 	if (open(c->cmd, O_RDONLY) > -1)
-		exec_fork(c->cmd, c);
+		exec_fork(c->cmd, c, minishell);
 	else
 	{
-		path = ft_split(var_env("$PATH", 0), ':');
+		path = ft_split(var_env("$PATH", 0, minishell), ':', 0);
 		while (path[i])
 		{
 			fusion = ft_strjoin(path[i], "/");
 			fusion = ft_strjoin(fusion, c->cmd);
 			if (open(fusion, O_RDONLY) > -1)
 			{
-				exec_fork(fusion, c);
+				exec_fork(fusion, c, minishell);
 				verif = 1;
 				break ;
 			}
 			i++;
 		}
-		if (!verif)
-		{
-			g_minishell.status = 127;
-			write(2, c->cmd, ft_strlen(c->cmd));
-			write(2, ": ", 2);
-			write(1, "command not found\n", 18);
-		}
+		no_command(verif, c, minishell);
 	}
 }
 
-void	exec_fork(char *fichier, t_command *c)
+void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
 {
 	int	pid;
-	int status;
+	int	status;
 
-	fusion_exec(c);
+	fusion_exec(c, minishell);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -116,31 +106,16 @@ void	exec_fork(char *fichier, t_command *c)
 			dup2(c->fd_out, 1);
 		if (c->fd_in != 0)
 			dup2(c->fd_in, 0);
-		if (execve(fichier, g_minishell.fusion, g_minishell.env) == -1)
-			g_minishell.status = put_error(errno);
+		if (execve(fichier, minishell->fusion, minishell->env) == -1)
+			minishell->status = put_error(errno);
+		else
+			minishell->status = 0;
 		exit(0);
 	}
 	else
 		waitpid(pid, &status, 0);
 	if (c->fd_out != 1)
 		close(c->fd_out);
+	free_double_tab(minishell->fusion);
 	free(fichier);
-}
-
-void	fusion_exec(t_command *c)
-{
-	int	i;
-
-	i = 0;
-	while (c->option[i])
-		i++;
-	g_minishell.fusion = malloc(sizeof(char *) + (i + 1));
-	i = 0;
-	g_minishell.fusion[0] = ft_strdup(c->cmd);
-	while (c->option[i])
-	{
-		g_minishell.fusion[i + 1] = ft_strdup(c->option[i]);
-		i++;
-	}
-	g_minishell.fusion[i + 1] = NULL;
 }

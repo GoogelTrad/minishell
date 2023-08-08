@@ -51,11 +51,11 @@ char	*ft_strdup(char *str)
 		dest[i] = str[i];
 		i++;
 	}
-	dest[i] = 0; 
+	dest[i] = 0;
 	return (dest);
 }
 
-int	isCharAlnum(char c)
+int	ischaralnum(char c)
 {
 	if (!((48 <= c && 57 >= c) || (65 <= c && 90 >= c)
 			|| (97 <= c && 122 >= c)))
@@ -68,4 +68,10 @@ int	ft_isdigit(int c)
 	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
+}
+
+void	bworded(t_command *c)
+{
+	if (ft_strcmp(c->cmd, "cat") == 0 && c->option[0] == NULL)
+		signal(SIGQUIT, &blocksig);
 }

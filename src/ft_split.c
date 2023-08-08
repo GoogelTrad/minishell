@@ -6,13 +6,13 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 12:46:59 by cmichez           #+#    #+#             */
-/*   Updated: 2023/07/10 22:51:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/02 21:06:38 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_size(int n)
+int	count_size(int n)
 {
 	int	i;
 
@@ -28,31 +28,6 @@ static int	count_size(int n)
 		n /= 10;
 	}
 	return (i + 1);
-}
-
-char	*ft_itoa(int n)
-{
-	int		i;
-	char	*str;
-	long	nb;
-
-	i = count_size(n);
-	nb = n;
-	str = malloc(sizeof(char) * i + 1);
-	if (!str)
-		return (0);
-	if (n < 0)
-		nb *= -1;
-	str[i--] = '\0';
-	while (i >= 0)
-	{
-		str[i] = nb % 10 + 48;
-		nb /= 10;
-		i--;
-	}
-	if (n < 0)
-		str[0] = '-';
-	return (str);
 }
 
 int	char_is_sep(char c, char sep)
@@ -81,15 +56,25 @@ int	count_words(const char *str, char sep)
 	return (nb);
 }
 
-char	**ft_split(char *str, char sep)
+char	quote_split(char *str, int i, char quote)
+{
+	if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
+	{
+		if (quote == ' ')
+			quote = str[i];
+		else
+			quote = ' ';
+	}
+	return (quote);
+}
+
+char	**ft_split(char *str, char sep, int i)
 {
 	char	**split;
 	char	quote;
-	int		i;
 	int		n;
 	int		j;
 
-	i = 0;
 	n = 0;
 	quote = ' ';
 	split = malloc(sizeof(char *) * (count_words(str, sep) + 1));
@@ -97,24 +82,16 @@ char	**ft_split(char *str, char sep)
 		return (0);
 	while (str[i])
 	{
-		while (char_is_sep(str[i], sep) && str[i] && quote == ' ')
-			i++;
+		char_split(str, &i, sep, quote);
 		j = i;
 		while (str[i] && (!char_is_sep(str[i], sep) || quote != ' '))
 		{
-			if ((str[i] == '"' || str[i] == '\'') && str[i - 1] != '\\')
-			{
-				if (quote == ' ')
-					quote = str[i];
-				else
-					quote = ' ';
-			}
+			quote = quote_split(str, i, quote);
 			i++;
 		}
 		if (i != j)
 			split[n++] = ft_strndup(str + j, i - j);
-		while (char_is_sep(str[i], sep) && str[i] && quote == ' ')
-			i++;
+		char_split(str, &i, sep, quote);
 	}
 	split[n] = 0;
 	return (split);
