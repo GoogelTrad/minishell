@@ -15,6 +15,7 @@
 void	belle_exec(t_command *c, t_minishell *minishell)
 {
 	int	pipes[2];
+	int	pid;
 
 	pipe(pipes);
 	exec_redi(c, minishell);
@@ -25,8 +26,11 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 		(c + 1)->fd_in = pipes[0];
 	}
 	exec(c->fd_out, c, minishell);
+	pid = minishell->pid;
 	if ((c + 1)->cmd)
 		belle_exec(c + 1, minishell);
+	close(pipes[0]);
+	waitpid(pid, &minishell->status, 0);
 }
 
 void	exec(int fd, t_command *c, t_minishell *minishell)
@@ -95,25 +99,19 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 
 void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
 {
-	int	pid;
-	int	status;
-
 	fusion_exec(c, minishell);
-	pid = fork();
-	if (pid == 0)
+	minishell->pid = fork();
+	if (minishell->pid == 0)
 	{
-		if (c->cmd)
-			dup2(c->fd_out, 1);
+		dup2(c->fd_out, 1);
 		if (c->fd_in != 0)
 			dup2(c->fd_in, 0);
 		if (execve(fichier, minishell->fusion, minishell->env) == -1)
 			minishell->status = put_error(errno);
 		else
 			minishell->status = 0;
-		exit(0);
+		exit(1);
 	}
-	else
-		waitpid(pid, &status, 0);
 	if (c->fd_out != 1)
 		close(c->fd_out);
 	free_double_tab(minishell->fusion);
