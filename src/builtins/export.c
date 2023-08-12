@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/08 18:40:55 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/12 14:44:22 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,8 @@ void	export(t_command *c, t_minishell *minishell)
 {
 	int	k;
 	int	i;
-	int	x;
 
 	i = 0;
-	x = 0;
 	if (!c->option[0])
 		aff_export_alone(c->fd_out, minishell);
 	else
@@ -108,43 +106,8 @@ void	export(t_command *c, t_minishell *minishell)
 		k = 0;
 		while (c->option[i] && c->option[i][k] && c->option[i][k] != '=')
 		{
-			if (ft_isalpha(c->option[i][k]))
-			{
-				x = 1;
-				k++;
-			}
-			else if ((c->option[i][k] == '_'
-				|| ft_isdigit(c->option[i][k])) && x == 1)
-				k++;
-			else
-			{
-				if (c->option[i][k + 1] == '=' && (!(ft_isalpha(c->option[i][k])
-					&& ft_isdigit(c->option[i][k]))))
-				{
-					if (c->option[i][k] == '&' || c->option[i][k] == ';'
-						|| c->option[i][k] == '|')
-					{
-						printf("%s: '%s': command not found\n",
-							c->cmd, c->option[i]);
-						minishell->status = 1;
-						return ;
-					}
-					else if (c->option[i][k] == '(' || c->option[i][k] == ')')
-					{
-						printf("%s: '%s': syntax error near unexpected token '%c'\n",
-							c->cmd, c->option[i], c->option[i][k]);
-						minishell->status = 1;
-						return ;
-					}
-					else
-					{
-						printf("%s: '%s': not a valid identifier\n",
-							c->cmd, c->option[i]);
-						minishell->status = 1;
-						return ;
-					}
-				}
-			}
+			if (check_option_export(c, minishell, i, k) == 0)
+				return ;
 		}
 		if (c->option[i][k] == '\0')
 			add_var_env(ft_strdup(c->option[i]), NULL, minishell);

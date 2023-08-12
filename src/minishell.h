@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/08 19:36:49 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/12 14:38:54 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,11 @@ int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*get_char(char *cmd, size_t start, size_t end);
 char		*set_value(char *word, char *value);
+
+//  builtins/utils_export2.c
+int 		is_valid(int c);
+int			isok(t_command *c, t_minishell *minishell, int i, int k);
+int			check_option_export(t_command *c, t_minishell *minishell, int i, int k);
 
 // redirection/double.c
 void		double_droite(t_command *c);

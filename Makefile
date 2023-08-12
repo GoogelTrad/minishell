@@ -14,6 +14,7 @@ SRCS =  src/builtins/cd.c \
 		src/builtins/unset.c \
 		src/builtins/utils_builtins.c \
 		src/builtins/utils_export.c \
+		src/builtins/utils_export2.c \
 		src/redirection/double.c \
 		src/redirection/parse_redi.c \
 		src/redirection/simple.c \
