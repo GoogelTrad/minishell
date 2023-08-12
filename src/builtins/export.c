@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/12 14:44:22 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/12 17:26:14 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 
 void	export(t_command *c, t_minishell *minishell)
 {
-	int	k;
 	int	i;
+	int k;
 
 	i = 0;
 	if (!c->option[0])
@@ -104,11 +104,8 @@ void	export(t_command *c, t_minishell *minishell)
 	else
 	{
 		k = 0;
-		while (c->option[i] && c->option[i][k] && c->option[i][k] != '=')
-		{
-			if (check_option_export(c, minishell, i, k) == 0)
-				return ;
-		}
+		if (check_option_export(c, minishell, i, &k) == 0)
+			return ;
 		if (c->option[i][k] == '\0')
 			add_var_env(ft_strdup(c->option[i]), NULL, minishell);
 		else

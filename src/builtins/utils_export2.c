@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:21:37 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/12 14:59:45 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/12 17:26:10 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_valid(int c)
 
 int	isok(t_command *c, t_minishell *minishell, int i, int k)
 {
-	if (c->option[i][k + 1] == '=' && (!(is_valid(c->option[i][k]))))
+	if (!is_valid(c->option[i][k]))
 	{
 		if (c->option[i][k] == '&' || c->option[i][k] == ';'
 			|| c->option[i][k] == '|')
@@ -48,26 +48,30 @@ int	isok(t_command *c, t_minishell *minishell, int i, int k)
 		return (1);
 }
 
-int	check_option_export(t_command *c, t_minishell *minishell, int i, int k)
+int	check_option_export(t_command *c, t_minishell *minishell, int i, int *k)
 {
 	int	x;
 
 	x = 0;
-	while (c->option[i] && c->option[i][k])
+	while (c->option[i] && c->option[i][*k] && c->option[i][*k] != '=')
 	{
-		if (ft_isalpha(c->option[i][k]))
+		if (ft_isalpha(c->option[i][*k]))
 		{
 			x = 1;
-			k++;
+			(*k)++;
 		}
-		else if ((c->option[i][k] == '_'
-			|| ft_isdigit(c->option[i][k])) && x == 1)
+		else if ((c->option[i][*k] == '_'
+			|| ft_isdigit(c->option[i][*k])) && x == 1)
 		{	
-			k++;
+			(*k)++;
 		}
-		else
-			if (isok(c, minishell, i, k) == 0)
+		else 
+		{
+			if (isok(c, minishell, i, *k) == 0)
 				return (0);
+			else
+				return (1);
+		}
 	}
 	return (1);
 }
