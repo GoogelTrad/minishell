@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/08 18:40:55 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/12 18:09:56 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,25 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 
 void	export_by_ascii(char **tab, int size_env)
 {
-	int		order;
 	int		i;
+	int		j;
 	char	*tmp;
 
-	order = 0;
-	while (tab && order == 0)
+	i = 0;
+	while (i < size_env - 1)
 	{
-		order = 1;
-		i = 0;
-		while (i < size_env - 1)
+		j = 0;
+		while (j < size_env - 1)
 		{
-			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+			if (ft_strncmp(tab[i], tab[j], ft_strlen(tab[i])) < 0)
 			{
 				tmp = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = tmp;
-				order = 0;
+				tab[i] = tab[j];
+				tab[j] = tmp;
 			}
-			i++;
+			j++;
 		}
-		size_env--;
+		i++;
 	}
 }
 
@@ -95,63 +93,26 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 
 void	export(t_command *c, t_minishell *minishell)
 {
-	int	k;
 	int	i;
-	int	x;
+	int k;
 
 	i = 0;
-	x = 0;
 	if (!c->option[0])
 		aff_export_alone(c->fd_out, minishell);
 	else
 	{
-		k = 0;
-		while (c->option[i] && c->option[i][k] && c->option[i][k] != '=')
+		while (c->option[i]) 
 		{
-			if (ft_isalpha(c->option[i][k]))
-			{
-				x = 1;
-				k++;
-			}
-			else if ((c->option[i][k] == '_'
-				|| ft_isdigit(c->option[i][k])) && x == 1)
-				k++;
+			k = 0;
+			if (check_option_export(c, minishell, i, &k) == 0)
+				return ;
+			if (c->option[i][k] == '\0')
+				add_var_env(ft_strdup(c->option[i]), NULL, minishell);
 			else
-			{
-				if (c->option[i][k + 1] == '=' && (!(ft_isalpha(c->option[i][k])
-					&& ft_isdigit(c->option[i][k]))))
-				{
-					if (c->option[i][k] == '&' || c->option[i][k] == ';'
-						|| c->option[i][k] == '|')
-					{
-						printf("%s: '%s': command not found\n",
-							c->cmd, c->option[i]);
-						minishell->status = 1;
-						return ;
-					}
-					else if (c->option[i][k] == '(' || c->option[i][k] == ')')
-					{
-						printf("%s: '%s': syntax error near unexpected token '%c'\n",
-							c->cmd, c->option[i], c->option[i][k]);
-						minishell->status = 1;
-						return ;
-					}
-					else
-					{
-						printf("%s: '%s': not a valid identifier\n",
-							c->cmd, c->option[i]);
-						minishell->status = 1;
-						return ;
-					}
-				}
-			}
+				add_var_env(get_char(c->option[i], 0, k),
+					c->option[i] + k + 1, minishell);
+			minishell->status = 0;
+			i++;
 		}
-		if (c->option[i][k] == '\0')
-			add_var_env(ft_strdup(c->option[i]), NULL, minishell);
-		else
-			add_var_env(get_char(c->option[i], 0, k),
-				c->option[i] + k + 1, minishell);
-		minishell->status = 0;
-		i++;
 	}
 }

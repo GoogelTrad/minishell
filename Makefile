@@ -14,6 +14,7 @@ SRCS =  src/builtins/cd.c \
 		src/builtins/unset.c \
 		src/builtins/utils_builtins.c \
 		src/builtins/utils_export.c \
+		src/builtins/utils_export2.c \
 		src/redirection/double.c \
 		src/redirection/parse_redi.c \
 		src/redirection/simple.c \
@@ -35,7 +36,7 @@ OBJC = ${SRCS:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJC}
-	${CC} ${CFLAGS} ${OBJC} ${COMPIL_CELIAN} -lreadline -lncurses -o ${NAME}
+	${CC} ${CFLAGS} ${OBJC} ${COMPIL_42} -lreadline -lncurses -o ${NAME}
 
 clean: 
 	 ${RM} ${OBJC}

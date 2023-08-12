@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/08 23:27:19 by cmichez          ###   ########.fr       */
+=======
+/*   Updated: 2023/08/12 17:54:39 by acolin           ###   ########.fr       */
+>>>>>>> ba4468de070188ee1cd6ee8d0503f3efde576fba
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +28,7 @@ int	main(int ac, char **av, char **env)
 	minishell.ac = ac;
 	//minishell.pid = -1;
 	minishell.incr = 0;
+	printf("%d\n", ft_strcmp("name=test", "name2=test"));
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
