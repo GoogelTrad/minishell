@@ -106,14 +106,15 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
 		dup2(c->fd_out, 1);
 		if (c->fd_in != 0)
 			dup2(c->fd_in, 0);
+		close((c + 1)->fd_in);
 		if (execve(fichier, minishell->fusion, minishell->env) == -1)
 			minishell->status = put_error(errno);
 		else
 			minishell->status = 0;
 		exit(1);
 	}
-	if (c->fd_out != 1)
-		close(c->fd_out);
+	//if (c->fd_out != 1)
+	//	close(c->fd_out);
 	free_double_tab(minishell->fusion);
 	free(fichier);
 }
