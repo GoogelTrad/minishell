@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/12 17:26:14 by acolin           ###   ########.fr       */
+/*   Updated: 2023/08/12 18:09:56 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,25 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 
 void	export_by_ascii(char **tab, int size_env)
 {
-	int		order;
 	int		i;
+	int		j;
 	char	*tmp;
 
-	order = 0;
-	while (tab && order == 0)
+	i = 0;
+	while (i < size_env - 1)
 	{
-		order = 1;
-		i = 0;
-		while (i < size_env - 1)
+		j = 0;
+		while (j < size_env - 1)
 		{
-			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+			if (ft_strncmp(tab[i], tab[j], ft_strlen(tab[i])) < 0)
 			{
 				tmp = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = tmp;
-				order = 0;
+				tab[i] = tab[j];
+				tab[j] = tmp;
 			}
-			i++;
+			j++;
 		}
-		size_env--;
+		i++;
 	}
 }
 
@@ -103,15 +101,18 @@ void	export(t_command *c, t_minishell *minishell)
 		aff_export_alone(c->fd_out, minishell);
 	else
 	{
-		k = 0;
-		if (check_option_export(c, minishell, i, &k) == 0)
-			return ;
-		if (c->option[i][k] == '\0')
-			add_var_env(ft_strdup(c->option[i]), NULL, minishell);
-		else
-			add_var_env(get_char(c->option[i], 0, k),
-				c->option[i] + k + 1, minishell);
-		minishell->status = 0;
-		i++;
+		while (c->option[i]) 
+		{
+			k = 0;
+			if (check_option_export(c, minishell, i, &k) == 0)
+				return ;
+			if (c->option[i][k] == '\0')
+				add_var_env(ft_strdup(c->option[i]), NULL, minishell);
+			else
+				add_var_env(get_char(c->option[i], 0, k),
+					c->option[i] + k + 1, minishell);
+			minishell->status = 0;
+			i++;
+		}
 	}
 }
