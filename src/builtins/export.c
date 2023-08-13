@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/12 18:09:56 by acolin           ###   ########.fr       */
+/*   Updated: 2023/08/13 16:37:55 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 	int		i;
 
 	minishell->size_env += 1;
+	// si la variable exite
+	// modifier la variable avec le bon kw
+	// if (find_my_var(kw, t_minishell *minishell))
+	// 	return (modif_my_var(kw, value, t_minishell *minishell));
 	var = malloc(sizeof (char *) * (minishell->size_env + 1));
 	i = 0;
 	while (minishell->env[i])
