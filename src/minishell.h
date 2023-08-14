@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 15:33:10 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:37:08 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ void		exec_others(t_command *c, int verif, t_minishell *minishell);
 void		exec_fork(char *fichier, t_command *c, t_minishell *minishell);
 
 //free.c
-void		free_env(t_minishell *minishell);
 void		free_cmd(t_minishell *minishell);
 void		free_all(t_minishell *minishell);
 
@@ -211,7 +210,7 @@ char		*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
 int			ft_strncmp(char *s1, char *s2, size_t n);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_strlen(char *str);
-void		affiche(t_command *c);
+void		get_sigint_cmd(int signal);
 void		ft_bzero(void *s, size_t n);
 
 #endif
