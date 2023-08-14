@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/12 16:22:46 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/14 15:37:55 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 	int		i;
 
 	minishell->size_env += 1;
+	// si la variable exite
+	// modifier la variable avec le bon kw
+	// if (find_my_var(kw, t_minishell *minishell))
+	// 	return (modif_my_var(kw, value, t_minishell *minishell));
+	//if (find_my_var(word, minishell) == 0)
+		//return (change_var(word, value, minishell));
 	var = malloc(sizeof (char *) * (minishell->size_env + 1));
 	i = 0;
 	while (minishell->env[i])
@@ -60,27 +66,25 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 
 void	export_by_ascii(char **tab, int size_env)
 {
-	int		order;
 	int		i;
+	int		j;
 	char	*tmp;
 
-	order = 0;
-	while (tab && order == 0)
+	i = 0;
+	while (i < size_env - 1)
 	{
-		order = 1;
-		i = 0;
-		while (i < size_env - 1)
+		j = 0;
+		while (j < size_env - 1)
 		{
-			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+			if (ft_strncmp(tab[i], tab[j], ft_strlen(tab[i])) < 0)
 			{
 				tmp = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = tmp;
-				order = 0;
+				tab[i] = tab[j];
+				tab[j] = tmp;
 			}
-			i++;
+			j++;
 		}
-		size_env--;
+		i++;
 	}
 }
 
@@ -95,26 +99,26 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 
 void	export(t_command *c, t_minishell *minishell)
 {
-	int	k;
 	int	i;
+	int k;
 
 	i = 0;
 	if (!c->option[0])
 		aff_export_alone(c->fd_out, minishell);
 	else
 	{
-		k = 0;
-		while (c->option[i] && c->option[i][k] && c->option[i][k] != '=')
+		while (c->option[i]) 
 		{
-			if (check_option_export(c, minishell, i, k) == 0)
+			k = 0;
+			if (check_option_export(c, minishell, i, &k) == 0)
 				return ;
+			if (c->option[i][k] == '\0')
+				add_var_env(ft_strdup(c->option[i]), NULL, minishell);
+			else
+				add_var_env(get_char(c->option[i], 0, k),
+					c->option[i] + k + 1, minishell);
+			minishell->status = 0;
+			i++;
 		}
-		if (c->option[i][k] == '\0')
-			add_var_env(ft_strdup(c->option[i]), NULL, minishell);
-		else
-			add_var_env(get_char(c->option[i], 0, k),
-				c->option[i] + k + 1, minishell);
-		minishell->status = 0;
-		i++;
 	}
 }

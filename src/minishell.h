@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/12 16:22:06 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/14 15:33:10 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_minishell
 	int			fd;
 	int			incr;
 	int			cd_n;
+	int			pid;
 
 	t_command	*command;
 }	t_minishell;
@@ -122,7 +123,7 @@ char		*set_value(char *word, char *value);
 //  builtins/utils_export2.c
 int 		is_valid(int c);
 int			isok(t_command *c, t_minishell *minishell, int i, int k);
-int			check_option_export(t_command *c, t_minishell *minishell, int i, int k);
+int			check_option_export(t_command *c, t_minishell *minishell, int i, int *k);
 
 // redirection/double.c
 void		double_droite(t_command *c);

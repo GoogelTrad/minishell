@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/06 18:43:23 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/13 01:23:24 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	main(int ac, char **av, char **env)
 	init_env(env, &minishell);
 	signal(SIGINT, &get_sigint);
 	minishell.ac = ac;
+	//minishell.pid = -1;
 	minishell.incr = 0;
+	printf("%d\n", ft_strcmp("name=test", "name2=test"));
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
