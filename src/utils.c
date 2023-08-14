@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/08 18:44:47 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/14 11:57:49 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,12 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	affiche(t_command *c)
+void	get_sigint_cmd(int signal)
 {
-	int	i;
-
-	i = 0;
-	printf("cmd = %s\n", c->cmd);
-	while (c->option[i])
-	{
-		printf("option = %s\n", c->option[i]);
-		i++;
-	}
+	(void)signal;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 void	ft_bzero(void *s, size_t n)

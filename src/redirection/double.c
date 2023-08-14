@@ -17,6 +17,30 @@ void	double_droite(t_command *c)
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
 }
 
+void	replace_heredoc(t_minishell *minishell)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	quote;
+
+	i = 0;
+	k = 1;
+	while (minishell->ligne[i])
+	{
+		if (minishell->ligne[i] == '"' || minishell->ligne[i] == '\'')
+		{
+			j = i++;
+			quote = minishell->ligne[j];
+			while(minishell->ligne[i] && minishell->ligne[i] != quote)
+				i++;
+			if(minishell->ligne[i] == quote && i != j)
+				minishell->ligne = replace(minishell->ligne, quote, &k);
+		}
+		i++;
+	}
+}
+
 void	double_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
@@ -24,6 +48,7 @@ void	double_gauche(t_command *c, t_minishell *minishell)
 
 	pipe(pipes);
 	c->fd_in = pipes[0];
+	replace_heredoc(minishell);
 	if (check_env(minishell->ligne))
 		c->redi->word = ft_strdup(coucou(minishell->ligne));
 	ligne = readline("> ");
@@ -49,9 +74,11 @@ char	*coucou(char *ligne)
 		if (ligne[i] == '$')
 		{
 			j = i;
-			while (ligne[i] && ligne[i] != ' ')
+			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '"' &&
+				ligne[i] != '\'')
 				i++;
 			res = ft_strndup(ligne + j, i);
+			printf("res = %s\n", res);
 			return (res);
 		}
 		i++;
