@@ -25,12 +25,12 @@ void	double_gauche(t_command *c, t_minishell *minishell)
 	char	*ligne;
 
 	pipe(pipes);
+	if (c->redi->word == NULL)
+		return ;
 	c->fd_in = pipes[0];
 	replace_heredoc(minishell);
 	if (check_env(minishell->ligne))
 		c->redi->word = ft_strdup(coucou(minishell->ligne));
-	if (c->redi->word == NULL)
-		return ;
 	ligne = readline("> ");
 	impr_double(c, pipes, ligne);
 	while (ft_strcmp(ligne, c->redi->word) != 0)
