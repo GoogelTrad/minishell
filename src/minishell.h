@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/15 13:09:43 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/15 17:35:14 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		ft_exit(t_command *c, t_minishell *minishell);
 // builtins/export.c
 void		export_alone(int fd, char **tab);
 int			add_var_env(char *word, char *value, t_minishell *minishell);
-void		export_by_ascii(char **tab, int size_env);
+void		export_by_ascii(char **tab);
 void		aff_export_alone(int fd, t_minishell *minishell);
 void		export(t_command *c, t_minishell *minishell);
 
@@ -124,6 +124,8 @@ char		*set_value(char *word, char *value);
 int 		is_valid(int c);
 int			isok(t_command *c, t_minishell *minishell, int i, int k);
 int			check_option_export(t_command *c, t_minishell *minishell, int i, int *k);
+int			find_my_var(char *word, t_minishell *minishell);
+int			change_var(char *word, char *value, int index, t_minishell *minishell);
 
 // redirection/double.c
 int			double_droite(t_command *c);

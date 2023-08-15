@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:21:37 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/12 17:36:17 by acolin           ###   ########.fr       */
+/*   Updated: 2023/08/15 16:44:37 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,39 @@ int	check_option_export(t_command *c, t_minishell *minishell, int i, int *k)
 		else 
 			return (isok(c, minishell, i, *k));
 	}
+	return (1);
+}
+
+int	find_my_var(char *word, t_minishell *minishell)
+{
+	int		j;
+	int		k;
+	char	*stock2;
+
+	k = 0;
+	stock2 = malloc(sizeof(char) * 100);
+	while (minishell->env[k])
+	{
+		j = 0;
+		while (minishell->env[k][j] && minishell->env[k][j] != '=')
+		{
+			stock2[j] = minishell->env[k][j];
+			j++;
+		}
+		stock2[j] = '\0';
+		if (ft_strcmp(stock2, word) == 0)
+		{
+			free(stock2);
+			return (k);
+		}
+		k++;
+	}
+	return (-1);
+}
+
+int	change_var(char *word, char *value, int index, t_minishell *minishell)
+{
+	free(minishell->env[index]);
+	minishell->env[index] = set_value(word, value);
 	return (1);
 }
