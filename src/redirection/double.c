@@ -25,8 +25,6 @@ void	double_gauche(t_command *c, t_minishell *minishell)
 	char	*ligne;
 
 	pipe(pipes);
-	if (c->redi->word == NULL)
-		return ;
 	c->fd_in = pipes[0];
 	replace_heredoc(minishell);
 	if (check_env(minishell->ligne))

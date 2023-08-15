@@ -19,12 +19,7 @@ void	redi(t_command *c, char **ligne, int i)
 	tmp = c->redi;
 	while (ligne[i])
 	{
-		printf("ligne[i] == %s\n", ligne[i]);
-		printf("coucou\n");
-		printf("ligne[i] == %s\n", ligne[i]);
-		printf("coucou3\n");
 		c->redi->type = ft_strdup(ligne[i]);
-		printf("coucou2\n");
 		c->redi->there = 1;
 		i++;
 		if (ligne[i])
@@ -37,7 +32,8 @@ void	redi(t_command *c, char **ligne, int i)
 				c->redi->there = 0;
 			}
 		}
-		i++;
+		if (ligne[i])
+			i++;
 	}
 	c->redi->next_redi = malloc(sizeof(t_redirection));
 	c->redi->next_redi->there = 0;
@@ -95,5 +91,16 @@ int	verif_line(char *line)
 		i++;
 	if (line[i - 1] == '|')
 		return (0);
+	return (1);
+}
+
+int	verif_redi(char *word, t_minishell *minishell)
+{
+	if (!word)
+	{
+		write(2, "syntax error near unexpected token 'newline'\n", 45);
+		minishell->status = 1;
+		return (0);
+	}
 	return (1);
 }

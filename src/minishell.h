@@ -138,7 +138,7 @@ void		redi(t_command *c, char **ligne, int i);
 void		parse_redi(char **ligne, t_command *c);
 void		replace_heredoc(t_minishell *minishell);
 int			verif_line(char *line);
-void		prompt_pipe(t_minishell *minishell);
+int			verif_redi(char *word, t_minishell *minishell);
 
 // redirection/simple.c
 void		simple_droite(t_command *c);
@@ -153,7 +153,7 @@ char		*get_env(char *var, char **env);
 //exec.c
 void		belle_exec(t_command *c, t_minishell *minishell);
 void		exec(int fd, t_command *c, t_minishell *minishell);
-void		exec_redi(t_command *c, t_minishell *minishell);
+int			exec_redi(t_command *c, t_minishell *minishell);
 void		exec_others(t_command *c, int verif, t_minishell *minishell);
 void		exec_fork(char *fichier, t_command *c, t_minishell *minishell);
 
