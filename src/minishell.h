@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/15 17:06:03 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/15 17:35:14 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,13 @@ void		impr_double(t_command *c, int pipes[2], char *ligne);
 
 void		redi(t_command *c, char **ligne, int i);
 void		parse_redi(char **ligne, t_command *c);
+void		replace_heredoc(t_minishell *minishell);
+int			verif_line(char *line);
+int			verif_redi(char *word, t_minishell *minishell);
 
 // redirection/simple.c
 void		simple_droite(t_command *c);
-void		simple_gauche(t_command *c);
+void		simple_gauche(t_command *c, t_minishell *minishell);
 
 // redirection/utils_redi.c
 char		**display_quote(char **str);
@@ -152,7 +155,7 @@ char		*get_env(char *var, char **env);
 //exec.c
 void		belle_exec(t_command *c, t_minishell *minishell);
 void		exec(int fd, t_command *c, t_minishell *minishell);
-void		exec_redi(t_command *c, t_minishell *minishell);
+int			exec_redi(t_command *c, t_minishell *minishell);
 void		exec_others(t_command *c, int verif, t_minishell *minishell);
 void		exec_fork(char *fichier, t_command *c, t_minishell *minishell);
 

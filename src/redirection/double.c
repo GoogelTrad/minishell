@@ -14,31 +14,9 @@
 
 void	double_droite(t_command *c)
 {
+	if (c->redi->word == NULL)
+		return ;
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
-}
-
-void	replace_heredoc(t_minishell *minishell)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	quote;
-
-	i = 0;
-	k = 1;
-	while (minishell->ligne[i])
-	{
-		if (minishell->ligne[i] == '"' || minishell->ligne[i] == '\'')
-		{
-			j = i++;
-			quote = minishell->ligne[j];
-			while(minishell->ligne[i] && minishell->ligne[i] != quote)
-				i++;
-			if(minishell->ligne[i] == quote && i != j)
-				minishell->ligne = replace(minishell->ligne, quote, &k);
-		}
-		i++;
-	}
 }
 
 void	double_gauche(t_command *c, t_minishell *minishell)

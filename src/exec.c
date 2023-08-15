@@ -18,7 +18,8 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 	int	pid;
 
 	pipe(pipes);
-	exec_redi(c, minishell);
+	if (!exec_redi(c, minishell))
+		return ;
 	if ((c + 1)->cmd)
 	{
 		if (c->fd_out == 1)
@@ -54,20 +55,23 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 		exec_others(c, 0, minishell);
 }
 
-void	exec_redi(t_command *c, t_minishell *minishell)
+int	exec_redi(t_command *c, t_minishell *minishell)
 {
 	while (c->redi->there)
 	{
+		if (!verif_redi(c->redi->word, minishell))
+			return (0);
 		if (ft_strcmp(c->redi->type, ">") == 0)
 			simple_droite(c);
 		else if (ft_strcmp(c->redi->type, ">>") == 0)
 			double_droite(c);
 		else if (ft_strcmp(c->redi->type, "<") == 0)
-			simple_gauche(c);
+			simple_gauche(c, minishell);
 		else if (ft_strcmp(c->redi->type, "<<") == 0)
 			double_gauche(c, minishell);
 		c->redi = c->redi->next_redi;
 	}
+	return (1);
 }
 
 void	exec_others(t_command *c, int verif, t_minishell *minishell)
