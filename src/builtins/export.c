@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/14 15:37:55 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/15 17:08:33 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,28 @@ void	export_alone(int fd, char **tab)
 {
 	int	i;
 	int	j;
+	int eg;
 
-	i = 0;
-	while (tab[i])
+	i = -1;
+	while (tab[++i])
 	{
 		j = 0;
 		write(fd, "declare -x ", 11);
+		eg = 0;
 		while (tab[i][j])
 		{
 			if (tab[i][j] == '=')
 			{
-				write(fd, &tab[i][j], 1);
+				eg = 1;
 				j++;
-				write(fd, "\"", 1);
+				write(fd, "=\"", 1);
 			}
 			write(fd, &tab[i][j], 1);
 			j++;
 		}
-		write(1, "\"", 1);
+		if (eg)
+			write(fd, "\"", 1);
 		write(fd, "\n", 1);
-		i++;
 	}
 }
 
@@ -43,15 +45,12 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 {
 	char	**var;
 	int		i;
+	int		index;
 
-	minishell->size_env += 1;
-	// si la variable exite
-	// modifier la variable avec le bon kw
-	// if (find_my_var(kw, t_minishell *minishell))
-	// 	return (modif_my_var(kw, value, t_minishell *minishell));
-	//if (find_my_var(word, minishell) == 0)
-		//return (change_var(word, value, minishell));
-	var = malloc(sizeof (char *) * (minishell->size_env + 1));
+	index = find_my_var(word, minishell);
+	if (index != -1)
+		return (change_var(word, value, index, minishell));
+	var = malloc(sizeof (char *) * (minishell->size_env + 2));
 	i = 0;
 	while (minishell->env[i])
 	{
@@ -61,22 +60,27 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 	var[i] = set_value(word, value);
 	var[++i] = NULL;
 	minishell->env = var;
+	minishell->size_env += 1;
 	return (1);
 }
 
-void	export_by_ascii(char **tab, int size_env)
+void	export_by_ascii(char **tab)
 {
 	int		i;
 	int		j;
+	int		size;
 	char	*tmp;
 
 	i = 0;
-	while (i < size_env - 1)
+	while (tab[i])
 	{
 		j = 0;
-		while (j < size_env - 1)
+		while (tab[j])
 		{
-			if (ft_strncmp(tab[i], tab[j], ft_strlen(tab[i])) < 0)
+			size = ft_strlen(tab[i]);
+			if (size < ft_strlen(tab[j]))
+				size = ft_strlen(tab[j]);
+			if (ft_strncmp(tab[i], tab[j], size) < 0)
 			{
 				tmp = tab[i];
 				tab[i] = tab[j];
@@ -93,7 +97,7 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 	char	**tab;
 
 	tab = copy_tab(minishell->env);
-	export_by_ascii(tab, minishell->size_env);
+	export_by_ascii(tab);
 	export_alone(fd, tab);
 }
 

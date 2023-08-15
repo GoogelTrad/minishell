@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 18:11:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/08 18:58:08 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/15 16:32:20 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	unset(t_command *c, t_minishell *minishell)
 			minishell->env[i] = minishell->env[i + 1];
 			i++;
 		}
+		minishell->size_env -= 1;
 	}
 	minishell->status = 0;
 }
