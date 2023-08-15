@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/06 18:31:39 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/14 21:56:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,43 @@ void	parse_redi(char **ligne, t_command *c)
 	c->option[i] = NULL;
 	redi(c, ligne, i);
 }
+
+void	replace_heredoc(t_minishell *minishell)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	quote;
+
+	i = 0;
+	k = 1;
+	while (minishell->ligne[i])
+	{
+		if (minishell->ligne[i] == '"' || minishell->ligne[i] == '\'')
+		{
+			j = i++;
+			quote = minishell->ligne[j];
+			while(minishell->ligne[i] && minishell->ligne[i] != quote)
+				i++;
+			if(minishell->ligne[i] == quote && i != j)
+				minishell->ligne = replace(minishell->ligne, quote, &k);
+		}
+		i++;
+	}
+}
+
+int	verif_line(char *line, t_minishell *minishell)
+{
+	int	i;
+
+	i = 0;
+	while(line[i])
+		i++;
+	if (line[i] == '|')
+	{
+		minishell->status = 127;
+		return (0);
+	}
+	minishell->status = 0;
+	return (1);
+}	
