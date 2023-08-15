@@ -109,6 +109,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 			i++;
 		}
 		no_command(verif, c, minishell);
+		free_double_tab(path);
 	}
 }
 

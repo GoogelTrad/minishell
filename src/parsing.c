@@ -85,29 +85,8 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 		}
 		i++;
 	}
+	free(replace);
 	return (ligne);
-}
-
-char	*replace_var(char *var, char **env)
-{
-	int		i;
-	int		j;
-	int		lenght_var;
-	char	*res;
-
-	i = 0;
-	lenght_var = ft_strlen(var);
-	while (env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
-		i++;
-	if (!env[i])
-		return (var);
-	j = i;
-	i = 0;
-	while (env[j][i] && env[j][i] != '=')
-		i++;
-	i++;
-	res = ft_strdup(env[j] + i);
-	return (res);
 }
 
 char	*replace_value(char *var, char *ligne, int i)

@@ -99,6 +99,7 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 	tab = copy_tab(minishell->env);
 	export_by_ascii(tab);
 	export_alone(fd, tab);
+	free_double_tab(tab);
 }
 
 void	export(t_command *c, t_minishell *minishell)

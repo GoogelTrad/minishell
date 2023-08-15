@@ -188,7 +188,6 @@ char		*var_arg(char **av, char *ligne, int ac);
 char		**copy_env(char **env);
 void		separate_cmd(char *ligne, t_minishell **minishell);
 char		*var_env(char *ligne, int j, t_minishell *minishell);
-char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne, int i);
 
 //quote.c
