@@ -12,17 +12,22 @@
 
 #include "../minishell.h"
 
-void	simple_droite(t_command *c)
+int	simple_droite(t_command *c, t_minishell *minishell)
 {
+	if (!verif_redi(c->redi->word, minishell))
+		return (0);
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	return (1);
 }
 
-void	simple_gauche(t_command *c, t_minishell *minishell)
+int	simple_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
 	int		fd;
 	char	buf;
 
+	if (!verif_redi(c->redi->word, minishell))
+		return (0);	
 	pipe(pipes);
 	if (open(c->redi->word, O_RDONLY) != -1)
 		fd = open(c->redi->word, O_RDONLY);
@@ -31,11 +36,12 @@ void	simple_gauche(t_command *c, t_minishell *minishell)
 		write(2, c->redi->word, ft_strlen(c->redi->word));
 		write(2, ": ", 3);
 		minishell->status = put_error(errno);
-		return ;
+		return (0);
 	}
 	c->fd_in = pipes[0];
 	while (read(fd, &buf, 1))
 		write(pipes[1], &buf, 1);
 	close(fd);
 	close(pipes[1]);
+	return (1);
 }

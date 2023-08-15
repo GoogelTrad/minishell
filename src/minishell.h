@@ -126,8 +126,8 @@ int			isok(t_command *c, t_minishell *minishell, int i, int k);
 int			check_option_export(t_command *c, t_minishell *minishell, int i, int *k);
 
 // redirection/double.c
-void		double_droite(t_command *c);
-void		double_gauche(t_command *c, t_minishell *minishell);
+int			double_droite(t_command *c);
+int			double_gauche(t_command *c, t_minishell *minishell);
 char		*coucou(char *ligne);
 int			check_env(char *ligne);
 void		impr_double(t_command *c, int pipes[2], char *ligne);
@@ -141,8 +141,8 @@ int			verif_line(char *line);
 int			verif_redi(char *word, t_minishell *minishell);
 
 // redirection/simple.c
-void		simple_droite(t_command *c);
-void		simple_gauche(t_command *c, t_minishell *minishell);
+int			simple_droite(t_command *c, t_minishell *minishell);
+int			simple_gauche(t_command *c, t_minishell *minishell);
 
 // redirection/utils_redi.c
 char		**display_quote(char **str);

@@ -59,16 +59,26 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 {
 	while (c->redi->there)
 	{
-		if (!verif_redi(c->redi->word, minishell))
-			return (0);
 		if (ft_strcmp(c->redi->type, ">") == 0)
-			simple_droite(c);
+		{
+			if (!simple_droite(c, minishell))
+				return (0);
+		}
 		else if (ft_strcmp(c->redi->type, ">>") == 0)
-			double_droite(c);
+		{
+			if (!double_droite(c))
+				return (0);
+		}
 		else if (ft_strcmp(c->redi->type, "<") == 0)
-			simple_gauche(c, minishell);
+		{
+			if (!simple_gauche(c, minishell))
+				return (0);
+		}
 		else if (ft_strcmp(c->redi->type, "<<") == 0)
-			double_gauche(c, minishell);
+		{
+			if (!double_gauche(c, minishell))
+				return (0);
+		}
 		c->redi = c->redi->next_redi;
 	}
 	return (1);
