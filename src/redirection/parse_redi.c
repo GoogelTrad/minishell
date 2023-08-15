@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 21:56:14 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:02:48 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,14 @@ void	replace_heredoc(t_minishell *minishell)
 	}
 }
 
-int	verif_line(char *line, t_minishell *minishell)
+int	verif_line(char *line)
 {
 	int	i;
 
 	i = 0;
 	while(line[i])
 		i++;
-	if (line[i] == '|')
-	{
-		minishell->status = 127;
+	if (line[i - 1] == '|')
 		return (0);
-	}
-	minishell->status = 0;
 	return (1);
-}	
+}

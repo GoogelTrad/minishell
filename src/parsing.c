@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 21:55:51 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:07:15 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	separate_cmd(char *ligne, t_minishell **minishell)
 	char		**res_ligne;
 
 	i = 0;
-	if (verif_line(ligne, *minishell) == 0)
-		exit((*minishell)->status);
+	if (verif_line(ligne) == 0)
+		printf("coucou\n");
 	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])
 		i++;

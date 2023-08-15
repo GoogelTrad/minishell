@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 21:54:40 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:09:43 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,12 @@ void		impr_double(t_command *c, int pipes[2], char *ligne);
 void		redi(t_command *c, char **ligne, int i);
 void		parse_redi(char **ligne, t_command *c);
 void		replace_heredoc(t_minishell *minishell);
-int			verif_line(char *line, t_minishell *minishell);
+int			verif_line(char *line);
+void		prompt_pipe(t_minishell *minishell);
 
 // redirection/simple.c
 void		simple_droite(t_command *c);
-void		simple_gauche(t_command *c);
+void		simple_gauche(t_command *c, t_minishell *minishell);
 
 // redirection/utils_redi.c
 char		**display_quote(char **str);

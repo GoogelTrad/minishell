@@ -63,7 +63,7 @@ void	exec_redi(t_command *c, t_minishell *minishell)
 		else if (ft_strcmp(c->redi->type, ">>") == 0)
 			double_droite(c);
 		else if (ft_strcmp(c->redi->type, "<") == 0)
-			simple_gauche(c);
+			simple_gauche(c, minishell);
 		else if (ft_strcmp(c->redi->type, "<<") == 0)
 			double_gauche(c, minishell);
 		c->redi = c->redi->next_redi;
