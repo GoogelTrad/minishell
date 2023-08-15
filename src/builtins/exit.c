@@ -20,7 +20,7 @@ void	ft_exit(t_command *c, t_minishell *minishell)
 		{
 			ft_putstr("exit\n");
 			printf("exit: %s: numeric argument required\n", c->option[0]);
-			//free_all(minishell);
+			free_all(minishell);
 			minishell->status = 42;
 			exit(minishell->status);
 		}
@@ -28,6 +28,6 @@ void	ft_exit(t_command *c, t_minishell *minishell)
 			minishell->status = ft_atoi(c->option[0]);
 	}
 	ft_putstr("exit\n");
-	//free_all(minishell);
+	free_all(minishell);
 	exit(minishell->status);
 }
