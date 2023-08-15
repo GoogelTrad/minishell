@@ -85,7 +85,6 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 		}
 		i++;
 	}
-	free(replace);
 	return (ligne);
 }
 
