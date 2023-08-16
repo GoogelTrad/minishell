@@ -82,7 +82,7 @@ void	replace_heredoc(t_minishell *minishell)
 	}
 }
 
-int	verif_line(char *line)
+int	verif_line(char *line, t_minishell *minishell)
 {
 	int	i;
 
@@ -90,7 +90,10 @@ int	verif_line(char *line)
 	while(line[i])
 		i++;
 	if (line[i - 1] == '|')
+	{
+		end_pipe(minishell);
 		return (0);
+	}
 	return (1);
 }
 

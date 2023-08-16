@@ -139,7 +139,7 @@ void		impr_double(t_command *c, int pipes[2], char *ligne);
 void		redi(t_command *c, char **ligne, int i);
 void		parse_redi(char **ligne, t_command *c);
 void		replace_heredoc(t_minishell *minishell);
-int			verif_line(char *line);
+int			verif_line(char *line, t_minishell *minishell);
 int			verif_redi(char *word, t_minishell *minishell);
 
 // redirection/simple.c
@@ -186,9 +186,10 @@ char		*var_arg(char **av, char *ligne, int ac);
 
 //parsing.c
 char		**copy_env(char **env);
-void		separate_cmd(char *ligne, t_minishell **minishell);
+int			separate_cmd(char *ligne, t_minishell **minishell);
 char		*var_env(char *ligne, int j, t_minishell *minishell);
 char		*replace_value(char *var, char *ligne, int i);
+void		end_pipe(t_minishell *minishell);
 
 //quote.c
 int			count_words_quote(char *str, char sep);
