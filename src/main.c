@@ -43,9 +43,11 @@ void	prompt(char *ligne, t_minishell *minishell)
 	add_history(ligne);
 	minishell->ligne = ft_strdup(ligne);
 	ligne = var_env(ligne, 0, minishell);
-	separate_cmd(ligne, &minishell);
-	bworded(minishell->command);
-	belle_exec(minishell->command, minishell);
+	if (separate_cmd(ligne, &minishell))
+	{
+		bworded(minishell->command);
+		belle_exec(minishell->command, minishell);
+	}
 }
 
 void	get_sigint(int signal)

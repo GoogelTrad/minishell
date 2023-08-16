@@ -56,6 +56,7 @@ void	pwd_back(char *path, int i, int j, t_minishell *minishell)
 			(ft_strndup(minishell->env[i], minishell->cd_n), cpy));
 	if (path[2])
 		change_pwd(path + 3, minishell);
+	free(cpy);
 }
 
 void	pwd_front(char *path, int i, t_minishell *minishell)
@@ -71,6 +72,7 @@ void	pwd_front(char *path, int i, t_minishell *minishell)
 	minishell->env[i] = ft_strjoin(minishell->env[i], cpy);
 	if (path[j + 1])
 		change_pwd(path + j + 1, minishell);
+	free(cpy);
 }
 
 void	change_pwd(char *path, t_minishell *minishell)

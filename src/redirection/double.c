@@ -12,18 +12,21 @@
 
 #include "../minishell.h"
 
-void	double_droite(t_command *c)
+int	double_droite(t_command *c)
 {
 	if (c->redi->word == NULL)
-		return ;
+		return (0);
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
+	return (1);
 }
 
-void	double_gauche(t_command *c, t_minishell *minishell)
+int	double_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
 	char	*ligne;
 
+	if (!verif_redi(c->redi->word, minishell))
+		return (0);
 	pipe(pipes);
 	c->fd_in = pipes[0];
 	replace_heredoc(minishell);
@@ -37,6 +40,7 @@ void	double_gauche(t_command *c, t_minishell *minishell)
 		impr_double(c, pipes, ligne);
 	}
 	close(pipes[1]);
+	return (1);
 }
 
 char	*coucou(char *ligne)

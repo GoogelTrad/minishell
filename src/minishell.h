@@ -128,8 +128,8 @@ int			find_my_var(char *word, t_minishell *minishell);
 int			change_var(char *word, char *value, int index, t_minishell *minishell);
 
 // redirection/double.c
-void		double_droite(t_command *c);
-void		double_gauche(t_command *c, t_minishell *minishell);
+int			double_droite(t_command *c);
+int			double_gauche(t_command *c, t_minishell *minishell);
 char		*coucou(char *ligne);
 int			check_env(char *ligne);
 void		impr_double(t_command *c, int pipes[2], char *ligne);
@@ -139,12 +139,12 @@ void		impr_double(t_command *c, int pipes[2], char *ligne);
 void		redi(t_command *c, char **ligne, int i);
 void		parse_redi(char **ligne, t_command *c);
 void		replace_heredoc(t_minishell *minishell);
-int			verif_line(char *line);
+int			verif_line(char *line, t_minishell *minishell);
 int			verif_redi(char *word, t_minishell *minishell);
 
 // redirection/simple.c
-void		simple_droite(t_command *c);
-void		simple_gauche(t_command *c, t_minishell *minishell);
+int			simple_droite(t_command *c, t_minishell *minishell);
+int			simple_gauche(t_command *c, t_minishell *minishell);
 
 // redirection/utils_redi.c
 char		**display_quote(char **str);
@@ -186,10 +186,10 @@ char		*var_arg(char **av, char *ligne, int ac);
 
 //parsing.c
 char		**copy_env(char **env);
-void		separate_cmd(char *ligne, t_minishell **minishell);
+int			separate_cmd(char *ligne, t_minishell **minishell);
 char		*var_env(char *ligne, int j, t_minishell *minishell);
-char		*replace_var(char *var, char **env);
 char		*replace_value(char *var, char *ligne, int i);
+void		end_pipe(t_minishell *minishell);
 
 //quote.c
 int			count_words_quote(char *str, char sep);

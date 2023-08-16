@@ -31,15 +31,21 @@ char	**copy_env(char **env)
 	return (copy);
 }
 
-void	separate_cmd(char *ligne, t_minishell **minishell)
+void	end_pipe(t_minishell *minishell)
+{
+	write(2, "syntax error near unexpected token 'newline'\n", 45);
+	minishell->status = 1;
+}
+
+int	separate_cmd(char *ligne, t_minishell **minishell)
 {
 	int			i;
 	char		**res_tot;
 	char		**res_ligne;
 
 	i = 0;
-	if (verif_line(ligne) == 0)
-		printf("coucou\n");
+	if (verif_line(ligne, *minishell) == 0)
+		return (0);
 	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])
 		i++;
@@ -55,9 +61,10 @@ void	separate_cmd(char *ligne, t_minishell **minishell)
 		(*minishell)->command[i].fd_out = 1;
 		(*minishell)->command[i].redi->there = 0;
 		parse_redi(res_ligne + 1, &(*minishell)->command[i]);
-		i++;
+;		i++;
 	}
 	(*minishell)->command[i].cmd = NULL;
+	return (1);
 }
 
 char	*var_env(char *ligne, int j, t_minishell *minishell)
@@ -86,28 +93,6 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 		i++;
 	}
 	return (ligne);
-}
-
-char	*replace_var(char *var, char **env)
-{
-	int		i;
-	int		j;
-	int		lenght_var;
-	char	*res;
-
-	i = 0;
-	lenght_var = ft_strlen(var);
-	while (env[i] && ft_strncmp(var, env[i], lenght_var) != 0)
-		i++;
-	if (!env[i])
-		return (var);
-	j = i;
-	i = 0;
-	while (env[j][i] && env[j][i] != '=')
-		i++;
-	i++;
-	res = ft_strdup(env[j] + i);
-	return (res);
 }
 
 char	*replace_value(char *var, char *ligne, int i)

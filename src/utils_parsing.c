@@ -69,6 +69,7 @@ char	*replace_var_env(char *ligne, int i, int j, t_minishell *minishell)
 		}
 	}
 	minishell->incr = 2;
+	free(var);
 	return (replace);
 }
 
