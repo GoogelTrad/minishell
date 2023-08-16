@@ -55,3 +55,5 @@ echo $$ -> dans replace value j'ai echo ID$$ et non echo ID en sortie. ✅
 echo ''"coucou" ne s'affiche comme il le faudrait, le deuxieme ' ne disparait pas et casse tout. ✅
 
 ls > toto < exit
+
+$> foo boucle infini.

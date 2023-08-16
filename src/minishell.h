@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/15 17:35:14 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/16 16:14:53 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ int			ft_isalnum(char *str);
 void		overflow(void);
 int			ft_atoi(const char *str);
 
+// builtins/utils_builtins2.c
+char		*verif_cd(t_command *c, t_minishell *minishell);
+int			verif_arg_cd(t_command *c, t_minishell *minishell);
 // builtins/utils_export.c
 char		**copy_tab(char **tab);
 int			ft_isalpha(int c);

@@ -16,8 +16,11 @@ void	cd(t_command *c, t_minishell *minishell)
 {
 	int	verif;
 
+	if (!verif_arg_cd(c, minishell))
+		return ;
 	if (c->option[0])
 	{
+		c->option[0] = verif_cd(c, minishell);
 		verif = chdir(c->option[0]);
 		if (verif == -1)
 		{
@@ -29,6 +32,11 @@ void	cd(t_command *c, t_minishell *minishell)
 		}
 		else
 			change_pwd(c->option[0], minishell);
+	}
+	else
+	{
+		chdir(get_env("HOME", minishell->env));
+		change_pwd(get_env("HOME", minishell->env), minishell);
 	}
 	minishell->status = 0;
 }

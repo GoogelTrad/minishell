@@ -23,7 +23,7 @@ void	pwd(int fd, t_minishell *minishell)
 	{
 		while (result[i])
 			write(fd, &result[i++], 1);
+		free(result);
 	}
 	write(fd, "\n", 1);
-	free(result);
 }
