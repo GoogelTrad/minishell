@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 11:54:19 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/17 15:37:19 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av, char **env)
 		}
 		if (ligne[0])
 			prompt(ligne, &minishell);
+		free(ligne);
 	}
 	return (0);
 }
