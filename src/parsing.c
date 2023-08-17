@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/15 13:07:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/17 16:06:10 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	separate_cmd(char *ligne, t_minishell **minishell)
 		(*minishell)->command[i].fd_out = 1;
 		(*minishell)->command[i].redi->there = 0;
 		parse_redi(res_ligne + 1, &(*minishell)->command[i]);
-;		i++;
+		free(res_tot[i]);
+		//free_double_tab(res_ligne);
+		i++;
 	}
 	(*minishell)->command[i].cmd = NULL;
 	return (1);
@@ -92,6 +94,7 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 		}
 		i++;
 	}
+	free(replace);
 	return (ligne);
 }
 

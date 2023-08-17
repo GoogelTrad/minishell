@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/17 15:37:19 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/17 15:56:06 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	prompt(char *ligne, t_minishell *minishell)
 		bworded(minishell->command);
 		belle_exec(minishell->command, minishell);
 	}
+	free_cmd(minishell);
+	free(minishell->command);
+	
 }
 
 void	get_sigint(int signal)

@@ -24,10 +24,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
-	if (!(malloc(sizeof(char) * (len_s1 + len_s2) + 1)))
-		return (NULL);
-	else
-		result = malloc(sizeof(char) * (len_s1 + len_s2) + 1);
+	result = malloc(sizeof(char) * (len_s1 + len_s2) + 1);
 	while (n < len_s1)
 	{
 		result[n] = s1[n];

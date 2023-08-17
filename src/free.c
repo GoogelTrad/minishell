@@ -36,21 +36,20 @@ void	free_cmd(t_minishell *minishell)
 	i = 0;
 	while (minishell->command[i].cmd)
 	{
-		if (minishell->command->redi->there)
-			free_redi(minishell->command);
-		if (minishell->command->option[0])
-			free_double_tab(minishell->command->option);
-		if (minishell->command->cmd)
-			free(minishell->command->cmd);
+		if (minishell->command[i].redi->there)
+			free_redi(&minishell->command[i]);
+		if (minishell->command[i].option[0])
+			free_double_tab(minishell->command[i].option);
+		if (minishell->command[i].cmd)
+			free(minishell->command[i].cmd);
 		i++;
 	}
-	free(minishell->command);
 	free(minishell->ligne);
-	free_double_tab(minishell->av);
+	
 }
 
 void	free_all(t_minishell *minishell)
 {
 	free_double_tab(minishell->env);
-	free_cmd(minishell);
+	free_double_tab(minishell->av);
 }
