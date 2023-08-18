@@ -26,6 +26,7 @@ void	free_redi(t_command *c)
 		free(actu->word);
 		free(actu);
 	}
+	free(c->redi->next_redi);
 	free(c->redi);
 }
 

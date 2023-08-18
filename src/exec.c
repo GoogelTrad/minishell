@@ -106,6 +106,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 				verif = 1;
 				break ;
 			}
+			free(fusion);
 			i++;
 		}
 		no_command(verif, c, minishell);
