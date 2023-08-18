@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/17 16:06:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/18 12:37:47 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	separate_cmd(char *ligne, t_minishell **minishell)
 		(*minishell)->command[i].redi = malloc(sizeof(t_redirection));
 		res_ligne = ft_split(res_tot[i], ' ', 0);
 		res_ligne = display_quote(res_ligne);
-		(*minishell)->command[i].cmd = res_ligne[0];
+		(*minishell)->command[i].cmd = ft_strdup(res_ligne[0]);
 		(*minishell)->command[i].fd_in = 0;
 		(*minishell)->command[i].fd_out = 1;
 		(*minishell)->command[i].redi->there = 0;
 		parse_redi(res_ligne + 1, &(*minishell)->command[i]);
 		free(res_tot[i]);
-		//free_double_tab(res_ligne);
+		free_double_tab(res_ligne);
 		i++;
 	}
 	(*minishell)->command[i].cmd = NULL;
@@ -88,13 +88,13 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 				quote = choose_quote(ligne[i], quote, &i, 1);
 			replace = type_of_var(ligne, i, j, minishell);
 			ligne = replace_value(replace, ligne, j);
+			free(replace);
 			quote = choose_quote(ligne[i], quote, &i, 0);
 			if (ligne[j + minishell->incr])
 				i = j + minishell->incr;
 		}
 		i++;
 	}
-	free(replace);
 	return (ligne);
 }
 
