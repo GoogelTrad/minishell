@@ -51,7 +51,8 @@ void	free_double_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
-	free(tab);
+	if (tab)
+		free(tab);
 }
 
 char	*ft_itoa(int n)

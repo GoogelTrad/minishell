@@ -22,12 +22,12 @@ void	free_redi(t_command *c)
 	{
 		actu = tmp;
 		tmp = tmp->next_redi;
-		free(actu->type);
-		free(actu->word);
+		if (actu->type)
+			free(actu->type);
+		if (actu->word)
+			free(actu->word);
 		free(actu);
 	}
-	free(c->redi->next_redi);
-	free(c->redi);
 }
 
 void	free_cmd(t_minishell *minishell)
@@ -35,19 +35,15 @@ void	free_cmd(t_minishell *minishell)
 	int	i;
 
 	i = 0;
-	while (minishell->command[i].cmd)
+	while (i < minishell->tab_len)
 	{
-		if (minishell->command[i].redi->there)
-			free_redi(&minishell->command[i]);
-		if (minishell->command[i].option[0])
-			free_double_tab(minishell->command[i].option);
-		if (minishell->command[i].cmd)
-			free(minishell->command[i].cmd);
-		free(&minishell->command[i]);
+		free_redi(&minishell->command[i]);
+		free_double_tab(minishell->command[i].option);
+		free(minishell->command[i].cmd);
 		i++;
 	}
 	free(minishell->ligne);
-	
+	free(minishell->command);
 }
 
 void	free_all(t_minishell *minishell)
