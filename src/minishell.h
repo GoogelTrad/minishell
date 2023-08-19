@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/16 16:14:53 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:41:39 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ char		*var_arg(char **av, char *ligne, int ac);
 
 //parsing.c
 char		**copy_env(char **env);
-int			separate_cmd(char *ligne, t_minishell **minishell);
+int			separate_cmd(char *ligne, t_minishell *minishell);
 char		*var_env(char *ligne, int j, t_minishell *minishell);
 char		*replace_value(char *var, char *ligne, int i);
 void		end_pipe(t_minishell *minishell);

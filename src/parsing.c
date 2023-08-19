@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/18 13:06:18 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:41:17 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,35 @@ void	end_pipe(t_minishell *minishell)
 	minishell->status = 1;
 }
 
-int	separate_cmd(char *ligne, t_minishell **minishell)
+int	separate_cmd(char *ligne, t_minishell *minishell)
 {
 	int			i;
 	char		**res_tot;
 	char		**res_ligne;
 
 	i = 0;
-	if (verif_line(ligne, *minishell) == 0)
+	if (verif_line(ligne, minishell) == 0)
 		return (0);
 	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])
 		i++;
-	(*minishell)->command = malloc(sizeof(t_command) * (i + 1));
+	minishell->command = malloc(sizeof(t_command) * (i + 1));
 	i = 0;
 	while (res_tot[i])
 	{
-		(*minishell)->command[i].redi = malloc(sizeof(t_redirection));
+		minishell->command[i].redi = malloc(sizeof(t_redirection));
 		res_ligne = ft_split(res_tot[i], ' ', 0);
 		res_ligne = display_quote(res_ligne);
-		(*minishell)->command[i].cmd = ft_strdup(res_ligne[0]);
-		(*minishell)->command[i].fd_in = 0;
-		(*minishell)->command[i].fd_out = 1;
-		(*minishell)->command[i].redi->there = 0;
-		parse_redi(res_ligne + 1, &(*minishell)->command[i]);
+		minishell->command[i].cmd = ft_strdup(res_ligne[0]);
+		minishell->command[i].fd_in = 0;
+		minishell->command[i].fd_out = 1;
+		minishell->command[i].redi->there = 0;
+		parse_redi(res_ligne + 1, &minishell->command[i]);
 		free(res_tot[i]);
 		free_double_tab(res_ligne);
 		i++;
 	}
-	(*minishell)->command[i].cmd = NULL;
+	minishell->command[i].cmd = NULL;
 	return (1);
 }
 
