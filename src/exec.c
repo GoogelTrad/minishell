@@ -88,6 +88,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
 	char	*tmp;
+	char	*var;
 	char	*fusion;
 	int		i;
 
@@ -96,7 +97,9 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 		exec_fork(c->cmd, c, minishell);
 	else
 	{
-		path = ft_split(var_env("$PATH", 0, minishell), ':', 0);
+		var = var_env("$PATH", 0, minishell);
+		path = ft_split(var, ':', 0);
+		free(var);
 		while (path[i])
 		{
 			tmp = ft_strjoin(path[i], "/");

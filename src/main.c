@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 15:41:48 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:18:04 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void	prompt(char *ligne, t_minishell *minishell)
 		belle_exec(minishell->command, minishell);
 	}
 	free_cmd(minishell);
-	free(minishell->command);
-	
+	system("leaks minishell");
 }
 
 void	get_sigint(int signal)
