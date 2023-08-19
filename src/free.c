@@ -49,6 +49,5 @@ void	free_cmd(t_minishell *minishell)
 void	free_all(t_minishell *minishell)
 {
 	free_double_tab(minishell->env);
-	//free_double_tab(minishell->fusion);
 	free_double_tab(minishell->av);
 }

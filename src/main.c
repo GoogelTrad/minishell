@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 16:18:04 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 17:50:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int ac, char **av, char **env)
 		{
 			printf("exit\n");
 			free_all(&minishell);
-			exit(0);
+			free(ligne);
+			exit(minishell.status);
 		}
 		if (ligne[0])
 			prompt(ligne, &minishell);
@@ -51,7 +52,7 @@ void	prompt(char *ligne, t_minishell *minishell)
 		belle_exec(minishell->command, minishell);
 	}
 	free_cmd(minishell);
-	system("leaks minishell");
+	free(minishell->command);
 }
 
 void	get_sigint(int signal)
