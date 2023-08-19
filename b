@@ -1,0 +1,11 @@
+Makefile
+a
+b
+c
+coucou
+libreadline.a
+minishell
+prout.txt
+src
+todo
+toto

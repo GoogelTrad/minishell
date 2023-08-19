@@ -45,6 +45,7 @@ int	double_gauche(t_command *c, t_minishell *minishell)
 		ligne = readline("> ");
 		impr_double(c, pipes, ligne);
 	}
+	free(ligne);
 	close(pipes[1]);
 	return (1);
 }
