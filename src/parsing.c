@@ -49,7 +49,8 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])
 		i++;
-	minishell->command = malloc(sizeof(t_command) * (i + 1));
+	minishell->tab_len = i;
+	minishell->command = malloc(sizeof(t_command) * (i));
 	i = 0;
 	while (res_tot[i])
 	{
@@ -61,12 +62,10 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 		minishell->command[i].fd_out = 1;
 		minishell->command[i].redi->there = 0;
 		parse_redi(res_ligne + 1, &minishell->command[i]);
-		free(res_tot[i]);
 		free_double_tab(res_ligne);
 		i++;
 	}
-	free(res_tot);
-	minishell->command[i].cmd = NULL;
+	free_double_tab(res_tot);
 	return (1);
 }
 

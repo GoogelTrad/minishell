@@ -52,7 +52,6 @@ void	prompt(char *ligne, t_minishell *minishell)
 		belle_exec(minishell->command, minishell);
 	}
 	free_cmd(minishell);
-	free(minishell->command);
 }
 
 void	get_sigint(int signal)
