@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/06 17:44:30 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:30:19 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,31 @@ int	len_env(char **env)
 	return (i);
 }
 
-void	env(int fd, t_command *c, t_minishell *minishell)
+void	aff_env(int fd, t_minishell *minishell)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	while (minishell->env[i])
+	{
+		j = 0;
+		while (minishell->env[i][j])
+		{
+			if (minishell->env[i][j] == '=')
+			{	
+				write(fd, minishell->env[i], ft_strlen(minishell->env[i]));
+				write(minishell->fd, "\n", 1);
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	env(int fd, t_command *c, t_minishell *minishell)
+{
 	if (c->option[0])
 	{
 		minishell->status = 127;
@@ -38,16 +57,7 @@ void	env(int fd, t_command *c, t_minishell *minishell)
 		return ;
 	}
 	else
-	{
-		while (minishell->env[i])
-		{
-			j = 0;
-			while (minishell->env[i][j])
-				write(fd, &minishell->env[i][j++], 1);
-			write(minishell->fd, "\n", 1);
-			i++;
-		}
-	}
+		aff_env(fd, minishell);
 	minishell->status = 0;
 }
 
