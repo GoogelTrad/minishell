@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:41:54 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/06 18:17:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:21:46 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	echo(int fd, t_command *c, t_minishell *minishell)
 			write(fd, " ", 1);
 		i++;
 	}
-	if (c->option[0] == NULL || !(c->option[0][0] == '-'
-		&& c->option[0][1] == 'n'))
+	if (!new_line)
 		write(fd, "\n", 1);
 	minishell->status = 0;
 }

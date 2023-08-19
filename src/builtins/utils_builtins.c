@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:07:53 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/08 18:50:35 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 16:41:10 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int	ft_isalnum(char *str)
 	return (1);
 }
 
-void	overflow(void)
+int	overflow(int element)
 {
-	write(2, "Error\n", 7);
-	exit(0);
+	if (element < 0)
+		return (0);
+	return (-1);
 }
 
 int	ft_atoi(const char *str)
@@ -78,7 +79,7 @@ int	ft_atoi(const char *str)
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		if ((nbr * 10 + (str[i] - '0')) / 10 != nbr)
-			overflow();
+			return (overflow(element));
 		nbr *= 10;
 		nbr += str[i] - '0';
 		i++;

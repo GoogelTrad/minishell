@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 15:52:50 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:54:56 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		export(t_command *c, t_minishell *minishell);
 
 // builtins/pwd.c
 
-void		pwd(int fd, t_minishell *minishell);
+void		pwd(int fd);
 
 // builtins/unset.c
 size_t		env_size(char *env);
@@ -110,7 +110,6 @@ void		unset(t_command *c, t_minishell *minishell);
 int			check_option_echo(char	*str);
 void		ft_putstr(char *s);
 int			ft_isalnum(char *str);
-void		overflow(void);
 int			ft_atoi(const char *str);
 
 // builtins/utils_builtins2.c
