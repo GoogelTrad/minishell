@@ -30,6 +30,7 @@ SRCS =  src/builtins/cd.c \
 		src/utils_exec.c \
 		src/utils_parsing.c \
 		src/utils.c \
+		src/utils2.c \
 
 
 OBJC = ${SRCS:.c=.o}

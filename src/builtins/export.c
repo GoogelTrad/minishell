@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/19 16:04:41 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 20:56:41 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	export_alone(int fd, char **tab)
 {
 	int	i;
 	int	j;
-	int eg;
+	int	eg;
 
 	i = -1;
 	while (tab[++i])
@@ -106,14 +106,14 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 void	export(t_command *c, t_minishell *minishell)
 {
 	int	i;
-	int k;
+	int	k;
 
 	i = 0;
 	if (!c->option[0])
 		aff_export_alone(c->fd_out, minishell);
 	else
 	{
-		while (c->option[i]) 
+		while (c->option[i])
 		{
 			k = 0;
 			if (check_option_export(c, minishell, i, &k) == 0)

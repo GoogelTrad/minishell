@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 16:54:56 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 20:51:03 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,13 @@ char		*get_char(char *cmd, size_t start, size_t end);
 char		*set_value(char *word, char *value);
 
 //  builtins/utils_export2.c
-int 		is_valid(int c);
+int			is_valid(int c);
 int			isok(t_command *c, t_minishell *minishell, int i, int k);
-int			check_option_export(t_command *c, t_minishell *minishell, int i, int *k);
+int			check_option_export(t_command *c, t_minishell *minishell,
+				int i, int *k);
 int			find_my_var(char *word, t_minishell *minishell);
-int			change_var(char *word, char *value, int index, t_minishell *minishell);
+int			change_var(char *word, char *value, int index,
+				t_minishell *minishell);
 
 // redirection/double.c
 int			double_droite(t_command *c);
@@ -220,5 +222,8 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_strlen(char *str);
 void		get_sigint_cmd(int signal);
 void		ft_bzero(void *s, size_t n);
+
+//utils2.c
+void		end_pipe(t_minishell *minishell);
 
 #endif

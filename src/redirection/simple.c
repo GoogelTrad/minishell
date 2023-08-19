@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 17:48:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 20:54:17 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	simple_gauche(t_command *c, t_minishell *minishell)
 	char	buf;
 
 	if (!verif_redi(c->redi->word, minishell))
-		return (0);	
+		return (0);
 	pipe(pipes);
 	if (open(c->redi->word, O_RDONLY) != -1)
 		fd = open(c->redi->word, O_RDONLY);

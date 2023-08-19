@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 16:28:30 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 20:47:06 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ char	**copy_env(char **env)
 	}
 	copy[i] = 0;
 	return (copy);
-}
-
-void	end_pipe(t_minishell *minishell)
-{
-	write(2, "syntax error near unexpected token 'newline'\n", 45);
-	minishell->status = 1;
 }
 
 int	separate_cmd(char *ligne, t_minishell *minishell)
@@ -102,7 +96,7 @@ char	*join_all(char *ligne, char *var, char *temp, int j)
 {
 	char	*tmp;
 	char	*tmp2;
-	
+
 	tmp = ft_strndup(ligne, j);
 	tmp2 = ft_strjoin(tmp, var);
 	free(tmp);
@@ -133,9 +127,6 @@ char	*replace_value(char *var, char *ligne, int i)
 		temp = ft_strndup(ligne + j + 2, ft_strlen(ligne) - j);
 	else
 		temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
-	// res = ft_strndup(ligne, j);
-	// res = ft_strjoin(res, var);
-	// res = ft_strjoin(res, temp);
 	res = join_all(ligne, var, temp, j);
 	free(temp);
 	return (res);

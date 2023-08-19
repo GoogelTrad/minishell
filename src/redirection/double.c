@@ -63,8 +63,8 @@ char	*coucou(char *ligne)
 		if (ligne[i] == '$')
 		{
 			j = i;
-			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '"' &&
-				ligne[i] != '\'')
+			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '"'
+				&& ligne[i] != '\'')
 				i++;
 			res = ft_strndup(ligne + j, i);
 			printf("res = %s\n", res);
@@ -72,7 +72,6 @@ char	*coucou(char *ligne)
 		}
 		i++;
 	}
-
 	return (NULL);
 }
 

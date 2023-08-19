@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:32:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/16 16:14:41 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 20:55:57 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	verif_arg_cd(t_command *c, t_minishell *minishell)
 
 char	*verif_cd(t_command *c, t_minishell *minishell)
 {
-    char	*res;
-	
+	char	*res;
+
 	res = c->option[0];
 	if (c->option[0][0] == '-' && !c->option[0][1])
 		res = cd_moins(minishell);

@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:21:37 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/19 16:07:05 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 20:54:42 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_option_export(t_command *c, t_minishell *minishell, int i, int *k)
 		else if ((c->option[i][*k] == '_'
 			|| ft_isdigit(c->option[i][*k])) && x == 1)
 			(*k)++;
-		else 
+		else
 			return (isok(c, minishell, i, *k));
 	}
 	return (1);
