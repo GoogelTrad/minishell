@@ -106,6 +106,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 				verif = 1;
 				break ;
 			}
+			free(fusion);
 			i++;
 		}
 		no_command(verif, c, minishell);
@@ -132,5 +133,6 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
 	}
 	if (c->fd_out != 1)
 		close(c->fd_out);
+	free_double_tab(minishell->fusion);
 	free(fichier);
 }
