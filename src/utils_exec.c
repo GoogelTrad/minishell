@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 20:41:46 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/06 17:38:00 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/18 16:59:32 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	fusion_exec(t_command *c, t_minishell *minishell)
 	i = 0;
 	while (c->option[i])
 		i++;
-	minishell->fusion = malloc(sizeof(char *) + (i + 1));
+	minishell->fusion = malloc(sizeof(char *) + (i));
 	i = 0;
 	minishell->fusion[0] = ft_strdup(c->cmd);
 	while (c->option[i])

@@ -133,5 +133,6 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
 	}
 	if (c->fd_out != 1)
 		close(c->fd_out);
+	free_double_tab(minishell->fusion);
 	free(fichier);
 }
