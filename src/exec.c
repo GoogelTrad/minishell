@@ -42,7 +42,7 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 	else if (ft_strcmp(c->cmd, "exit") == 0)
 		ft_exit(c, minishell);
 	else if (ft_strcmp(c->cmd, "pwd") == 0)
-		pwd(fd, minishell);
+		pwd(fd);
 	else if (ft_strcmp(c->cmd, "env") == 0)
 		env(fd, c, minishell);
 	else if (ft_strcmp(c->cmd, "cd") == 0)
@@ -88,6 +88,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
 	char	*tmp;
+	char	*var;
 	char	*fusion;
 	int		i;
 
@@ -96,7 +97,9 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 		exec_fork(c->cmd, c, minishell);
 	else
 	{
-		path = ft_split(var_env("$PATH", 0, minishell), ':', 0);
+		var = var_env("$PATH", 0, minishell);
+		path = ft_split(var, ':', 0);
+		free(var);
 		while (path[i])
 		{
 			tmp = ft_strjoin(path[i], "/");
