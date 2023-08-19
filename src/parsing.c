@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 15:41:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:43:50 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 		free_double_tab(res_ligne);
 		i++;
 	}
+	free(res_tot);
 	minishell->command[i].cmd = NULL;
 	return (1);
 }
@@ -98,6 +99,19 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 	return (ligne);
 }
 
+char	*join_all(char *ligne, char *var, char *temp, int j)
+{
+	char	*tmp;
+	char	*tmp2;
+	
+	tmp = ft_strndup(ligne, j);
+	tmp2 = ft_strjoin(tmp, var);
+	free(tmp);
+	tmp = ft_strjoin(tmp2, temp);
+	free(tmp2);
+	return (tmp);
+}
+
 char	*replace_value(char *var, char *ligne, int i)
 {
 	char	*temp;
@@ -120,9 +134,10 @@ char	*replace_value(char *var, char *ligne, int i)
 		temp = ft_strndup(ligne + j + 2, ft_strlen(ligne) - j);
 	else
 		temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
-	res = ft_strndup(ligne, j);
-	res = ft_strjoin(res, var);
-	res = ft_strjoin(res, temp);
+	// res = ft_strndup(ligne, j);
+	// res = ft_strjoin(res, var);
+	// res = ft_strjoin(res, temp);
+	res = join_all(ligne, var, temp, j);
 	free(temp);
 	return (res);
 }
