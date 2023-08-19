@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:32:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/16 16:14:41 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 19:05:51 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 char	*cd_home_moins(t_minishell *minishell)
 {
-	return (ft_strdup(get_env("OLDPWD", minishell->env)));
+	return (get_env("OLDPWD", minishell->env));
 }
 
 char	*cd_moins(t_minishell *minishell)
 {
-	printf("%s\n", get_env("OLDPWD", minishell->env));
-	return (ft_strdup(get_env("OLDPWD", minishell->env)));
+	char	*name;
+
+	name = get_env("OLDPWD", minishell->env);
+	printf("%s\n", name);
+	return (name);
 }
 
 int	verif_arg_cd(t_command *c, t_minishell *minishell)

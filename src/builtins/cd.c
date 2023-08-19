@@ -15,13 +15,17 @@
 void	cd(t_command *c, t_minishell *minishell)
 {
 	int	verif;
+	char *var;
 
 	if (!verif_arg_cd(c, minishell))
 		return ;
 	if (c->option[0])
 	{
 		c->option[0] = verif_cd(c, minishell);
-		verif = chdir(c->option[0]);
+		if (c->option[0])
+			verif = chdir(c->option[0]);
+		else
+			verif = -1;
 		if (verif == -1)
 		{
 			write(2, "cd: ", 4);
@@ -35,8 +39,13 @@ void	cd(t_command *c, t_minishell *minishell)
 	}
 	else
 	{
-		chdir(get_env("HOME", minishell->env));
-		change_pwd(get_env("HOME", minishell->env), minishell);
+		var = get_env("HOME", minishell->env);
+		if (var)
+		{
+			chdir(var);
+			change_pwd(var, minishell);
+		}
+		free(var);
 	}
 	minishell->status = 0;
 }
@@ -61,13 +70,16 @@ void	pwd_back(char *path, int i, int j, t_minishell *minishell)
 {
 	char	*cpy;
 	char	*tmp;
+	char	*join;
 
 	j--;
 	while (minishell->env[i][j] && minishell->env[i][j] != '/')
 		j--;
 	cpy = ft_strndup(minishell->env[i] + minishell->cd_n, j - minishell->cd_n);
 	tmp = ft_strndup(minishell->env[i], minishell->cd_n);
-	minishell->env[i] = ft_strdup(ft_strjoin(tmp, cpy));
+	join = ft_strjoin(tmp, cpy);
+	minishell->env[i] = ft_strdup(join);
+	free(join);
 	free(tmp);
 	if (path[2])
 		change_pwd(path + 3, minishell);
@@ -97,6 +109,7 @@ void	change_pwd(char *path, t_minishell *minishell)
 	int		i;
 	int		j;
 	char	*tmp;
+	char	*join;
 
 	i = 0;
 	minishell->cd_n = 0;
@@ -111,7 +124,9 @@ void	change_pwd(char *path, t_minishell *minishell)
 		if (path[ft_strlen(path) - 1] == '/')
 			path = ft_strndup(path, ft_strlen(path) - 1);
 		tmp = ft_strndup(minishell->env[i], minishell->cd_n);
-		minishell->env[i] = ft_strdup(ft_strjoin(tmp, path));
+		join = ft_strjoin(tmp, path);
+		minishell->env[i] = ft_strdup(join);
+		free(join);
 		free(tmp);
 	}
 	else
