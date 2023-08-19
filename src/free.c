@@ -18,7 +18,7 @@ void	free_redi(t_command *c)
 	t_redirection	*actu;
 
 	tmp = c->redi;
-	while(tmp)
+	while (tmp)
 	{
 		actu = tmp;
 		tmp = tmp->next_redi;
@@ -35,7 +35,7 @@ void	free_cmd(t_minishell *minishell)
 	int	i;
 
 	i = 0;
-	while (i < minishell->tab_len)
+	while (minishell->command[i].cmd)
 	{
 		free_redi(&minishell->command[i]);
 		free_double_tab(minishell->command[i].option);

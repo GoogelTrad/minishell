@@ -57,29 +57,30 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 
 int	exec_redi(t_command *c, t_minishell *minishell)
 {
-	while (c->redi->there)
+	t_redirection *tmp = c->redi;
+	while (tmp->there)
 	{
-		if (ft_strcmp(c->redi->type, ">") == 0)
+		if (ft_strcmp(tmp->type, ">") == 0)
 		{
 			if (!simple_droite(c, minishell))
 				return (0);
 		}
-		else if (ft_strcmp(c->redi->type, ">>") == 0)
+		else if (ft_strcmp(tmp->type, ">>") == 0)
 		{
 			if (!double_droite(c))
 				return (0);
 		}
-		else if (ft_strcmp(c->redi->type, "<") == 0)
+		else if (ft_strcmp(tmp->type, "<") == 0)
 		{
 			if (!simple_gauche(c, minishell))
 				return (0);
 		}
-		else if (ft_strcmp(c->redi->type, "<<") == 0)
+		else if (ft_strcmp(tmp->type, "<<") == 0)
 		{
 			if (!double_gauche(c, minishell))
 				return (0);
 		}
-		c->redi = c->redi->next_redi;
+		tmp = tmp->next_redi;
 	}
 	return (1);
 }

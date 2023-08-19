@@ -59,7 +59,6 @@ typedef struct s_minishell
 	int			incr;
 	int			cd_n;
 	int			pid;
-	int			tab_len;
 
 	t_command	*command;
 }	t_minishell;
