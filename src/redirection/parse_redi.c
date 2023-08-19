@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 16:10:31 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 20:52:56 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,12 @@ void	redi(t_command *c, char **ligne, int i)
 		if (ligne[i])
 			i++;
 	}
-	if(c->redi->there)
+	if (c->redi->there)
 	{
 		c->redi->next_redi = malloc(sizeof(t_redirection));
 		c->redi->next_redi->there = 0;
 	}
 	c->redi = tmp;
-
-	//tmp leaks quand il y a une redirection
-	//type et word aussi
-	// le dernier malloc aussi 
 }
 
 void	parse_redi(char **ligne, t_command *c)
@@ -80,9 +76,9 @@ void	replace_heredoc(t_minishell *minishell)
 		{
 			j = i++;
 			quote = minishell->ligne[j];
-			while(minishell->ligne[i] && minishell->ligne[i] != quote)
+			while (minishell->ligne[i] && minishell->ligne[i] != quote)
 				i++;
-			if(minishell->ligne[i] == quote && i != j)
+			if (minishell->ligne[i] == quote && i != j)
 				minishell->ligne = replace(minishell->ligne, quote, &k);
 		}
 		i++;
@@ -94,7 +90,7 @@ int	verif_line(char *line, t_minishell *minishell)
 	int	i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 		i++;
 	if (line[i - 1] == '|')
 	{

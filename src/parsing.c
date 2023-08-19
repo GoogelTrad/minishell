@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 23:06:37 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 23:21:40 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ char	**copy_env(char **env)
 	}
 	copy[i] = 0;
 	return (copy);
-}
-
-void	end_pipe(t_minishell *minishell)
-{
-	write(2, "syntax error near unexpected token 'newline'\n", 45);
-	minishell->status = 1;
 }
 
 int	separate_cmd(char *ligne, t_minishell *minishell)
@@ -102,7 +96,7 @@ char	*join_all(char *ligne, char *var, char *temp, int j)
 {
 	char	*tmp;
 	char	*tmp2;
-	
+
 	tmp = ft_strndup(ligne, j);
 	tmp2 = ft_strjoin(tmp, var);
 	free(tmp);
