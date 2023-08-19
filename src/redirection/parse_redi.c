@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 15:59:42 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 16:10:31 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	redi(t_command *c, char **ligne, int i)
 		c->redi->next_redi->there = 0;
 	}
 	c->redi = tmp;
+
+	//tmp leaks quand il y a une redirection
+	//type et word aussi
+	// le dernier malloc aussi 
 }
 
 void	parse_redi(char **ligne, t_command *c)

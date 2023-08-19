@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 14:21:37 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/15 16:44:37 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 16:07:05 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	find_my_var(char *word, t_minishell *minishell)
 		}
 		k++;
 	}
+	free(stock2);
 	return (-1);
 }
 

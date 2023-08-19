@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/15 17:08:33 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 16:04:41 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	add_var_env(char *word, char *value, t_minishell *minishell)
 		var[i] = ft_strdup(minishell->env[i]);
 		i++;
 	}
+	free_double_tab(minishell->env);
 	var[i] = set_value(word, value);
 	var[++i] = NULL;
 	minishell->env = var;
@@ -99,8 +100,7 @@ void	aff_export_alone(int fd, t_minishell *minishell)
 	tab = copy_tab(minishell->env);
 	export_by_ascii(tab);
 	export_alone(fd, tab);
-	if (tab[0])
-		free_double_tab(tab);
+	free_double_tab(tab);
 }
 
 void	export(t_command *c, t_minishell *minishell)
