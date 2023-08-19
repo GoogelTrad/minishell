@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 15:41:39 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:52:50 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void		exec_fork(char *fichier, t_command *c, t_minishell *minishell);
 //free.c
 void		free_cmd(t_minishell *minishell);
 void		free_all(t_minishell *minishell);
+void		free_redi(t_command *c);
 
 //ft_split.c
 int			count_size(int n);
