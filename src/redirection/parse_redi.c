@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 15:55:53 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 16:10:31 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ void	redi(t_command *c, char **ligne, int i)
 		if (ligne[i])
 			i++;
 	}
-	c->redi->next_redi = malloc(sizeof(t_redirection));
-	c->redi->next_redi->there = 0;
+	if(c->redi->there)
+	{
+		c->redi->next_redi = malloc(sizeof(t_redirection));
+		c->redi->next_redi->there = 0;
+	}
 	c->redi = tmp;
 
 	//tmp leaks quand il y a une redirection

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/18 13:07:08 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/19 15:41:48 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	prompt(char *ligne, t_minishell *minishell)
 	add_history(ligne);
 	minishell->ligne = ft_strdup(ligne);
 	ligne = var_env(ligne, 0, minishell);
-	if (separate_cmd(ligne, &minishell))
+	if (separate_cmd(ligne, minishell))
 	{
 		bworded(minishell->command);
 		belle_exec(minishell->command, minishell);
@@ -76,6 +76,7 @@ char	*var_arg(char **av, char *ligne, int ac)
 {
 	char	*res;
 	char	*tmp;
+	char	*temp;
 	int		i;
 	int		nb;
 
@@ -84,14 +85,16 @@ char	*var_arg(char **av, char *ligne, int ac)
 	{
 		if (ligne[i] == '$' && ft_isdigit(ligne[i + 1]))
 		{
-			tmp = ft_strndup(ligne, i - 1);
+			temp = ft_strndup(ligne, i - 1);
 			nb = ligne[i + 1] - '0';
-			if (nb <= ac)
+			if (nb <= ac && av[nb])
 				res = ft_strdup(av[nb]);
 			else
 				res = "";
-			tmp = ft_strjoin(tmp, res);
+			tmp = ft_strjoin(temp, res);
 			ligne = ft_strjoin(tmp, ligne + i + 2);
+			free(tmp);
+			free(temp);
 		}
 		i++;
 	}
