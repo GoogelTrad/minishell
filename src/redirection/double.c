@@ -24,6 +24,7 @@ int	double_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
 	char	*ligne;
+	char	*tmp;
 
 	if (!verif_redi(c->redi->word, minishell))
 		return (0);
@@ -31,15 +32,19 @@ int	double_gauche(t_command *c, t_minishell *minishell)
 	c->fd_in = pipes[0];
 	replace_heredoc(minishell);
 	if (check_env(minishell->ligne))
-		c->redi->word = ft_strdup(coucou(minishell->ligne));
+	{
+		tmp = coucou(minishell->ligne);
+		c->redi->word = ft_strdup(tmp);
+		free(tmp);
+	}
 	ligne = readline("> ");
 	impr_double(c, pipes, ligne);
 	while (ft_strcmp(ligne, c->redi->word) != 0)
 	{
+		free(ligne);
 		ligne = readline("> ");
 		impr_double(c, pipes, ligne);
 	}
-	free(ligne);
 	close(pipes[1]);
 	return (1);
 }
@@ -66,6 +71,7 @@ char	*coucou(char *ligne)
 		}
 		i++;
 	}
+
 	return (NULL);
 }
 
