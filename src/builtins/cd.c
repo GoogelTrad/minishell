@@ -39,13 +39,16 @@ void	cd(t_command *c, t_minishell *minishell)
 	}
 	else
 	{
-		printf("coucou\n");
 		var = get_env("HOME", minishell->env);
-		printf("coucou2\n");
 		if (var)
 		{
 			chdir(var);
 			change_pwd(var, minishell);
+		}
+		else
+		{
+			write(2, "cd : HOME not set\n", 18);
+			minishell->status = 1;
 		}
 		free(var);
 	}
@@ -85,9 +88,9 @@ void	pwd_back(char *path, int i, int j, t_minishell *minishell)
 	minishell->env[i] = ft_strdup(join);
 	free(join);
 	free(tmp);
+	free(cpy);
 	if (path[2])
 		change_pwd(path + 3, minishell);
-	free(cpy);
 }
 
 void	pwd_front(char *path, int i, t_minishell *minishell)
@@ -103,9 +106,9 @@ void	pwd_front(char *path, int i, t_minishell *minishell)
 	cpy = ft_strndup(path, j);
 	minishell->env[i] = ft_strjoin(tmp, cpy);
 	free(tmp);
+	free(cpy);
 	if (path[j + 1])
 		change_pwd(path + j + 1, minishell);
-	free(cpy);
 }
 
 void	change_pwd(char *path, t_minishell *minishell)
