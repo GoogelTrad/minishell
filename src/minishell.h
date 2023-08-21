@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 23:33:40 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/21 17:09:45 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int			ft_isalnum(char *str);
 int			ft_atoi(const char *str);
 
 // builtins/utils_builtins2.c
-char		*verif_cd(t_command *c, t_minishell *minishell);
+char		*verif_cd(t_command *c, t_minishell *minishell, int *verif);
 int			verif_arg_cd(t_command *c, t_minishell *minishell);
 // builtins/utils_export.c
 char		**copy_tab(char **tab);
@@ -162,7 +162,7 @@ void		belle_exec(t_command *c, t_minishell *minishell);
 void		exec(int fd, t_command *c, t_minishell *minishell);
 int			exec_redi(t_command *c, t_minishell *minishell);
 void		exec_others(t_command *c, int verif, t_minishell *minishell);
-void		exec_fork(char *fichier, t_command *c, t_minishell *minishell);
+void		exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i);
 
 //free.c
 void		free_cmd(t_minishell *minishell);

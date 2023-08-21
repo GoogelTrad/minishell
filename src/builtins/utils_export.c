@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 18:17:35 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/21 16:19:25 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:51:18 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,7 @@ char	*set_value(char *word, char *value)
 			var[++i] = value[j];
 	}
 	var[++i] = '\0';
-	printf("coucou\n");
 	if (word)
 		free(word);
-	printf("coucou2\n");
 	return (var);
 }

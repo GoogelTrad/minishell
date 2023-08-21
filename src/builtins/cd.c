@@ -21,13 +21,13 @@ void	cd(t_command *c, t_minishell *minishell)
 		return ;
 	if (c->option[0])
 	{
-		c->option[0] = verif_cd(c, minishell);
+		c->option[0] = verif_cd(c, minishell, &verif);
 		if (c->option[0])
 			verif = chdir(c->option[0]);
-		else
-			verif = -1;
-		if (verif == -1)
+		if (verif <= -1)
 		{
+			if (verif == -2)
+				return ;
 			write(2, "cd: ", 4);
 			write(2, c->option[0], ft_strlen(c->option[0]));
 			write(2, ": ", 3);
@@ -39,7 +39,9 @@ void	cd(t_command *c, t_minishell *minishell)
 	}
 	else
 	{
+		printf("coucou\n");
 		var = get_env("HOME", minishell->env);
+		printf("coucou2\n");
 		if (var)
 		{
 			chdir(var);
@@ -61,7 +63,7 @@ void	old_pwd(int i, t_minishell *minishell)
 		j++;
 	tmp = ft_strdup(minishell->env[i] + 4);
 	if (!minishell->env[j])
-		add_var_env("OLDPWD", minishell->env[i] + 4, minishell);
+		add_var_env(ft_strdup("OLDPWD"), minishell->env[i] + 4, minishell);
 	var_name = ft_strndup(minishell->env[j], 7);
 	minishell->env[j] = ft_strjoin(var_name, tmp);
 	free(tmp);

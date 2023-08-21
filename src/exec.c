@@ -97,7 +97,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 
 	i = 0;
 	if (open(c->cmd, O_RDONLY) > -1)
-		exec_fork(c->cmd, c, minishell);
+		exec_fork(c->cmd, c, minishell, 0);
 	else
 	{
 		var = var_env("$PATH", 0, minishell);
@@ -110,7 +110,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 			free(tmp);
 			if (open(fusion, O_RDONLY) > -1)
 			{
-				exec_fork(fusion, c, minishell);
+				exec_fork(fusion, c, minishell, 1);
 				verif = 1;
 				break ;
 			}
@@ -122,7 +122,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 	}
 }
 
-void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
+void	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
 {
 	fusion_exec(c, minishell);
 	minishell->pid = fork();
@@ -142,5 +142,6 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell)
 	if (c->fd_out != 1)
 		close(c->fd_out);
 	free_double_tab(minishell->fusion);
-	free(fichier);
+	if (i)
+		free(fichier);
 }
