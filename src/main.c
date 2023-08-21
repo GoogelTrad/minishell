@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 20:51:21 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 23:21:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	prompt(char *ligne, t_minishell *minishell)
 		belle_exec(minishell->command, minishell);
 	}
 	free_cmd(minishell);
-	system("leaks minishell");
 }
 
 void	get_sigint(int signal)

@@ -20,13 +20,19 @@ void	free_redi(t_command *c)
 	tmp = c->redi;
 	while (tmp)
 	{
+		printf("coucou1\n");
 		actu = tmp;
+		printf("coucou2\n");
 		tmp = tmp->next_redi;
+		printf("coucou3\n");
 		if (actu->type)
 			free(actu->type);
+		printf("coucou4\n");
 		if (actu->word)
 			free(actu->word);
+		printf("coucou5\n");
 		free(actu);
+		printf("coucou6\n");
 	}
 }
 
@@ -37,7 +43,7 @@ void	free_cmd(t_minishell *minishell)
 	i = 0;
 	while (minishell->command[i].cmd)
 	{
-		free_redi(&minishell->command[i]);
+		//free_redi(&minishell->command[i]);
 		free_double_tab(minishell->command[i].option);
 		free(minishell->command[i].cmd);
 		i++;

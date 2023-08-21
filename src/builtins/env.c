@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/19 16:30:19 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/19 23:33:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	env(int fd, t_command *c, t_minishell *minishell)
 void	init_env(char **env, t_minishell *minishell)
 {
 	char	*buf;
+	char	*tmp;
+	char	*cwd;
 
 	buf = NULL;
 	if (env[0])
@@ -72,10 +74,13 @@ void	init_env(char **env, t_minishell *minishell)
 		return ;
 	}
 	minishell->env = malloc(sizeof(char *) * 4);
-	minishell->env[0] = ft_strjoin("PWD=", getcwd(buf, 0));
+	cwd = getcwd(buf, 0);
+	minishell->env[0] = ft_strjoin("PWD=", cwd);
 	minishell->env[1] = ft_strdup("SHLVL=1");
-	minishell->env[2] = ft_strjoin("_=", getcwd(buf, 0));
-	minishell->env[2] = ft_strjoin(minishell->env[2], "/");
-	minishell->env[2] = ft_strjoin(minishell->env[2], minishell->av[0]);
+	minishell->env[2] = ft_strjoin("_=", cwd);
+	tmp = ft_strjoin(minishell->env[2], "/");
+	minishell->env[2] = ft_strjoin(tmp, minishell->av[0]);
+	free(tmp);
 	free(buf);
+	free(cwd);
 }

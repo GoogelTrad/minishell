@@ -58,7 +58,7 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 int	exec_redi(t_command *c, t_minishell *minishell)
 {
 	t_redirection	*tmp;
-
+	
 	tmp = c->redi;
 	while (tmp->there)
 	{
