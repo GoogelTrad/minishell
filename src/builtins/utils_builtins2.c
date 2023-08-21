@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:32:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/21 10:41:24 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:04:17 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@ char	*cd_moins(t_minishell *minishell)
 
 int	verif_arg_cd(t_command *c, t_minishell *minishell)
 {
-	char	*verif;
-
-	verif = get_env("PATH", minishell->env);
-	if (c->option[0] && c->option[1] && verif)
+	if (c->option[0] && c->option[1])
 	{
 		write(2, "cd: too many arguments\n", 24);
 		minishell->status = 1;\
-		free(verif);
 		return (0);
 	}
-	free(verif);
 	return (1);
 }
 

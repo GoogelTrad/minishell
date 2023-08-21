@@ -57,9 +57,11 @@ void	old_pwd(int i, t_minishell *minishell)
 	char	*var_name;
 
 	j = 0;
-	while (ft_strncmp(minishell->env[j], "OLDPWD", 6) != 0)
+	while (minishell->env[j] && ft_strncmp(minishell->env[j], "OLDPWD", 6) != 0)
 		j++;
 	tmp = ft_strdup(minishell->env[i] + 4);
+	if (!minishell->env[j])
+		add_var_env("OLDPWD", minishell->env[i] + 4, minishell);
 	var_name = ft_strndup(minishell->env[j], 7);
 	minishell->env[j] = ft_strjoin(var_name, tmp);
 	free(tmp);
