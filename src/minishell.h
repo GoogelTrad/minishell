@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 11:49:13 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:41:07 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,5 +225,6 @@ void		ft_bzero(void *s, size_t n);
 
 //utils2.c
 void		end_pipe(void);
+int			verif_slash(char *cmd);
 
 #endif
