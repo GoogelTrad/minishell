@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 14:41:07 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:32:12 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ int			ft_atoi(const char *str);
 // builtins/utils_builtins2.c
 char		*verif_cd(t_command *c, t_minishell *minishell, int *verif);
 int			verif_arg_cd(t_command *c);
+void		absolute_path(char *path, t_minishell *minishell, int i);
+
+
 // builtins/utils_export.c
 char		**copy_tab(char **tab);
 int			ft_isalpha(int c);
@@ -226,5 +229,6 @@ void		ft_bzero(void *s, size_t n);
 //utils2.c
 void		end_pipe(void);
 int			verif_slash(char *cmd);
+void		cd_alone(t_minishell *minishell);
 
 #endif

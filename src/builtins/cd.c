@@ -15,7 +15,6 @@
 void	cd(t_command *c, t_minishell *minishell)
 {
 	int	verif;
-	char *var;
 
 	if (!verif_arg_cd(c))
 		return ;
@@ -38,20 +37,7 @@ void	cd(t_command *c, t_minishell *minishell)
 			change_pwd(c->option[0], minishell);
 	}
 	else
-	{
-		var = get_env("HOME", minishell->env);
-		if (var)
-		{
-			chdir(var);
-			change_pwd(var, minishell);
-		}
-		else
-		{
-			write(2, "cd : HOME not set\n", 18);
-			g_status = 1;
-		}
-		free(var);
-	}
+		cd_alone(minishell);
 	g_status = 0;
 }
 
@@ -115,8 +101,6 @@ void	change_pwd(char *path, t_minishell *minishell)
 {
 	int		i;
 	int		j;
-	char	*tmp;
-	char	*join;
 
 	i = 0;
 	minishell->cd_n = 0;
@@ -127,15 +111,7 @@ void	change_pwd(char *path, t_minishell *minishell)
 		minishell->cd_n++;
 	old_pwd(i, minishell);
 	if (path[0] == '/')
-	{
-		if (path[ft_strlen(path) - 1] == '/')
-			path = ft_strndup(path, ft_strlen(path) - 1);
-		tmp = ft_strndup(minishell->env[i], minishell->cd_n);
-		join = ft_strjoin(tmp, path);
-		minishell->env[i] = ft_strdup(join);
-		free(join);
-		free(tmp);
-	}
+		absolute_path(path, minishell, i);
 	else
 	{
 		if (path && ft_strncmp(path, "..", 2) == 0)

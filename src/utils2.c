@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:46:59 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 14:40:58 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:07:07 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,22 @@ int	verif_slash(char *cmd)
 	}
 	return (0);
 }
+
+void	cd_alone(t_minishell *minishell)
+{
+	char	*var;
+	
+	var = get_env("HOME", minishell->env);
+	if (var)
+	{
+		chdir(var);
+		change_pwd(var, minishell);
+	}
+	else
+	{
+		write(2, "cd : HOME not set\n", 18);
+		g_status = 1;
+	}
+	free(var);
+}
+

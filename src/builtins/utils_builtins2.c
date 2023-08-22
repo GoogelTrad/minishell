@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:32:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 11:44:38 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:32:05 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ char	*verif_cd(t_command *c, t_minishell *minishell, int *verif)
 	if (!res)
 		*verif = -2;
 	return (res);
+}
+
+void	absolute_path(char *path, t_minishell *minishell, int i)
+{
+	char	*tmp;
+	char	*join;
+
+	if (path[ft_strlen(path) - 1] == '/')
+		path = ft_strndup(path, ft_strlen(path) - 1);
+	tmp = ft_strndup(minishell->env[i], minishell->cd_n);
+	join = ft_strjoin(tmp, path);
+	minishell->env[i] = ft_strdup(join);
+	free(join);
+	free(tmp);
 }
