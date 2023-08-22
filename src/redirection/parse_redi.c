@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 11:50:14 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:48:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	redi(t_command *c, char **ligne, int i)
 	tmp = c->redi;
 	while (ligne[i])
 	{
-		c->redi->type = ft_strdup(ligne[i]);
+		c->redi->type = ft_strdup(ligne[i++]);
 		c->redi->there = 1;
-		i++;
 		if (ligne[i])
 		{
 			c->redi->word = ft_strdup(ligne[i]);

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 13:57:15 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 20:40:10 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,15 @@ char	*get_env(char *var, char **env)
 	}
 	return (NULL);
 }
+
+void	double_check_env(t_minishell *minishell, t_command *c)
+{
+	char	*tmp;
+	
+	if (check_env(minishell->ligne))
+	{
+		tmp = coucou(minishell->ligne);
+		c->redi->word = ft_strdup(tmp);
+		free(tmp);
+	}
+}	

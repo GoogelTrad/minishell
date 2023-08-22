@@ -60,39 +60,20 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 	t_redirection	*tmp;
 	
 	tmp = c->redi;
-	while (tmp->there)
+	while (c->redi->there)
 	{
-		if (ft_strcmp(tmp->type, ">") == 0)
-		{
-			if (!simple_droite(c))
-				return (0);
-		}
-		else if (ft_strcmp(tmp->type, ">>") == 0)
-		{
-			if (!double_droite(c))
-				return (0);
-		}
-		else if (ft_strcmp(tmp->type, "<") == 0)
-		{
-			if (!simple_gauche(c))
-				return (0);
-		}
-		else if (ft_strcmp(tmp->type, "<<") == 0)
-		{
-			if (!double_gauche(c, minishell))
-				return (0);
-		}
-		tmp = tmp->next_redi;
+		if (!redi_norme(c, minishell))
+			return (0);
+		c->redi = c->redi->next_redi;
 	}
+	c->redi = tmp;
 	return (1);
 }
 
 void	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
-	char	*tmp;
 	char	*var;
-	char	*fusion;
 	int		i;
 
 	i = 0;
@@ -105,16 +86,8 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 		free(var);
 		while (path[i] && c->cmd[0] != '/' && c->cmd[0] != '.')
 		{
-			tmp = ft_strjoin(path[i], "/");
-			fusion = ft_strjoin(tmp, c->cmd);
-			free(tmp);
-			if (open(fusion, O_RDONLY) > -1)
-			{
-				exec_fork(fusion, c, minishell, 1);
-				verif = 1;
+			if (!exec_relative_path(path[i], &verif, minishell, c))
 				break ;
-			}
-			free(fusion);
 			i++;
 		}
 		no_command(verif, c, minishell);

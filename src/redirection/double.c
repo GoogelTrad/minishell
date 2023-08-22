@@ -24,19 +24,13 @@ int	double_gauche(t_command *c, t_minishell *minishell)
 {
 	int		pipes[2];
 	char	*ligne;
-	char	*tmp;
 
 	if (!verif_redi(c->redi->word))
 		return (0);
 	pipe(pipes);
 	c->fd_in = pipes[0];
 	replace_heredoc(minishell);
-	if (check_env(minishell->ligne))
-	{
-		tmp = coucou(minishell->ligne);
-		c->redi->word = ft_strdup(tmp);
-		free(tmp);
-	}
+	double_check_env(minishell, c);
 	ligne = readline("> ");
 	impr_double(c, pipes, ligne);
 	while (ft_strcmp(ligne, c->redi->word) != 0)

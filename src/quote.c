@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/06 17:37:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 21:03:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,12 @@ char	*dolar_dolar(t_minishell *minishell)
 	res = ft_itoa(pid);
 	minishell->incr = 2;
 	return (res);
+}
+
+void	init_cmd(t_minishell *minishell, char *ligne, int i)
+{
+	minishell->command[i].cmd = ft_strdup(ligne);
+	minishell->command[i].fd_in = 0;
+	minishell->command[i].fd_out = 1;
+	minishell->command[i].redi->there = 0;	
 }
