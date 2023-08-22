@@ -96,7 +96,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 	int		i;
 
 	i = 0;
-	if (open(c->cmd, O_RDONLY) > -1)
+	if (open(c->cmd, O_RDONLY) > -1 && c->cmd[0] == '/')
 		exec_fork(c->cmd, c, minishell, 0);
 	else
 	{
