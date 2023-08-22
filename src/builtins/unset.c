@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 18:11:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/21 10:44:43 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:44:17 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void	unset(t_command *c, t_minishell *minishell)
 		}
 		minishell->size_env -= 1;
 	}
-	minishell->status = 0;
+	g_status = 0;
 }

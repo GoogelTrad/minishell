@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 20:41:46 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 23:12:09 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:46:52 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	no_command(int verif, t_command *c, t_minishell *minishell)
 	{
 		if (!redi_cmd(c))
 		{
-			minishell->status = 127;
+			g_status = 127;
 			write(2, c->cmd, ft_strlen(c->cmd));
 			write(2, ": ", 2);
 			write(1, "command not found\n", 18);

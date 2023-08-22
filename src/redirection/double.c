@@ -26,7 +26,7 @@ int	double_gauche(t_command *c, t_minishell *minishell)
 	char	*ligne;
 	char	*tmp;
 
-	if (!verif_redi(c->redi->word, minishell))
+	if (!verif_redi(c->redi->word))
 		return (0);
 	pipe(pipes);
 	c->fd_in = pipes[0];

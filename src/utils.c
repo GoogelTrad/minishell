@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:44:47 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/14 11:57:49 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:47:18 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_strlen(char *str)
 void	get_sigint_cmd(int signal)
 {
 	(void)signal;
+	g_status = 130;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_redisplay();

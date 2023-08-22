@@ -17,7 +17,7 @@ void	cd(t_command *c, t_minishell *minishell)
 	int	verif;
 	char *var;
 
-	if (!verif_arg_cd(c, minishell))
+	if (!verif_arg_cd(c))
 		return ;
 	if (c->option[0])
 	{
@@ -31,7 +31,7 @@ void	cd(t_command *c, t_minishell *minishell)
 			write(2, "cd: ", 4);
 			write(2, c->option[0], ft_strlen(c->option[0]));
 			write(2, ": ", 3);
-			minishell->status = put_error(errno);
+			g_status = put_error(errno);
 			return ;
 		}
 		else
@@ -48,11 +48,11 @@ void	cd(t_command *c, t_minishell *minishell)
 		else
 		{
 			write(2, "cd : HOME not set\n", 18);
-			minishell->status = 1;
+			g_status = 1;
 		}
 		free(var);
 	}
-	minishell->status = 0;
+	g_status = 0;
 }
 
 void	old_pwd(int i, t_minishell *minishell)

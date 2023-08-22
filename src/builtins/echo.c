@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:41:54 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/19 16:21:46 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/22 11:43:30 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	echo(int fd, t_command *c, t_minishell *minishell)
+void	echo(int fd, t_command *c)
 {
 	int	i;
 	int	j;
@@ -34,5 +34,5 @@ void	echo(int fd, t_command *c, t_minishell *minishell)
 	}
 	if (!new_line)
 		write(fd, "\n", 1);
-	minishell->status = 0;
+	g_status = 0;
 }

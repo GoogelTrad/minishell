@@ -6,11 +6,13 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 11:06:16 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:55:53 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_status;
 
 int	main(int ac, char **av, char **env)
 {
@@ -32,7 +34,7 @@ int	main(int ac, char **av, char **env)
 			printf("exit\n");
 			free_all(&minishell);
 			free(ligne);
-			exit(minishell.status);
+			exit(g_status);
 		}
 		if (ligne[0])
 			prompt(ligne, &minishell);
@@ -57,6 +59,7 @@ void	prompt(char *ligne, t_minishell *minishell)
 void	get_sigint(int signal)
 {
 	(void)signal;
+	g_status = 130;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -66,8 +69,8 @@ void	get_sigint(int signal)
 void	blocksig(int signal)
 {
 	(void)signal;
+	g_status = 131;
 	printf("Quit : 3\n");
-	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }

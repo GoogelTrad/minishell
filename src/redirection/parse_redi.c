@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 10:59:40 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:50:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	replace_heredoc(t_minishell *minishell)
 	}
 }
 
-int	verif_line(char *line, t_minishell *minishell)
+int	verif_line(char *line)
 {
 	int	i;
 
@@ -94,18 +94,18 @@ int	verif_line(char *line, t_minishell *minishell)
 		i++;
 	if (line[i - 1] == '|')
 	{
-		end_pipe(minishell);
+		end_pipe();
 		return (0);
 	}
 	return (1);
 }
 
-int	verif_redi(char *word, t_minishell *minishell)
+int	verif_redi(char *word)
 {
 	if (!word)
 	{
 		write(2, "syntax error near unexpected token 'newline'\n", 45);
-		minishell->status = 1;
+		g_status = 1;
 		return (0);
 	}
 	return (1);

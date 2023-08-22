@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 10:59:20 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:50:29 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 
 	i = 0;
 	minishell->command = malloc(sizeof(t_command) * (i + 1));
-	if (verif_line(ligne, minishell) == 0)
+	if (verif_line(ligne) == 0)
 		return (0);
 	res_tot = separate_quote(ligne, '|');
 	while (res_tot[i])

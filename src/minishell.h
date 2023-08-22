@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/21 17:09:45 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:49:13 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_command
 
 typedef struct s_minishell
 {
-	int			status;
 	int			ac;
 	char		*ligne;
 	char		**env;
@@ -65,6 +64,8 @@ typedef struct s_minishell
 
 //******************************FONCTIONS******************************//
 
+extern	int	g_status;
+
 char		*readline(const char *prompt);
 void		rl_replace_line(const char *text, int clear_undo);
 
@@ -77,7 +78,7 @@ void		change_pwd(char *path, t_minishell *minishell);
 
 // builtins/echo.c
 
-void		echo(int fd, t_command *c, t_minishell *minishell);
+void		echo(int fd, t_command *c);
 
 // builtins/env.c
 
@@ -114,7 +115,7 @@ int			ft_atoi(const char *str);
 
 // builtins/utils_builtins2.c
 char		*verif_cd(t_command *c, t_minishell *minishell, int *verif);
-int			verif_arg_cd(t_command *c, t_minishell *minishell);
+int			verif_arg_cd(t_command *c);
 // builtins/utils_export.c
 char		**copy_tab(char **tab);
 int			ft_isalpha(int c);
@@ -124,9 +125,8 @@ char		*set_value(char *word, char *value);
 
 //  builtins/utils_export2.c
 int			is_valid(int c);
-int			isok(t_command *c, t_minishell *minishell, int i, int k);
-int			check_option_export(t_command *c, t_minishell *minishell,
-				int i, int *k);
+int			isok(t_command *c, int i, int k);
+int			check_option_export(t_command *c, int i, int *k);
 int			find_my_var(char *word, t_minishell *minishell);
 int			change_var(char *word, char *value, int index,
 				t_minishell *minishell);
@@ -143,12 +143,12 @@ void		impr_double(t_command *c, int pipes[2], char *ligne);
 void		redi(t_command *c, char **ligne, int i);
 void		parse_redi(char **ligne, t_command *c);
 void		replace_heredoc(t_minishell *minishell);
-int			verif_line(char *line, t_minishell *minishell);
-int			verif_redi(char *word, t_minishell *minishell);
+int			verif_line(char *line);
+int			verif_redi(char *word);
 
 // redirection/simple.c
-int			simple_droite(t_command *c, t_minishell *minishell);
-int			simple_gauche(t_command *c, t_minishell *minishell);
+int			simple_droite(t_command *c);
+int			simple_gauche(t_command *c);
 int			redi_cmd(t_command *c);
 
 // redirection/utils_redi.c
@@ -195,7 +195,6 @@ char		**copy_env(char **env);
 int			separate_cmd(char *ligne, t_minishell *minishell);
 char		*var_env(char *ligne, int j, t_minishell *minishell);
 char		*replace_value(char *var, char *ligne, int i);
-void		end_pipe(t_minishell *minishell);
 
 //quote.c
 int			count_words_quote(char *str, char sep);
@@ -225,6 +224,6 @@ void		get_sigint_cmd(int signal);
 void		ft_bzero(void *s, size_t n);
 
 //utils2.c
-void		end_pipe(t_minishell *minishell);
+void		end_pipe(void);
 
 #endif

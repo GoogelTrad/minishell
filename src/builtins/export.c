@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/21 16:19:08 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:48:27 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,14 @@ void	export(t_command *c, t_minishell *minishell)
 		while (c->option[i])
 		{
 			k = 0;
-			if (check_option_export(c, minishell, i, &k) == 0)
+			if (check_option_export(c, i, &k) == 0)
 				return ;
 			if (c->option[i][k] == '\0')
 				add_var_env(ft_strdup(c->option[i]), NULL, minishell);
 			else
 				add_var_env(get_char(c->option[i], 0, k),
 					c->option[i] + k + 1, minishell);
-			minishell->status = 0;
+			g_status = 0;
 			i++;
 		}
 	}

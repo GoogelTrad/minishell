@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:40:20 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/19 20:55:17 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/22 11:44:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	pwd(int fd)
 		write(fd, &result[i++], 1);
 	free(result);
 	write(fd, "\n", 1);
+	g_status = 0;
 }

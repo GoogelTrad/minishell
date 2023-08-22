@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:40 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/08 18:45:46 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/22 11:55:45 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*type_of_var(char *ligne, int i, int j, t_minishell *minishell)
 
 	if (ligne[i] == '?')
 	{
-		replace = ft_itoa(minishell->status);
+		replace = ft_itoa(g_status);
 		minishell->incr = 2;
 	}
 	else if (ligne[i] == '$')

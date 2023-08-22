@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:32:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/21 17:08:13 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:44:38 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*cd_home_moins(t_minishell *minishell, t_command *c)
 		write(2, "cd : ", 5);
 		write(2, c->option[0], ft_strlen(c->option[0]));
 		write(2, ": No such file or directory\n", 28);
-		minishell->status = 1;
+		g_status = 1;
 		return (NULL);
 	}
 	return (name);
@@ -36,19 +36,19 @@ char	*cd_moins(t_minishell *minishell)
 	if (!name)
 	{
 		write(2, "cd : OLDPWD not set\n", 20);
-		minishell->status = 1;
+		g_status = 1;
 		return (NULL);
 	}
 	printf("%s\n", name);
 	return (name);
 }
 
-int	verif_arg_cd(t_command *c, t_minishell *minishell)
+int	verif_arg_cd(t_command *c)
 {
 	if (c->option[0] && c->option[1])
 	{
 		write(2, "cd: too many arguments\n", 24);
-		minishell->status = 1;\
+		g_status = 1;
 		return (0);
 	}
 	return (1);

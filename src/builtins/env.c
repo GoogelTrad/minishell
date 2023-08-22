@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/19 23:33:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:43:40 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	env(int fd, t_command *c, t_minishell *minishell)
 {
 	if (c->option[0])
 	{
-		minishell->status = 127;
+		g_status = 127;
 		write(2, "cd: ", 4);
 		write(2, c->option[0], ft_strlen(c->option[0]));
 		write(2, ": ", 3);
@@ -58,7 +58,7 @@ void	env(int fd, t_command *c, t_minishell *minishell)
 	}
 	else
 		aff_env(fd, minishell);
-	minishell->status = 0;
+	g_status = 0;
 }
 
 void	init_env(char **env, t_minishell *minishell)

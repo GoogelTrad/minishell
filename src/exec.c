@@ -32,13 +32,13 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 	if ((c + 1)->cmd)
 		belle_exec(c + 1, minishell);
 	close(pipes[0]);
-	waitpid(pid, &minishell->status, 0);
+	waitpid(pid, &g_status, 0);
 }
 
 void	exec(int fd, t_command *c, t_minishell *minishell)
 {
 	if (ft_strcmp(c->cmd, "echo") == 0)
-		echo(fd, c, minishell);
+		echo(fd, c);
 	else if (ft_strcmp(c->cmd, "exit") == 0)
 		ft_exit(c, minishell);
 	else if (ft_strcmp(c->cmd, "pwd") == 0)
@@ -64,7 +64,7 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 	{
 		if (ft_strcmp(tmp->type, ">") == 0)
 		{
-			if (!simple_droite(c, minishell))
+			if (!simple_droite(c))
 				return (0);
 		}
 		else if (ft_strcmp(tmp->type, ">>") == 0)
@@ -74,7 +74,7 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 		}
 		else if (ft_strcmp(tmp->type, "<") == 0)
 		{
-			if (!simple_gauche(c, minishell))
+			if (!simple_gauche(c))
 				return (0);
 		}
 		else if (ft_strcmp(tmp->type, "<<") == 0)
@@ -134,9 +134,9 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
 		if ((c + 1)->cmd)
 			close((c + 1)->fd_in);
 		if (execve(fichier, minishell->fusion, minishell->env) == -1)
-			minishell->status = put_error(errno);
+			g_status = put_error(errno);
 		else
-			minishell->status = 0;
+			g_status = 0;
 		exit(1);
 	}
 	if (c->fd_out != 1)
