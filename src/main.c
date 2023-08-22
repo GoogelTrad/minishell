@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/19 23:21:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 11:06:16 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	blocksig(int signal)
 {
 	(void)signal;
 	printf("Quit : 3\n");
+	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
