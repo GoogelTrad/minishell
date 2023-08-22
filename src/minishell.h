@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 20:32:12 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 21:02:43 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ char		**display_quote(char **str);
 char		*replace_quote(char *str, int i);
 char		*replace(char *str, char quote, int *j);
 char		*get_env(char *var, char **env);
+void		double_check_env(t_minishell *minishell, t_command *c);
 
 //exec.c
 void		belle_exec(t_command *c, t_minishell *minishell);
@@ -204,6 +205,7 @@ int			count_words_quote(char *str, char sep);
 int			while_quote(char *str, int i, char sep);
 char		**separate_quote(char *str, char sep);
 char		*dolar_dolar(t_minishell *minishell);
+void		init_cmd(t_minishell *minishell, char *ligne, int i);
 
 //utils_exec.c
 void		no_command(int verif, t_command *c, t_minishell *minishell);
@@ -230,5 +232,7 @@ void		ft_bzero(void *s, size_t n);
 void		end_pipe(void);
 int			verif_slash(char *cmd);
 void		cd_alone(t_minishell *minishell);
+int			redi_norme(t_command *c, t_minishell *minishell);
+int			exec_relative_path(char *path, int *verif, t_minishell *minishell, t_command *c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 13:29:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 21:03:42 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 		minishell->command[i].redi = malloc(sizeof(t_redirection));
 		res_ligne = ft_split(res_tot[i], ' ', 0);
 		res_ligne = display_quote(res_ligne);
-		minishell->command[i].cmd = ft_strdup(res_ligne[0]);
-		minishell->command[i].fd_in = 0;
-		minishell->command[i].fd_out = 1;
-		minishell->command[i].redi->there = 0;
+		init_cmd(minishell, res_ligne[0], i);
 		parse_redi(res_ligne + 1, &minishell->command[i]);
 		free_double_tab(res_ligne);
 		i++;
