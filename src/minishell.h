@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 14:41:07 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/22 17:53:52 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void		unset(t_command *c, t_minishell *minishell);
 int			check_option_echo(char	*str);
 void		ft_putstr(char *s);
 int			ft_isalnum(char *str);
+int			overflow(int element);
 int			ft_atoi(const char *str);
 
 // builtins/utils_builtins2.c
