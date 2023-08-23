@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/23 11:20:06 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 11:52:02 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_minishell
 	int			size_env;
 	char		**fusion;
 	char		**av;
-	int			fd;
 	int			incr;
 	int			cd_n;
 	int			pid;
