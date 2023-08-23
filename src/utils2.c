@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:46:59 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 20:58:53 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 11:25:08 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	verif_slash(char *cmd)
 void	cd_alone(t_minishell *minishell)
 {
 	char	*var;
-	
+
 	var = get_env("HOME", minishell->env);
 	if (var)
 	{

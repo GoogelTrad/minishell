@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 21:34:01 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/23 11:20:06 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int			verif_redi(char *word);
 int			simple_droite(t_command *c);
 int			simple_gauche(t_command *c);
 int			redi_cmd(t_command *c);
+void		parse_redi_norme(t_command *c);
 
 // redirection/utils_redi.c
 char		**display_quote(char **str);
