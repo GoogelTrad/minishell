@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 11:43:40 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 11:55:55 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	aff_env(int fd, t_minishell *minishell)
 			if (minishell->env[i][j] == '=')
 			{	
 				write(fd, minishell->env[i], ft_strlen(minishell->env[i]));
-				write(minishell->fd, "\n", 1);
+				write(fd, "\n", 1);
 				break ;
 			}
 			j++;
