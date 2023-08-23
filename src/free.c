@@ -39,7 +39,7 @@ void	free_cmd(t_minishell *minishell)
 	{
 		while (minishell->command[i].cmd)
 		{
-			free_redi(&minishell->command[i]);
+			//free_redi(&minishell->command[i]);
 			free_double_tab(minishell->command[i].option);
 			free(minishell->command[i].cmd);
 			i++;
