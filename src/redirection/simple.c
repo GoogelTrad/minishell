@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 11:45:36 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 12:12:33 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ int	redi_cmd(t_command *c)
 		return (1);
 	else
 		return (0);
+}
+
+void	parse_redi_norme(t_command *c)
+{
+	c->redi->next_redi = malloc(sizeof(t_redirection));
+	c->redi = c->redi->next_redi;
+	c->redi->there = 0;
 }

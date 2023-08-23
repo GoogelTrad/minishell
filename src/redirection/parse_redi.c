@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 20:48:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 11:53:40 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ void	redi(t_command *c, char **ligne, int i)
 		{
 			c->redi->word = ft_strdup(ligne[i]);
 			if (ligne[i + 1])
-			{
-				c->redi->next_redi = malloc(sizeof(t_redirection));
-				c->redi = c->redi->next_redi;
-				c->redi->there = 0;
-			}
+				parse_redi_norme(c);
 		}
 		if (ligne[i])
 			i++;

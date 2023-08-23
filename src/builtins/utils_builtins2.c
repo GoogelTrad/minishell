@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:32:06 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 20:32:05 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 11:41:27 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,16 @@ char	*verif_cd(t_command *c, t_minishell *minishell, int *verif)
 
 	res = c->option[0];
 	if (c->option[0][0] == '-' && !c->option[0][1])
+	{
+		free(res);
 		res = cd_moins(minishell);
+	}
 	else if (c->option[0][0] == '~' && c->option[0][1] == '-'
 		&& !c->option[0][2])
+	{
+		free(res);
 		res = cd_home_moins(minishell, c);
+	}
 	if (!res)
 		*verif = -2;
 	return (res);
@@ -78,6 +84,8 @@ void	absolute_path(char *path, t_minishell *minishell, int i)
 		path = ft_strndup(path, ft_strlen(path) - 1);
 	tmp = ft_strndup(minishell->env[i], minishell->cd_n);
 	join = ft_strjoin(tmp, path);
+	if (minishell->env[i])
+		free(minishell->env[i]);
 	minishell->env[i] = ft_strdup(join);
 	free(join);
 	free(tmp);

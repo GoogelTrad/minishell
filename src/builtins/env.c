@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:48 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/23 11:55:55 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/23 12:01:00 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	init_env(char **env, t_minishell *minishell)
 	minishell->env[1] = ft_strdup("SHLVL=1");
 	minishell->env[2] = ft_strjoin("_=", cwd);
 	tmp = ft_strjoin(minishell->env[2], "/");
+	free(minishell->env[2]);
 	minishell->env[2] = ft_strjoin(tmp, minishell->av[0]);
 	free(tmp);
 	free(buf);
