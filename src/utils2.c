@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:46:59 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/23 11:25:08 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/23 12:08:40 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,12 @@ int	redi_norme(t_command *c, t_minishell *minishell)
 	return (1);
 }
 
-int	exec_relative_path(char *path, int *verif, t_minishell *minishell, t_command *c)
+int	exec_relative_path(char *path, int *verif, t_minishell *minishell,
+	t_command *c)
 {
 	char	*tmp;
 	char	*fusion;
-	
+
 	tmp = ft_strjoin(path, "/");
 	fusion = ft_strjoin(tmp, c->cmd);
 	free(tmp);

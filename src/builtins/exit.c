@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:36:39 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 21:28:32 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/23 12:14:48 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi_exit(const char *str)
 {
-	int	element;
+	int				element;
 	long long int	nbr;
-	int	i;
+	int				i;
 
 	element = 1;
 	nbr = 0;
@@ -66,20 +66,6 @@ static int	check_arg(char *arg)
 		i++;
 	}
 	return (0);
-}
-
-void	err_(t_command *c)
-{
-	ft_putstr("exit\n");
-	printf("minishell: exit: %s: numeric argument required\n", c->option[0]);
-	exit(255);
-}
-
-void	err_nb_arg(void)
-{
-	ft_putstr("exit\n");
-	printf("minishell: exit: too many arguments\n");
-	exit(1);
 }
 
 void	exit_nb(int nb)

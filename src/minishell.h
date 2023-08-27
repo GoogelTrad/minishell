@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/26 23:13:02 by cmichez          ###   ########.fr       */
+=======
+/*   Updated: 2023/08/23 12:26:08 by elisa            ###   ########.fr       */
+>>>>>>> 8705a68dec41712e1f6155f0019ba6e408d0b0c5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +58,6 @@ typedef struct s_minishell
 	int			size_env;
 	char		**fusion;
 	char		**av;
-	int			fd;
 	int			incr;
 	int			cd_n;
 	int			pid;
@@ -64,7 +67,7 @@ typedef struct s_minishell
 
 //******************************FONCTIONS******************************//
 
-extern	int	g_status;
+extern int	g_status;
 
 char		*readline(const char *prompt);
 void		rl_replace_line(const char *text, int clear_undo);
@@ -77,17 +80,17 @@ void		pwd_front(char *path, int i, t_minishell *minishell);
 void		change_pwd(char *path, t_minishell *minishell);
 
 // builtins/echo.c
-
 void		echo(int fd, t_command *c);
 
 // builtins/env.c
-
 int			len_env(char **env);
 void		env(int fd, t_command *c, t_minishell *minishell);
 void		init_env(char **env, t_minishell *minishell);
 
 // builtins/exit.c
-
+int			ft_atoi_exit(const char *str);
+void		exit_nb(int nb);
+void		oui(t_command *c, int nb);
 void		ft_exit(t_command *c, t_minishell *minishell);
 
 // builtins/export.c
@@ -98,7 +101,6 @@ void		aff_export_alone(int fd, t_minishell *minishell);
 void		export(t_command *c, t_minishell *minishell);
 
 // builtins/pwd.c
-
 void		pwd(int fd);
 
 // builtins/unset.c
@@ -119,6 +121,9 @@ char		*verif_cd(t_command *c, t_minishell *minishell, int *verif);
 int			verif_arg_cd(t_command *c);
 void		absolute_path(char *path, t_minishell *minishell, int i);
 
+// builtins/utils_exit.c
+void		err_(t_command *c);
+void		err_nb_arg(void);
 
 // builtins/utils_export.c
 char		**copy_tab(char **tab);
@@ -143,9 +148,14 @@ int			check_env(char *ligne);
 void		impr_double(t_command *c, int pipes[2], char *ligne);
 
 // redirection/parse_redi.c
+<<<<<<< HEAD
 
 t_redirection		*redi(char *ligne, int i);
 void		parse_redi(char *ligne, t_command *c);
+=======
+void		redi(t_command *c, char **ligne, int i);
+void		parse_redi(char **ligne, t_command *c);
+>>>>>>> 8705a68dec41712e1f6155f0019ba6e408d0b0c5
 void		replace_heredoc(t_minishell *minishell);
 int			verif_line(char *line);
 int			verif_redi(char *word);
@@ -168,7 +178,8 @@ void		belle_exec(t_command *c, t_minishell *minishell);
 void		exec(int fd, t_command *c, t_minishell *minishell);
 int			exec_redi(t_command *c, t_minishell *minishell);
 void		exec_others(t_command *c, int verif, t_minishell *minishell);
-void		exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i);
+void		exec_fork(char *fichier, t_command *c, t_minishell *minishell,
+				int i);
 
 //free.c
 void		free_cmd(t_minishell *minishell);
@@ -235,6 +246,7 @@ void		end_pipe(void);
 int			verif_slash(char *cmd);
 void		cd_alone(t_minishell *minishell);
 int			redi_norme(t_command *c, t_minishell *minishell);
-int			exec_relative_path(char *path, int *verif, t_minishell *minishell, t_command *c);
+int			exec_relative_path(char *path, int *verif, t_minishell *minishell,
+				t_command *c);
 
 #endif
