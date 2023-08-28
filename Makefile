@@ -30,6 +30,7 @@ SRCS =  src/builtins/cd.c \
 		src/quote.c \
 		src/utils_exec.c \
 		src/utils_parsing.c \
+		src/utils_parsing2.c \
 		src/utils.c \
 		src/utils2.c \
 

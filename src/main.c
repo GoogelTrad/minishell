@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 19:54:37 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:21:04 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	prompt(char *ligne, t_minishell *minishell)
 	ligne = var_env(ligne, 0, minishell);
 	if (separate_cmd(ligne, minishell))
 	{
+		printf("coucou main\n");
 		bworded(minishell->command);
 		belle_exec(minishell->command, minishell);
 		free_cmd(minishell);

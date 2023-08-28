@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 20:41:46 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/23 11:25:41 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/27 22:18:15 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	no_command(int verif, t_command *c, t_minishell *minishell)
 		else
 		{
 			fusion_exec(c, minishell);
-			redi(c, minishell->fusion, 0);
-			exec_redi(c, minishell);
+			//redi(c, minishell->fusion, 0);
+			//exec_redi(c, minishell);
 			free_double_tab(minishell->fusion);
 		}
 	}

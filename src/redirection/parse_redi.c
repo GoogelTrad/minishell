@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/27 21:41:09 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:25:46 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,32 @@
 
 t_redirection	*redi(char *ligne, int i)
 {
-	t_redirection *redi;
+	t_redirection *redis;
+	int j;
+	int n;
 
-	redi = NULL;
 	while (ligne[i] && ligne[i] != '>' && ligne[i] != '<')
 		i++;
 	if (ligne[i])
 	{
-		redi->type = get_redi(ligne + i);
+		redis = malloc(sizeof(t_redirection));
+		redis->type = get_redi(ligne + i);
+		n = i;
+		while (ligne[i] && ligne[i] != ' ')
+			i++;		
 		while (ligne[i] && ligne[i] == ' ')
 			i++;
-		redi = malloc(sizeof(t_redirection));
-		int j = 0;
+		j = i;
 		while (ligne[j] && ligne[j] != ' ')
 			j++;
-		redi->word = ft_strndup(ligne[i], j - i);
-		redi->there = 1;
-		while (i--)
-			ligne = delete_char(ligne);
-		redi->next_redi = redi(ligne, i);
+		redis->word = ft_strndup(ligne + i, j - i);
+		redis->there = 1;
+		j = j - i;
+		while (j--)
+			ligne = delete_char(ligne + n);
+		redis->next_redi = redi(ligne, i);
 	}
-	return redi;
-}
-
-char *delete_char(char *ligne)
-{
-	int i = 0;
-	
-	while (ligne[i])
-	{
-		ligne[i] = ligne[i + 1];
-		i++;
-	}
-}
-
-char *get_redi(char *ligne)
-{
-	if (!ft_strncmp(">>", ligne, 2))
-		return (ft_strndup(ligne, 2));
-	if (!ft_strncmp("<<", ligne, 2))
-		return (ft_strndup(ligne, 2));
-	if (ligne[0] == '>')
-		return (ft_strndup(ligne, 1));
-	if (ligne[0] == '<')
-		return (ft_strndup(ligne, 1));
-		
+	return redis;
 }
 
 void	parse_redi(char *ligne, t_command *c)
@@ -73,7 +54,7 @@ void	parse_redi(char *ligne, t_command *c)
 	i = 0;
 	while (ligne[i] && ligne[i] != '>' && ligne[i] != '<')
 	{
-		c->option[i] = ft_strdup(ligne[i]);
+		c->option[i] = ft_strdup(ligne);
 		i++;
 	}
 	c->option[i] = NULL;

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/26 23:13:02 by cmichez          ###   ########.fr       */
-=======
-/*   Updated: 2023/08/23 12:26:08 by elisa            ###   ########.fr       */
->>>>>>> 8705a68dec41712e1f6155f0019ba6e408d0b0c5
+/*   Updated: 2023/08/28 13:26:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,14 +144,9 @@ int			check_env(char *ligne);
 void		impr_double(t_command *c, int pipes[2], char *ligne);
 
 // redirection/parse_redi.c
-<<<<<<< HEAD
 
 t_redirection		*redi(char *ligne, int i);
 void		parse_redi(char *ligne, t_command *c);
-=======
-void		redi(t_command *c, char **ligne, int i);
-void		parse_redi(char **ligne, t_command *c);
->>>>>>> 8705a68dec41712e1f6155f0019ba6e408d0b0c5
 void		replace_heredoc(t_minishell *minishell);
 int			verif_line(char *line);
 int			verif_redi(char *word);
@@ -233,6 +224,10 @@ char		choose_quote(char c, char quote, int *i, int verif);
 int			put_error(int type);
 char		*replace_var_env(char *ligne, int i, int j, t_minishell *minishell);
 char		*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
+
+//utils_parsing2.c
+char		*delete_char(char *ligne);
+char		*get_redi(char *ligne);
 
 //utils.c
 int			ft_strncmp(char *s1, char *s2, size_t n);
