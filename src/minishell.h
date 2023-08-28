@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/28 13:26:01 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/28 21:03:36 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_command
 {
 	int				fd_in;
 	int				fd_out;
-	char			*word;
 	char			*cmd;
 	char			**option;
 	t_redirection	*redi;
@@ -145,8 +144,8 @@ void		impr_double(t_command *c, int pipes[2], char *ligne);
 
 // redirection/parse_redi.c
 
-t_redirection		*redi(char *ligne, int i);
-void		parse_redi(char *ligne, t_command *c);
+t_redirection		*redi(char *ligne);
+void		parse_redi(char **ligne, t_command *c);
 void		replace_heredoc(t_minishell *minishell);
 int			verif_line(char *line);
 int			verif_redi(char *word);
@@ -209,10 +208,10 @@ int			count_words_quote(char *str, char sep);
 int			while_quote(char *str, int i, char sep);
 char		**separate_quote(char *str, char sep);
 char		*dolar_dolar(t_minishell *minishell);
-void		init_cmd(t_minishell *minishell, char *ligne, int i);
+void		init_cmd(t_command *c, char *ligne);
 
 //utils_exec.c
-void		no_command(int verif, t_command *c, t_minishell *minishell);
+void		no_command(int verif, t_command *c);
 void		fusion_exec(t_command *c, t_minishell *minishell);
 void		free_double_tab(char **tab);
 char		*ft_itoa(int n);
@@ -226,7 +225,7 @@ char		*replace_var_env(char *ligne, int i, int j, t_minishell *minishell);
 char		*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
 
 //utils_parsing2.c
-char		*delete_char(char *ligne);
+char		*delete_char(char *ligne, int i);
 char		*get_redi(char *ligne);
 
 //utils.c

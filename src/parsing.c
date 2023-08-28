@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/28 13:22:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/28 20:56:49 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,10 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 	i = 0;
 	while (res_tot[i])
 	{
-		printf("restot avant = %s\n", res_tot[i]);
-		minishell->command[i].redi = redi(res_tot[i], 0);
-		printf("restot apres = %s\n", res_tot[i]);
-		//parse_redi(res_tot[i], &minishell->command[i]);
-		//printf("%s\n", res_tot[i]);
+		minishell->command[i].redi = redi(res_tot[i]);
 		res_ligne = ft_split(res_tot[i], ' ', 0);
 		res_ligne = display_quote(res_ligne);
-		//faire cnd + options
+		parse_redi(res_ligne, &minishell->command[i]);
 		free_double_tab(res_ligne);
 		i++;
 	}

@@ -37,22 +37,25 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 
 void	exec(int fd, t_command *c, t_minishell *minishell)
 {
-	if (ft_strcmp(c->cmd, "echo") == 0)
-		echo(fd, c);
-	else if (ft_strcmp(c->cmd, "exit") == 0)
-		ft_exit(c, minishell);
-	else if (ft_strcmp(c->cmd, "pwd") == 0)
-		pwd(fd);
-	else if (ft_strcmp(c->cmd, "env") == 0)
-		env(fd, c, minishell);
-	else if (ft_strcmp(c->cmd, "cd") == 0)
-		cd(c, minishell);
-	else if (ft_strcmp(c->cmd, "unset") == 0)
-		unset(c, minishell);
-	else if (ft_strcmp(c->cmd, "export") == 0)
-		export(c, minishell);
-	else
-		exec_others(c, 0, minishell);
+	if (c->cmd)
+	{
+		if (ft_strcmp(c->cmd, "echo") == 0)
+			echo(fd, c);
+		else if (ft_strcmp(c->cmd, "exit") == 0)
+			ft_exit(c, minishell);
+		else if (ft_strcmp(c->cmd, "pwd") == 0)
+			pwd(fd);
+		else if (ft_strcmp(c->cmd, "env") == 0)
+			env(fd, c, minishell);
+		else if (ft_strcmp(c->cmd, "cd") == 0)
+			cd(c, minishell);
+		else if (ft_strcmp(c->cmd, "unset") == 0)
+			unset(c, minishell);
+		else if (ft_strcmp(c->cmd, "export") == 0)
+			export(c, minishell);
+		else
+			exec_others(c, 0, minishell);
+	}
 }
 
 int	exec_redi(t_command *c, t_minishell *minishell)
@@ -84,13 +87,13 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 		var = var_env("$PATH", 0, minishell);
 		path = ft_split(var, ':', 0);
 		free(var);
-		while (path[i] && c->cmd[0] != '/' && c->cmd[0] != '.')
+		while (path[i] && c->cmd[0] != '/' && c->cmd[0] != '.' && c->cmd)
 		{
 			if (!exec_relative_path(path[i], &verif, minishell, c))
 				break ;
 			i++;
 		}
-		no_command(verif, c, minishell);
+		no_command(verif, c);
 		free_double_tab(path);
 	}
 }

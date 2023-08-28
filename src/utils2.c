@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:46:59 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/23 12:08:40 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/28 21:05:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	exec_relative_path(char *path, int *verif, t_minishell *minishell,
 	tmp = ft_strjoin(path, "/");
 	fusion = ft_strjoin(tmp, c->cmd);
 	free(tmp);
-	if (open(fusion, O_RDONLY) > -1)
+	if (open(fusion, O_RDONLY) > -1 && c->cmd)
 	{
 		exec_fork(fusion, c, minishell, 1);
 		(*verif) = 1;

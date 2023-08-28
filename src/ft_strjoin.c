@@ -69,6 +69,9 @@ int	ft_isdigit(int c)
 
 void	bworded(t_command *c)
 {
-	if (ft_strcmp(c->cmd, "cat") == 0 && c->option[0] == NULL)
-		signal(SIGQUIT, &blocksig);
+	if (c->cmd && c->option[0])
+	{
+		if (ft_strcmp(c->cmd, "cat") == 0 && c->option[0] == NULL)
+			signal(SIGQUIT, &blocksig);
+	}
 }

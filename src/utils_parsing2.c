@@ -12,11 +12,8 @@
 
 #include "minishell.h"
 
-char *delete_char(char *ligne)
+char *delete_char(char *ligne, int i)
 {
-	int i;
-
-	i = 0;
 	while (ligne[i])
 	{
 		ligne[i] = ligne[i + 1];
