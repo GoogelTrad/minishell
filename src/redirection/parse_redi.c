@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/28 21:09:46 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:17:27 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,33 @@
 t_redirection	*redi(char *ligne)
 {
 	t_redirection *redis;
+	char quote;
 	int i;
-	int j;
-	int n;
 
 	i = 0;
 	redis = malloc(sizeof(t_redirection));
 	redis->there = 0;
 	while (ligne[i] && ligne[i] != '>' && ligne[i] != '<')
+	{
+		if (ligne[i] == '"' || ligne[i] == '\'')
+		{
+			quote = ligne[i++];
+			while (ligne[i] != quote)
+				i++;
+		}
 		i++;
+	}
 	if (ligne[i])
 	{
-		redis->type = get_redi(ligne + i);
-		n = i;
-		while (ligne[i] && ligne[i] != ' ')
-			i++;		
-		while (ligne[i] && ligne[i] == ' ')
-			i++;
-		j = i;
-		while (ligne[j] && ligne[j] != ' ')
-			j++;
-		redis->word = ft_strndup(ligne + i, j - i);
-		redis->there = 1;
-		while (n < j--)
-			ligne = delete_char(ligne, n);
+		redis = redi_parse(ligne, i, redis);
 		redis->next_redi = redi(ligne);
 	}
-	return redis;
+	return (redis);
 }
 
 void	parse_redi(char **ligne, t_command *c)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (ligne[0])
@@ -57,7 +52,7 @@ void	parse_redi(char **ligne, t_command *c)
 		i++;
 	c->option = malloc(sizeof(char *) * i);
 	i = 1;
-	while(ligne[i] && ligne[i - 1])
+	while (ligne[i] && ligne[i - 1])
 	{
 		c->option[i - 1] = ft_strdup(ligne[i]);
 		i++; 

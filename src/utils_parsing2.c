@@ -34,3 +34,24 @@ char *get_redi(char *ligne)
 		return (ft_strndup(ligne, 1));
     return (NULL);
 }
+
+t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
+{
+	int	j;
+	int	n;
+
+	redis->type = get_redi(ligne + i);
+	n = i;
+	while (ligne[i] && ligne[i] != ' ')
+		i++;		
+	while (ligne[i] && ligne[i] == ' ')
+		i++;
+	j = i;
+	while (ligne[j] && ligne[j] != ' ')
+		j++;
+	redis->word = ft_strndup(ligne + i, j - i);
+	redis->there = 1;
+	while (n < j--)
+		ligne = delete_char(ligne, n);
+	return (redis);
+}
