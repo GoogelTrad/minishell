@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 11:48:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/30 19:25:51 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,24 @@ void	export(t_command *c, t_minishell *minishell)
 	i = 0;
 	if (!c->option[0])
 		aff_export_alone(c->fd_out, minishell);
+	else if (c->option[0][0] == '=')
+	{
+		printf("%s: '%s': not a valid identifier\n",
+				c->cmd, c->option[i]);
+		g_status = 1;
+	}
 	else
 	{
 		while (c->option[i])
 		{
 			k = 0;
+			if (c->option[i][0] == '=')
+			{
+				printf("%s: '%s': not a valid identifier\n",
+						c->cmd, c->option[i]);
+				g_status = 1;
+				return ;
+			}
 			if (check_option_export(c, i, &k) == 0)
 				return ;
 			if (c->option[i][k] == '\0')
