@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/30 13:02:37 by elisa            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:42:46 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ int	verif_line(char *line)
 
 int	verif_redi(char *word)
 {
-	if (!word)
+	if (!word[0])
 	{
 		write(2, "syntax error near unexpected token 'newline'\n", 45);
-		g_status = 1;
+		g_status = 2;
 		return (0);
 	}
 	return (1);
