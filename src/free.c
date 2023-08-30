@@ -28,6 +28,7 @@ void	free_redi(t_command *c)
 			free(actu->word);
 		free(actu);
 	}
+	free(tmp);
 }
 
 void	free_cmd(t_minishell *minishell)
@@ -44,7 +45,9 @@ void	free_cmd(t_minishell *minishell)
 			free(minishell->command[i].cmd);
 			i++;
 		}
+
 		free(minishell->command);
+
 	}
 	free(minishell->ligne);
 }
@@ -53,4 +56,5 @@ void	free_all(t_minishell *minishell)
 {
 	free_double_tab(minishell->env);
 	free_double_tab(minishell->av);
+	free_cmd(minishell);
 }
