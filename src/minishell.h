@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/29 21:18:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:51:48 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			aff_export_alone(int fd, t_minishell *minishell);
 void			export(t_command *c, t_minishell *minishell);
 
 // builtins/pwd.c
-void			pwd(int fd);
+void			pwd(int fd, t_minishell *minishell);
 
 // builtins/unset.c
 size_t			env_size(char *env);

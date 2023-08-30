@@ -44,7 +44,7 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 		else if (ft_strcmp(c->cmd, "exit") == 0)
 			ft_exit(c, minishell);
 		else if (ft_strcmp(c->cmd, "pwd") == 0)
-			pwd(fd);
+			pwd(fd, minishell);
 		else if (ft_strcmp(c->cmd, "env") == 0)
 			env(fd, c, minishell);
 		else if (ft_strcmp(c->cmd, "cd") == 0)
