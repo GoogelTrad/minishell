@@ -12,17 +12,17 @@
 
 #include "minishell.h"
 
-char *delete_char(char *ligne, int i)
+char	*delete_char(char *ligne, int i)
 {
 	while (ligne[i])
 	{
 		ligne[i] = ligne[i + 1];
 		i++;
 	}
-    return (ligne);
+	return (ligne);
 }
 
-char *get_redi(char *ligne)
+char	*get_redi(char *ligne)
 {
 	if (!ft_strncmp(">>", ligne, 2))
 		return (ft_strndup(ligne, 2));
@@ -32,7 +32,7 @@ char *get_redi(char *ligne)
 		return (ft_strndup(ligne, 1));
 	if (ligne[0] == '<')
 		return (ft_strndup(ligne, 1));
-    return (NULL);
+	return (NULL);
 }
 
 t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
@@ -43,7 +43,7 @@ t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
 	redis->type = get_redi(ligne + i);
 	n = i;
 	while (ligne[i] && ligne[i] != ' ')
-		i++;		
+		i++;
 	while (ligne[i] && ligne[i] == ' ')
 		i++;
 	j = i;

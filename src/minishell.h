@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/30 12:51:48 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:01:55 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,8 @@ void			char_split(char *str, int *i, char sep, char quote);
 char			*ft_strndup(char *str, int n);
 char			choose_quote(char c, char quote, int *i, int verif);
 int				put_error(int type);
-char			*replace_var_env(char *ligne, int i, int j, t_minishell *minishell);
+char			*replace_var_env(char *ligne, int i, int j,
+					t_minishell *minishell);
 char			*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
 
 //utils_parsing2.c
@@ -241,7 +242,7 @@ void			end_pipe(void);
 int				verif_slash(char *cmd);
 void			cd_alone(t_minishell *minishell);
 int				redi_norme(t_command *c, t_minishell *minishell);
-int				exec_relative_path(char *path, int *verif, t_minishell *minishell,
-					t_command *c);
+int				exec_relative_path(char *path, int *verif,
+					t_minishell *minishell, t_command *c);
 
 #endif

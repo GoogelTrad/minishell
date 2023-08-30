@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/29 21:17:27 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:02:37 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_redirection	*redi(char *ligne)
 {
-	t_redirection *redis;
-	char quote;
-	int i;
+	t_redirection	*redis;
+	char			quote;
+	int				i;
 
 	i = 0;
 	redis = malloc(sizeof(t_redirection));
@@ -55,7 +55,7 @@ void	parse_redi(char **ligne, t_command *c)
 	while (ligne[i] && ligne[i - 1])
 	{
 		c->option[i - 1] = ft_strdup(ligne[i]);
-		i++; 
+		i++;
 	}
 	c->option[i - 1] = NULL;
 }
