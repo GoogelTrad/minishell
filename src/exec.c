@@ -27,20 +27,15 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 		(c + 1)->fd_in = pipes[0];
 	}
 	signal(SIGINT, &get_sigint_cmd);
-	exec(c->fd_out, c, minishell);
-	pid = minishell->pid;
+	pid = exec(c->fd_out, c, minishell);
 	if ((c + 1)->cmd)
 		belle_exec(c + 1, minishell);
-	//printf("exec\n");
 	close(pipes[0]);
-	//printf("exec2\n");
-	//printf("exec = %d\n", pid);
-	if (pid > 0)
+	//if (pid > 0)
 		waitpid(pid, &g_status, 0);
-	//printf("exec3\n");
 }
 
-void	exec(int fd, t_command *c, t_minishell *minishell)
+int	exec(int fd, t_command *c, t_minishell *minishell)
 {
 	if (c->cmd)
 	{
@@ -59,10 +54,9 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 		else if (ft_strcmp(c->cmd, "export") == 0)
 			export(c, minishell);
 		else
-		{
-			exec_others(c, 0, minishell);
-		}
+			return (exec_others(c, 0, minishell));
 	}
+	return (0);
 }
 
 int	exec_redi(t_command *c, t_minishell *minishell)
@@ -82,7 +76,7 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 	return (1);
 }
 
-void	exec_others(t_command *c, int verif, t_minishell *minishell)
+int	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
 	char	*var;
@@ -90,7 +84,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 
 	i = 0;
 	if (open(c->cmd, O_RDONLY) > -1 && (c->cmd[0] == '/' || c->cmd[0] == '.'))
-		exec_fork(c->cmd, c, minishell, 0);
+		return (exec_fork(c->cmd, c, minishell, 0));
 	else
 	{
 		var = get_env("PATH", minishell->env);
@@ -105,13 +99,16 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 		no_command(verif, c);
 		free_double_tab(path);
 	}
+	return (0);
 }
 
-void	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
+int	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
 {
+	int	pid;
+
 	fusion_exec(c, minishell);
-	minishell->pid = fork();
-	if (minishell->pid == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		dup2(c->fd_out, 1);
 		if (c->fd_in != 0)
@@ -124,11 +121,10 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
 			g_status = 0;
 		exit(1);
 	}
-	//else
-		//printf("fork = %d\n", minishell->pid);
 	if (c->fd_out != 1)
 		close(c->fd_out);
 	free_double_tab(minishell->fusion);
 	if (i)
 		free(fichier);
+	return (pid);
 }

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 14:01:39 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:48:35 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,10 +166,10 @@ char			**parse_quote(char **ligne, t_minishell *minishell);
 
 //exec.c
 void			belle_exec(t_command *c, t_minishell *minishell);
-void			exec(int fd, t_command *c, t_minishell *minishell);
+int				exec(int fd, t_command *c, t_minishell *minishell);
 int				exec_redi(t_command *c, t_minishell *minishell);
-void			exec_others(t_command *c, int verif, t_minishell *minishell);
-void			exec_fork(char *fichier, t_command *c, t_minishell *minishell,
+int				exec_others(t_command *c, int verif, t_minishell *minishell);
+int				exec_fork(char *fichier, t_command *c, t_minishell *minishell,
 					int i);
 
 //free.c
