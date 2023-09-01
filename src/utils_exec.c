@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 20:41:46 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/30 15:20:07 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:45:32 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	no_command(int verif, t_command *c)
 {
 	if (!verif)
 	{
-		if (!verif_slash(c->cmd))
+		if (!verif_slash(c->cmd) && !verif_cmd(c->cmd))
 		{
 			g_status = 127;
 			write(2, c->cmd, ft_strlen(c->cmd));

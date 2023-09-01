@@ -42,8 +42,7 @@ t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
 
 	redis->type = get_redi(ligne + i);
 	n = i;
-	while (ligne[i] && ligne[i] != ' ')
-		i++;
+	i += ft_strlen(redis->type);
 	while (ligne[i] && ligne[i] == ' ')
 		i++;
 	j = i;

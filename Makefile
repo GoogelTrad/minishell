@@ -26,6 +26,7 @@ SRCS =  src/builtins/cd.c \
 		src/ft_split.c \
 		src/ft_strjoin.c \
 		src/main.c \
+		src/utils_cmd.c \
 		src/parsing.c \
 		src/quote.c \
 		src/utils_exec.c \

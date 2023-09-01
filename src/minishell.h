@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 12:59:06 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:01:39 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,9 @@ void			get_sigint(int signal);
 void			blocksig(int signal);
 char			*var_arg(char **av, char *ligne, int ac);
 
+//utils_cmd.c
+int 			verif_cmd(char *cmd);
+
 //parsing.c
 char			**copy_env(char **env);
 int				separate_cmd(char *ligne, t_minishell *minishell);
@@ -242,7 +245,7 @@ void			get_sigint_cmd(int signal);
 void			ft_bzero(void *s, size_t n);
 
 //utils2.c
-void			end_pipe(void);
+void			end_pipe(char *msg);
 int				verif_slash(char *cmd);
 void			cd_alone(t_minishell *minishell);
 int				redi_norme(t_command *c, t_minishell *minishell);
