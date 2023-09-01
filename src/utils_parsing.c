@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:40 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/22 11:55:45 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/31 17:47:29 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,25 @@ char	*ft_strndup(char *str, int n)
 	return (dest);
 }
 
-char	choose_quote(char c, char quote, int *i, int verif)
+int	is_inquote(char *ligne, int max)
 {
-	if (c == '\'')
-		quote = '\'';
-	else if (c == '"' && quote != '\'')
-		quote = '"';
-	else if (c == '"' && quote == '"')
-		quote = ' ';
-	else if (c == '\'' && quote == '\'')
-		quote = ' ';
-	else if (c == '\'' && quote != '\'')
-		quote = ' ';
-	if (verif == 1)
-		(*i)++;
+	int	i;
+	int	quote;
+
+	i = 0;
+	quote = 0;
+	while (i < max)
+	{
+		if (ligne[i] == '\'' && quote == 0)
+			quote = 1;
+		else if (ligne[i] == '"' && quote == 0)
+			quote = 2;
+		else if (ligne[i] == '"' && quote == 2)
+			quote = 0;
+		else if (ligne[i] == '\'' && quote == 1)
+			quote = 0;
+		i++;
+	}
 	return (quote);
 }
 

@@ -84,7 +84,7 @@ void	exec_others(t_command *c, int verif, t_minishell *minishell)
 		exec_fork(c->cmd, c, minishell, 0);
 	else
 	{
-		var = var_env("$PATH", 0, minishell);
+		var = get_env("PATH", minishell->env);
 		path = ft_split(var, ':', 0);
 		free(var);
 		while (path[i] && c->cmd[0] != '/' && c->cmd[0] != '.' && c->cmd)

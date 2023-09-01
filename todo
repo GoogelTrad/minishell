@@ -57,3 +57,6 @@ echo ''"coucou" ne s'affiche comme il le faudrait, le deuxieme ' ne disparait pa
 ls > toto < exit
 
 $> foo boucle infini.
+
+
+ingnorer les '\'.

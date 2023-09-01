@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 18:11:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 11:44:17 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/31 13:55:46 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	unset(t_command *c, t_minishell *minishell)
 	int	i;
 
 	i = 0;
-	if (c->option[0] && var_env(c->option[0], 0, minishell))
+	if (c->option[0] && get_env(c->option[0], minishell->env))
 	{
 		while (minishell->env[i] && ft_strncmp(c->option[0],
 				minishell->env[i], ft_strlen(c->option[0])) != 0)

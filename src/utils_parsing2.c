@@ -55,3 +55,29 @@ t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
 		ligne = delete_char(ligne, n);
 	return (redis);
 }
+
+char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*res;
+	if (!s2)
+		return (s1);
+	if (!s1)
+		return (s2);
+	res = ft_strjoin(s1, s2);
+	free(s1);
+	return (res);
+}
+
+int	env_var_size(char *var)
+{
+	int	i;
+
+	i = 0;
+	while(var[i])
+	{
+		if (var[i] == '=')
+			return (i);
+		i++;
+	}
+	return (0);
+}

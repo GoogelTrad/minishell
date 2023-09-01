@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/29 21:10:56 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:07:43 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 	{
 		minishell->command[i].redi = redi(res_tot[i]);
 		res_ligne = ft_split(res_tot[i], ' ', 0);
-		res_ligne = display_quote(res_ligne);
+		res_ligne = parse_quote(res_ligne, minishell);
 		parse_redi(res_ligne, &minishell->command[i]);
 		free_double_tab(res_ligne);
 		i++;
@@ -59,6 +59,43 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 	return (1);
 }
 
+int	var_size(char *ligne)
+{
+	int	i;
+
+	i = 0;
+	if (*ligne == '?')
+		return (1);
+	while (ligne[i] && (ischaralnum(ligne[i]) || ligne[i] == '_'))
+		i++;
+	return (i);
+}
+
+
+char	*var_env(char *var, t_minishell *minishell)
+{
+	int		i;
+	
+	i = 0;
+	if (var[0] == '$')
+		return (dolar_dolar(minishell));
+	else if (var[0] == '?')
+		return (ft_itoa(g_status));
+	else
+	{
+		if (var_size(var) == 0)
+			return ("$");
+		while (minishell->env[i])
+		{
+			if (ft_strncmp(minishell->env[i], var, env_var_size(minishell->env[i])) == 0)
+				return (ft_strdup(minishell->env[i] + var_size(var) + 1));
+			i++;
+		}
+	}
+	return (NULL);
+}
+//*/
+/*
 char	*var_env(char *ligne, int j, t_minishell *minishell)
 {
 	int		i;
@@ -86,7 +123,7 @@ char	*var_env(char *ligne, int j, t_minishell *minishell)
 		i++;
 	}
 	return (ligne);
-}
+}*/
 
 char	*join_all(char *ligne, char *var, char *temp, int j)
 {

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:40:20 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/30 12:52:48 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/31 13:47:32 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pwd(int fd, t_minishell *minishell)
 
 	i = 0;
 	result = NULL;
-	result = var_env("$PWD", 0, minishell);
+	result = get_env("PWD", minishell->env);
 	while (result[i])
 		write(fd, &result[i++], 1);
 	free(result);

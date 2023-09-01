@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/30 15:42:46 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/08/31 13:59:56 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	parse_redi(char **ligne, t_command *c)
 	}
 	c->option[i - 1] = NULL;
 }
-
+/*
 void	replace_heredoc(t_minishell *minishell)
 {
 	int		i;
@@ -82,7 +82,7 @@ void	replace_heredoc(t_minishell *minishell)
 		}
 		i++;
 	}
-}
+}*/
 
 int	verif_line(char *line)
 {
