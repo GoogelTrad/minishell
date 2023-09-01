@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 13:07:43 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:14:04 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,36 +94,6 @@ char	*var_env(char *var, t_minishell *minishell)
 	}
 	return (NULL);
 }
-//*/
-/*
-char	*var_env(char *ligne, int j, t_minishell *minishell)
-{
-	int		i;
-	char	quote;
-	char	*replace;
-
-	i = 0;
-	quote = ' ';
-	while (ligne[i])
-	{
-		quote = choose_quote(ligne[i], quote, &i, 0);
-		if (ligne[i] == '$' && quote != '\'')
-		{
-			j = i++;
-			while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$'
-				&& ligne[i] != quote && ischaralnum(ligne[i]))
-				quote = choose_quote(ligne[i], quote, &i, 1);
-			replace = type_of_var(ligne, i, j, minishell);
-			ligne = replace_value(replace, ligne, j);
-			free(replace);
-			quote = choose_quote(ligne[i], quote, &i, 0);
-			if (ligne[j + minishell->incr])
-				i = j + minishell->incr;
-		}
-		i++;
-	}
-	return (ligne);
-}*/
 
 char	*join_all(char *ligne, char *var, char *temp, int j)
 {

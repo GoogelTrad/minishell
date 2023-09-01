@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 12:55:34 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:13:31 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,6 @@ char	*display_quote(char *ligne, t_minishell *minishell)
 	return (res);
 }
 
-/*
-char	**display_quote(char **str)
-{
-	char	quote;
-	int		i[2];
-	int		k;
-
-	i[0] = 0;
-	while (str[i[0]])
-	{
-		i[1] = 0;
-		while (str[i[0]][i[1]])
-		{
-			if ((str[i[0]][i[1]] == '"' || str[i[0]][i[1]] == '\'') &&
-				str[i[0]][i[1] - 1] != '\\')
-			{
-				k = i[1]++;
-				quote = str[i[0]][k];
-				while (str[i[0]][i[1]] && str[i[0]][i[1]] != quote)
-					i[1]++;
-				if (str[i[0]][i[1]] == quote && i[1] != k)
-					str[i[0]] = replace(str[i[0]], quote);
-			}
-			i[1]++;
-		}
-		i[0]++;
-	}
-	return (str);
-}
-*/
-
 char	*replace_quote(char *str, char c)
 {
 	int		i;
@@ -101,25 +70,6 @@ char	*replace_quote(char *str, char c)
 	return (new);
 }
 
-/*
-char	*replace(char *str, char quote)
-{
-	int	i;
-
-	i = 0;
-	printf("str = %s\n", str);
-	while (str[i] != quote)
-		i++;
-	str = replace_quote(str, i);
-	i = 0;
-	while (str[i] != quote)
-		i++;
-	str = replace_quote(str, i);
-	printf("str = %s\n", str);
-	//while(1);
-	return (str);
-}
-*/
 char	*get_env(char *var, char **env)
 {
 	int	i;
