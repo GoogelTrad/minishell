@@ -31,8 +31,13 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 	pid = minishell->pid;
 	if ((c + 1)->cmd)
 		belle_exec(c + 1, minishell);
+	//printf("exec\n");
 	close(pipes[0]);
-	waitpid(pid, &g_status, 0);
+	//printf("exec2\n");
+	//printf("exec = %d\n", pid);
+	if (pid > 0)
+		waitpid(pid, &g_status, 0);
+	//printf("exec3\n");
 }
 
 void	exec(int fd, t_command *c, t_minishell *minishell)
@@ -54,7 +59,9 @@ void	exec(int fd, t_command *c, t_minishell *minishell)
 		else if (ft_strcmp(c->cmd, "export") == 0)
 			export(c, minishell);
 		else
+		{
 			exec_others(c, 0, minishell);
+		}
 	}
 }
 
@@ -117,6 +124,8 @@ void	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
 			g_status = 0;
 		exit(1);
 	}
+	//else
+		//printf("fork = %d\n", minishell->pid);
 	if (c->fd_out != 1)
 		close(c->fd_out);
 	free_double_tab(minishell->fusion);
