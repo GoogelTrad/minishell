@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 20:48:39 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 00:24:59 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 char	**parse_quote(char **ligne, t_minishell *minishell)
 {
 	int	i;
+	char *tmp;
 
 	i = 0;
 	while (ligne[i])
 	{
-		ligne[i] = display_quote(ligne[i], minishell);
+		tmp = ft_strdup(ligne[i]);
+		free(ligne[i]);
+		ligne[i] = display_quote(tmp, minishell);
+		free(tmp);
 		i++;
 	}
 	return (ligne);

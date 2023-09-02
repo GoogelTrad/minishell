@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 17:18:08 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 23:00:26 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,5 +256,6 @@ int				exec_relative_path(char *path, int *verif,
 
 //utils3.c
 int				var_size(char *ligne);
+char			*replace_char(char *ligne, int i);
 
 #endif

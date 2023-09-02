@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 21:29:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 23:08:41 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_redirection	*redi(char *ligne)
 	redis->there = 0;
 	while (ligne[i] && ligne[i] != '>' && ligne[i] != '<')
 	{
+		if (ligne[i] == '\\' || ligne[i] == ';')
+			replace_char(ligne, i);
 		if (ligne[i] == '"' || ligne[i] == '\'')
 		{
 			quote = ligne[i++];
