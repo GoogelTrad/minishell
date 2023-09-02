@@ -14,7 +14,7 @@
 
 int	double_droite(t_command *c)
 {
-	if (c->redi->word == NULL)
+	if (!verif_redi(c->redi->word))
 		return (0);
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_APPEND, 0644);
 	return (1);
@@ -29,7 +29,7 @@ int	double_gauche(t_command *c, t_minishell *minishell)
 		return (0);
 	pipe(pipes);
 	c->fd_in = pipes[0];
-	replace_heredoc(minishell);
+	//replace_heredoc(minishell);
 	double_check_env(minishell, c);
 	ligne = readline("> ");
 	impr_double(c, pipes, ligne);

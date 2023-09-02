@@ -18,7 +18,7 @@ void	cd(t_command *c, t_minishell *minishell)
 
 	if (!verif_arg_cd(c))
 		return ;
-	if (c->option[0])
+	if (c->option[0] && c->option[0][0] != '~')
 	{
 		c->option[0] = verif_cd(c, minishell, &verif);
 		if (c->option[0])

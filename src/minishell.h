@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/30 13:01:55 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/01 20:48:35 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,18 +157,19 @@ int				redi_cmd(t_command *c);
 void			parse_redi_norme(t_command *c);
 
 // redirection/utils_redi.c
-char			**display_quote(char **str);
-char			*replace_quote(char *str, int i);
-char			*replace(char *str, char quote, int *j);
+char			*display_quote(char *ligne, t_minishell *minishell);
+char			*replace_quote(char *str, char c);
+char			*replace(char *str, char quote);
 char			*get_env(char *var, char **env);
 void			double_check_env(t_minishell *minishell, t_command *c);
+char			**parse_quote(char **ligne, t_minishell *minishell);
 
 //exec.c
 void			belle_exec(t_command *c, t_minishell *minishell);
-void			exec(int fd, t_command *c, t_minishell *minishell);
+int				exec(int fd, t_command *c, t_minishell *minishell);
 int				exec_redi(t_command *c, t_minishell *minishell);
-void			exec_others(t_command *c, int verif, t_minishell *minishell);
-void			exec_fork(char *fichier, t_command *c, t_minishell *minishell,
+int				exec_others(t_command *c, int verif, t_minishell *minishell);
+int				exec_fork(char *fichier, t_command *c, t_minishell *minishell,
 					int i);
 
 //free.c
@@ -197,11 +198,15 @@ void			get_sigint(int signal);
 void			blocksig(int signal);
 char			*var_arg(char **av, char *ligne, int ac);
 
+//utils_cmd.c
+int 			verif_cmd(char *cmd);
+
 //parsing.c
 char			**copy_env(char **env);
 int				separate_cmd(char *ligne, t_minishell *minishell);
-char			*var_env(char *ligne, int j, t_minishell *minishell);
+char			*var_env(char *var, t_minishell *minishell);
 char			*replace_value(char *var, char *ligne, int i);
+int				var_size(char *ligne);
 
 //quote.c
 int				count_words_quote(char *str, char sep);
@@ -219,7 +224,7 @@ void			char_split(char *str, int *i, char sep, char quote);
 
 //utils_parsing.c
 char			*ft_strndup(char *str, int n);
-char			choose_quote(char c, char quote, int *i, int verif);
+int				is_inquote(char *ligne, int max);
 int				put_error(int type);
 char			*replace_var_env(char *ligne, int i, int j,
 					t_minishell *minishell);
@@ -229,6 +234,8 @@ char			*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
 char			*delete_char(char *ligne, int i);
 char			*get_redi(char *ligne);
 t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis);
+char			*ft_strjoin_free(char *s1, char *s2);
+int				env_var_size(char *var);
 
 //utils.c
 int				ft_strncmp(char *s1, char *s2, size_t n);
@@ -238,7 +245,7 @@ void			get_sigint_cmd(int signal);
 void			ft_bzero(void *s, size_t n);
 
 //utils2.c
-void			end_pipe(void);
+void			end_pipe(char *msg);
 int				verif_slash(char *cmd);
 void			cd_alone(t_minishell *minishell);
 int				redi_norme(t_command *c, t_minishell *minishell);

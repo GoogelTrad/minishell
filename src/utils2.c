@@ -6,15 +6,17 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:46:59 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/30 15:32:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:48:13 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	end_pipe(void)
+void	end_pipe(char *msg)
 {
-	write(2, "syntax error near unexpected token 'newline'\n", 45);
+	write(2, "syntax error near unexpected token '", 37);
+	write(2, msg, ft_strlen(msg));
+	write(2, "'\n", 2);
 	g_status = 1;
 }
 
@@ -30,7 +32,7 @@ int	verif_slash(char *cmd)
 			g_status = 127;
 			write(2, cmd, ft_strlen(cmd));
 			write(2, ": ", 2);
-			write(1, "No such file or directory\n", 26);
+			write(2, "No such file or directory\n", 26);
 			return (1);
 		}
 		i++;
