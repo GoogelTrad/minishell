@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 19:45:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 21:29:59 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_redirection	*redi(char *ligne)
 		if (ligne[i] == '"' || ligne[i] == '\'')
 		{
 			quote = ligne[i++];
-			while (ligne[i] != quote)
+			while (ligne[i] != quote && ligne[i])
 				i++;
 		}
 		i++;

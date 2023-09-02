@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 18:45:05 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 20:40:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	prompt(char *ligne, t_minishell *minishell)
 	if (separate_cmd(ligne, minishell))
 	{
 		bworded(minishell->command);
+		printf("");
 		belle_exec(minishell->command, minishell);
 		free_cmd(minishell);
 	}
