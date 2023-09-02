@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:46:59 by elisa             #+#    #+#             */
-/*   Updated: 2023/09/01 22:24:02 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 17:09:39 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	exec_relative_path(char *path, int *verif, t_minishell *minishell,
 	free(tmp);
 	if (open(fusion, O_RDONLY) > -1 && c->cmd)
 	{
-		exec_fork(fusion, c, minishell, 1);
+		minishell->pid = exec_fork(fusion, c, minishell, 1);
 		(*verif) = 1;
 		return (0);
 	}

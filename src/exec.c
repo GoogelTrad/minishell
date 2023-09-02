@@ -28,6 +28,7 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 	}
 	signal(SIGINT, &get_sigint_cmd);
 	pid = exec(c->fd_out, c, minishell);
+	close(pipes[1]);
 	if ((c + 1)->cmd)
 		belle_exec(c + 1, minishell);
 	close(pipes[0]);
@@ -79,12 +80,14 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 int	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
+	int		pid;
 	char	*var;
 	int		i;
 
 	i = 0;
+	pid = 0;
 	if (open(c->cmd, O_RDONLY) > -1 && (c->cmd[0] == '/' || c->cmd[0] == '.'))
-		return (exec_fork(c->cmd, c, minishell, 0));
+		pid = exec_fork(c->cmd, c, minishell, 0);
 	else
 	{
 		var = get_env("PATH", minishell->env);
@@ -93,13 +96,16 @@ int	exec_others(t_command *c, int verif, t_minishell *minishell)
 		while (path[i] && c->cmd[0] != '/' && c->cmd[0] != '.' && c->cmd)
 		{
 			if (!exec_relative_path(path[i], &verif, minishell, c))
+			{
+				pid = minishell->pid;
 				break ;
+			}
 			i++;
 		}
 		no_command(verif, c);
 		free_double_tab(path);
 	}
-	return (0);
+	return (pid);
 }
 
 int	exec_fork(char *fichier, t_command *c, t_minishell *minishell, int i)
