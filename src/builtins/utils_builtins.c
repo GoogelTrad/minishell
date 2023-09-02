@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:07:53 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/22 18:28:06 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/02 14:05:55 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_option_echo(char	*str)
 	int	i;
 
 	i = 0;
+	if (!str[i])
+		return (0);
 	while (str[i] == 'n')
 		i++;
 	if (str[i] != ' ' && str[i] != '\0')
