@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 12:36:58 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 15:41:20 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ void			echo(int fd, t_command *c);
 int				len_env(char **env);
 void			env(int fd, t_command *c, t_minishell *minishell);
 void			init_env(char **env, t_minishell *minishell);
+
+// builtins/error_export.c
+void			error_arg(t_command *c, int *i);
 
 // builtins/exit.c
 int				ft_atoi_exit(const char *str);
@@ -198,7 +201,7 @@ void			blocksig(int signal);
 char			*var_arg(char **av, char *ligne, int ac);
 
 //utils_cmd.c
-int 			verif_cmd(char *cmd);
+int				verif_cmd(char *cmd);
 
 //parsing.c
 char			**copy_env(char **env);
@@ -250,5 +253,8 @@ void			cd_alone(t_minishell *minishell);
 int				redi_norme(t_command *c, t_minishell *minishell);
 int				exec_relative_path(char *path, int *verif,
 					t_minishell *minishell, t_command *c);
+
+//utils3.c
+int				var_size(char *ligne);
 
 #endif
