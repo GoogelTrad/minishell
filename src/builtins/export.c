@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/30 19:25:51 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/02 15:02:43 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,7 @@ void	export(t_command *c, t_minishell *minishell)
 	if (!c->option[0])
 		aff_export_alone(c->fd_out, minishell);
 	else if (c->option[0][0] == '=')
-	{
-		printf("%s: '%s': not a valid identifier\n",
-				c->cmd, c->option[i]);
-		g_status = 1;
-	}
+		error_arg(c, &i);
 	else
 	{
 		while (c->option[i])
@@ -124,9 +120,7 @@ void	export(t_command *c, t_minishell *minishell)
 			k = 0;
 			if (c->option[i][0] == '=')
 			{
-				printf("%s: '%s': not a valid identifier\n",
-						c->cmd, c->option[i]);
-				g_status = 1;
+				error_arg(c, &i);
 				return ;
 			}
 			if (check_option_export(c, i, &k) == 0)

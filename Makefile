@@ -10,6 +10,7 @@ SRCS =  src/builtins/cd.c \
 		src/builtins/env.c \
 		src/builtins/exit.c \
 		src/builtins/export.c \
+		src/builtins/export2.c \
 		src/builtins/pwd.c \
 		src/builtins/unset.c \
 		src/builtins/utils_builtins.c \
@@ -34,6 +35,7 @@ SRCS =  src/builtins/cd.c \
 		src/utils_parsing2.c \
 		src/utils.c \
 		src/utils2.c \
+		src/utils3.c \
 
 
 OBJC = ${SRCS:.c=.o}

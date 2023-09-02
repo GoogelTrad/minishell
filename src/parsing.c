@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 15:40:13 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 14:35:23 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,10 @@ int	separate_cmd(char *ligne, t_minishell *minishell)
 	return (1);
 }
 
-int	var_size(char *ligne)
-{
-	int	i;
-
-	i = 0;
-	if (*ligne == '?')
-		return (1);
-	while (ligne[i] && (ischaralnum(ligne[i]) || ligne[i] == '_'))
-		i++;
-	return (i);
-}
-
-
 char	*var_env(char *var, t_minishell *minishell)
 {
 	int		i;
-	
+
 	i = 0;
 	if (var[0] == '$')
 		return (dolar_dolar(minishell));
@@ -87,7 +74,8 @@ char	*var_env(char *var, t_minishell *minishell)
 			return ("$");
 		while (minishell->env[i])
 		{
-			if (ft_strncmp(minishell->env[i], var, env_var_size(minishell->env[i])) == 0)
+			if (ft_strncmp(minishell->env[i], var,
+					env_var_size(minishell->env[i])) == 0)
 				return (ft_strdup(minishell->env[i] + var_size(var) + 1));
 			i++;
 		}

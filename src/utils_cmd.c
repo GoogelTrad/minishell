@@ -12,22 +12,22 @@
 
 #include "minishell.h"
 
-int verif_cmd(char *cmd)
+int	verif_cmd(char *cmd)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(cmd[i])
-    {
-        if (!ischaralnum(cmd[i]))\
-        {
-            g_status = 2;
+	i = 0;
+	while (cmd[i])
+	{
+		if (!ischaralnum(cmd[i]))
+		{
+			g_status = 2;
 			write(2, "syntax error near unexpected token '", 37);
-            write(2, &cmd[i], 1);
-            write(2, "'\n", 2);
-            return (1);
-        }
-        i++;
-    }
-    return (0);
+			write(2, &cmd[i], 1);
+			write(2, "'\n", 2);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }

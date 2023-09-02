@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:41:54 by elisa             #+#    #+#             */
-/*   Updated: 2023/09/02 14:29:04 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/02 15:05:34 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 
 int	check_option(char **str)
 {
-	
 	int	i;
-	int	lenSkip;
+	int	lenskip;
 	int	check;
 
 	i = 0;
-	lenSkip = 0;
+	lenskip = 0;
 	while (str[i])
 	{
 		check = 0;
 		if (str[i][0] == '-')
 		{
 			if (check_option_echo(str[i] + 1))
-				lenSkip += 1;
+				lenskip += 1;
 			else
-				return (lenSkip);
+				return (lenskip);
 			check = 1;
 		}
 		if (check && str[i + 1] != NULL && !check_option_echo(str[i + 1] + 1))
-			return (lenSkip);
+			return (lenskip);
 		i++;
 	}
-	return (lenSkip);
+	return (lenskip);
 }
 
 void	echo(int fd, t_command *c)
@@ -44,7 +43,7 @@ void	echo(int fd, t_command *c)
 	int	i;
 	int	j;
 	int	new_line;
-	int skip;
+	int	skip;
 
 	i = 0;
 	new_line = 0;

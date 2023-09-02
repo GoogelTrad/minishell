@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 13:43:01 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 14:44:42 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**parse_quote(char **ligne, t_minishell *minishell)
 
 char	*display_quote(char *ligne, t_minishell *minishell)
 {
-	int	i;
+	int		i;
 	char	*res;
 
 	i = 0;
@@ -38,8 +38,9 @@ char	*display_quote(char *ligne, t_minishell *minishell)
 			i++;
 		else if (ligne[i] == '"' && is_inquote(ligne, i) != 1)
 			i++;
-		else if (ligne[i] == '$' && ligne[i + 1] != '"' && ligne[i + 1] != '\'' &&
-			ligne[i + 1] && ligne[i + 1] != ' ' && is_inquote(ligne, i) != 1 && ligne[i - 1] != '\\')
+		else if (ligne[i] == '$' && ligne[i + 1] != '"' && ligne[i + 1] != '\''
+			&& ligne[i + 1] && ligne[i + 1] != ' ' && is_inquote(ligne, i) != 1
+			&& ligne[i - 1] != '\\')
 		{
 			i++;
 			res = ft_strjoin_free(res, var_env(ligne + i, minishell));
@@ -61,7 +62,7 @@ char	*replace_quote(char *str, char c)
 
 	i = 0;
 	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	new =  ft_strdup(str);
+	new = ft_strdup(str);
 	free(str);
 	while (new[i])
 		i++;
