@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 15:40:13 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 12:37:10 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*var_env(char *var, t_minishell *minishell)
 	
 	i = 0;
 	if (var[0] == '$')
-		return (dolar_dolar(minishell));
+		return (dolar_dolar());
 	else if (var[0] == '?')
 		return (ft_itoa(g_status));
 	else

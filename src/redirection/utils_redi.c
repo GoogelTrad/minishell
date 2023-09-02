@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 13:43:01 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 12:32:58 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*get_env(char *var, char **env)
 			return (ft_strdup(env[i] + len + 1));
 		i++;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
 
 void	double_check_env(t_minishell *minishell, t_command *c)

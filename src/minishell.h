@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 20:48:35 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 12:36:58 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_minishell
 	int			size_env;
 	char		**fusion;
 	char		**av;
-	int			incr;
 	int			cd_n;
 	int			pid;
 
@@ -212,7 +211,7 @@ int				var_size(char *ligne);
 int				count_words_quote(char *str, char sep);
 int				while_quote(char *str, int i, char sep);
 char			**separate_quote(char *str, char sep);
-char			*dolar_dolar(t_minishell *minishell);
+char			*dolar_dolar(void);
 void			init_cmd(t_command *c, char *ligne);
 
 //utils_exec.c

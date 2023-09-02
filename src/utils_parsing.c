@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:40 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/31 17:47:29 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 12:37:41 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,6 @@ char	*replace_var_env(char *ligne, int i, int j, t_minishell *minishell)
 			replace = ft_strdup(var_arg(minishell->av, var, minishell->ac));
 		}
 	}
-	minishell->incr = 2;
 	free(var);
-	return (replace);
-}
-
-char	*type_of_var(char *ligne, int i, int j, t_minishell *minishell)
-{
-	char	*replace;
-
-	if (ligne[i] == '?')
-	{
-		replace = ft_itoa(g_status);
-		minishell->incr = 2;
-	}
-	else if (ligne[i] == '$')
-		replace = dolar_dolar(minishell);
-	else
-		replace = replace_var_env(ligne, i, j, minishell);
 	return (replace);
 }

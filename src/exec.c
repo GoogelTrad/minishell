@@ -31,7 +31,7 @@ void	belle_exec(t_command *c, t_minishell *minishell)
 	if ((c + 1)->cmd)
 		belle_exec(c + 1, minishell);
 	close(pipes[0]);
-	//if (pid > 0)
+	if (pid > 0)
 		waitpid(pid, &g_status, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:53:05 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/31 17:31:10 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 12:35:14 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,13 @@ char	**separate_quote(char *str, char sep)
 	return (res);
 }
 
-char	*dolar_dolar(t_minishell *minishell)
+char	*dolar_dolar(void)
 {
 	pid_t	pid;
 	char	*res;
 
 	pid = getpid();
 	res = ft_itoa(pid);
-	minishell->incr = 2;
 	return (res);
 }
 

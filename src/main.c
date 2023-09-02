@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/01 19:44:45 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/02 14:23:33 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ int	main(int ac, char **av, char **env)
 	minishell.size_env = len_env(env);
 	init_env(env, &minishell);
 	minishell.ac = ac;
-	minishell.incr = 0;
 	while (1)
 	{
-		//signal(SIGINT, &get_sigint);
+		signal(SIGINT, &get_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		ligne = readline("MiniShell> ");
 		if (ligne == NULL)
