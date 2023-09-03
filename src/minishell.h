@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 23:00:26 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 11:41:02 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ int				len_env(char **env);
 void			env(int fd, t_command *c, t_minishell *minishell);
 void			init_env(char **env, t_minishell *minishell);
 
-// builtins/error_export.c
-void			error_arg(t_command *c, int *i);
-
 // builtins/exit.c
 int				ft_atoi_exit(const char *str);
 void			exit_nb(int nb);
@@ -94,8 +91,11 @@ void			ft_exit(t_command *c, t_minishell *minishell);
 void			export_alone(int fd, char **tab);
 int				add_var_env(char *word, char *value, t_minishell *minishell);
 void			export_by_ascii(char **tab);
-void			aff_export_alone(int fd, t_minishell *minishell);
 void			export(t_command *c, t_minishell *minishell);
+
+// builtins/export2.c
+void			error_arg(t_command *c, int *i);
+void			aff_export_alone(int fd, t_minishell *minishell);
 
 // builtins/pwd.c
 void			pwd(int fd, t_minishell *minishell);
