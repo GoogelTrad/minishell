@@ -44,6 +44,8 @@ void	free_cmd(t_minishell *minishell)
 				break;
 			free(minishell->command[i].cmd);
 			i++;
+			if (!minishell->command[i].cmd)
+				break;
 		}
 		free(minishell->command);
 	}
