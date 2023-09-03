@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 00:24:59 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 12:41:50 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ char	*replace_quote(char *str, char c)
 
 	i = 0;
 	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	new = ft_strdup(str);
-	free(str);
-	while (new[i])
+	while (str[i])
+	{
+		new[i] = str[i];
 		i++;
+	}
+	free(str);
 	new[i] = c;
 	new[i + 1] = 0;
 	return (new);
