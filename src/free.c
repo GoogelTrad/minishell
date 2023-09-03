@@ -36,10 +36,12 @@ void	free_cmd(t_minishell *minishell)
 	i = 0;
 	if (minishell->command)
 	{
-		while (minishell->command[i].cmd)
+		while (1)
 		{
 			free_redi(&minishell->command[i]);
 			free_double_tab(minishell->command[i].option);
+			if (!minishell->command[i].cmd)
+				break;
 			free(minishell->command[i].cmd);
 			i++;
 		}

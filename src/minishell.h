@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 14:35:01 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 15:07:34 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ t_redirection	*redi(char *ligne);
 void			parse_redi(char **ligne, t_command *c);
 void			replace_heredoc(t_minishell *minishell);
 int				verif_line(char *line);
-int				verif_redi(char *word, t_command *c);
+int				verif_redi(char *word);
 
 // redirection/simple.c
 int				simple_droite(t_command *c);
