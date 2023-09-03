@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:16:13 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 14:37:22 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:16:31 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,42 +83,3 @@ char	*var_env(char *var, t_minishell *minishell)
 	return (NULL);
 }
 
-char	*join_all(char *ligne, char *var, char *temp, int j)
-{
-	char	*tmp;
-	char	*tmp2;
-
-	tmp = ft_strndup(ligne, j);
-	tmp2 = ft_strjoin(tmp, var);
-	free(tmp);
-	tmp = ft_strjoin(tmp2, temp);
-	free(tmp2);
-	return (tmp);
-}
-
-char	*replace_value(char *var, char *ligne, int i)
-{
-	char	*temp;
-	int		verif;
-	char	*res;
-	int		j;
-
-	j = i++;
-	verif = 0;
-	if (!ischaralnum(ligne[j + 1]) || !ligne[j + 1])
-		verif = 1;
-	while (ligne[i] && ligne[i] != ' ' && ligne[i] != '$'
-		&& ligne[i] != '"' && ischaralnum(ligne[i]))
-		i++;
-	if ((ligne[i] == '$' || ligne[i] == '?') && ligne[i - 1] == '$')
-		verif = 2;
-	if (verif == 1)
-		temp = ft_strndup(ligne + j, ft_strlen(ligne) - j);
-	else if (verif == 2)
-		temp = ft_strndup(ligne + j + 2, ft_strlen(ligne) - j);
-	else
-		temp = ft_strndup(ligne + i, ft_strlen(ligne) - i);
-	res = join_all(ligne, var, temp, j);
-	free(temp);
-	return (res);
-}

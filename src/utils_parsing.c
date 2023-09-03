@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 16:16:40 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/02 20:48:44 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:16:53 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,4 @@ int	put_error(int type)
 	write(2, strerror(type), ft_strlen(strerror(type)));
 	write(2, "\n", 1);
 	return (type);
-}
-
-char	*replace_var_env(char *ligne, int i, int j, t_minishell *minishell)
-{
-	char	*replace;
-	char	*var;
-
-	var = ft_strndup(ligne + j, i - j);
-	replace = get_env(var + 1, minishell->env);
-	if (!replace)
-	{
-		if (!ft_isalnum(var + 1))
-			replace = ft_strdup(var + 1);
-		else if (ft_isdigit(var[1]))
-		{
-			replace = ft_strdup(var_arg(minishell->av, var, minishell->ac));
-		}
-	}
-	free(var);
-	return (replace);
 }

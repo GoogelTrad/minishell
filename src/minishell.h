@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 15:49:51 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:18:22 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,6 @@ int				verif_redi(char *word);
 // redirection/simple.c
 int				simple_droite(t_command *c);
 int				simple_gauche(t_command *c);
-int				redi_cmd(t_command *c);
-void			parse_redi_norme(t_command *c);
 
 // redirection/utils_redi.c
 char			*display_quote(char *ligne, t_minishell *minishell);
@@ -197,17 +195,11 @@ int				main(int ac, char **av, char **env);
 void			prompt(char *ligne, t_minishell *minishell);
 void			get_sigint(int signal);
 void			blocksig(int signal);
-char			*var_arg(char **av, char *ligne, int ac);
-
-//utils_cmd.c
-int				verif_cmd(char *cmd);
 
 //parsing.c
 char			**copy_env(char **env);
 int				separate_cmd(char *ligne, t_minishell *minishell);
 char			*var_env(char *var, t_minishell *minishell);
-char			*replace_value(char *var, char *ligne, int i);
-int				var_size(char *ligne);
 
 //quote.c
 int				count_words_quote(char *str, char sep);
@@ -215,6 +207,9 @@ int				while_quote(char *str, int i, char sep);
 char			**separate_quote(char *str, char sep);
 char			*dolar_dolar(void);
 void			init_cmd(t_command *c, char *ligne);
+
+//utils_cmd.c
+int				verif_cmd(char *cmd);
 
 //utils_exec.c
 void			no_command(int verif, t_command *c);
@@ -227,9 +222,6 @@ void			char_split(char *str, int *i, char sep, char quote);
 char			*ft_strndup(char *str, int n);
 int				is_inquote(char *ligne, int max);
 int				put_error(int type);
-char			*replace_var_env(char *ligne, int i, int j,
-					t_minishell *minishell);
-char			*type_of_var(char *ligne, int i, int j, t_minishell *minishell);
 
 //utils_parsing2.c
 char			*delete_char(char *ligne, int i);

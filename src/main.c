@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:22:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 15:09:28 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:15:31 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,33 +71,4 @@ void	blocksig(int signal)
 	printf("Quit : 3\n");
 	rl_replace_line("", 0);
 	rl_redisplay();
-}
-
-char	*var_arg(char **av, char *ligne, int ac)
-{
-	char	*res;
-	char	*tmp;
-	char	*temp;
-	int		i;
-	int		nb;
-
-	i = 0;
-	while (ligne[i])
-	{
-		if (ligne[i] == '$' && ft_isdigit(ligne[i + 1]))
-		{
-			temp = ft_strndup(ligne, i - 1);
-			nb = ligne[i + 1] - '0';
-			if (nb <= ac && av[nb])
-				res = ft_strdup(av[nb]);
-			else
-				res = "";
-			tmp = ft_strjoin(temp, res);
-			ligne = ft_strjoin(tmp, ligne + i + 2);
-			free(tmp);
-			free(temp);
-		}
-		i++;
-	}
-	return (ligne);
 }

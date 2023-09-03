@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 18:11:33 by elisa             #+#    #+#             */
-/*   Updated: 2023/08/31 13:55:46 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:25:09 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void	ft_putchar(char c)
 void	unset(t_command *c, t_minishell *minishell)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	if (c->option[0] && get_env(c->option[0], minishell->env))
+	j = 0;
+	while (c->option[j] && get_env(c->option[0], minishell->env))
 	{
+		i = 0;
 		while (minishell->env[i] && ft_strncmp(c->option[0],
 				minishell->env[i], ft_strlen(c->option[0])) != 0)
 			i++;
@@ -54,6 +56,7 @@ void	unset(t_command *c, t_minishell *minishell)
 			i++;
 		}
 		minishell->size_env -= 1;
+		j++;
 	}
 	g_status = 0;
 }

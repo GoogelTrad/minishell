@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 14:35:57 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:12:37 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,4 @@ int	simple_gauche(t_command *c)
 	close(fd);
 	close(pipes[1]);
 	return (1);
-}
-
-int	redi_cmd(t_command *c)
-{
-	if (ft_strcmp(c->cmd, "<") == 0 || ft_strcmp(c->cmd, "<<") == 0
-		|| ft_strcmp(c->cmd, ">") == 0 || ft_strcmp(c->cmd, ">>") == 0)
-		return (1);
-	else
-		return (0);
-}
-
-void	parse_redi_norme(t_command *c)
-{
-	c->redi->next_redi = malloc(sizeof(t_redirection));
-	c->redi = c->redi->next_redi;
-	c->redi->there = 0;
 }
