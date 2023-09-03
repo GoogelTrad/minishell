@@ -6,7 +6,7 @@
 /*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:22:52 by elisa             #+#    #+#             */
-/*   Updated: 2023/09/02 15:02:43 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/03 11:40:00 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,36 @@ void	export_by_ascii(char **tab)
 	}
 }
 
-void	aff_export_alone(int fd, t_minishell *minishell)
+void	export_opt(t_command *c, t_minishell *minishell)
 {
-	char	**tab;
+	int	i;
+	int	k;
 
-	tab = copy_tab(minishell->env);
-	export_by_ascii(tab);
-	export_alone(fd, tab);
-	free_double_tab(tab);
+	i = 0;
+	k = 0;
+	while (c->option[i])
+	{
+		k = 0;
+		if (c->option[i][0] == '=')
+		{
+			error_arg(c, &i);
+			return ;
+		}
+		if (check_option_export(c, i, &k) == 0)
+			return ;
+		if (c->option[i][k] == '\0')
+			add_var_env(ft_strdup(c->option[i]), NULL, minishell);
+		else
+			add_var_env(get_char(c->option[i], 0, k),
+				c->option[i] + k + 1, minishell);
+		g_status = 0;
+		i++;
+	}
 }
 
 void	export(t_command *c, t_minishell *minishell)
 {
 	int	i;
-	int	k;
 
 	i = 0;
 	if (!c->option[0])
@@ -114,24 +130,5 @@ void	export(t_command *c, t_minishell *minishell)
 	else if (c->option[0][0] == '=')
 		error_arg(c, &i);
 	else
-	{
-		while (c->option[i])
-		{
-			k = 0;
-			if (c->option[i][0] == '=')
-			{
-				error_arg(c, &i);
-				return ;
-			}
-			if (check_option_export(c, i, &k) == 0)
-				return ;
-			if (c->option[i][k] == '\0')
-				add_var_env(ft_strdup(c->option[i]), NULL, minishell);
-			else
-				add_var_env(get_char(c->option[i], 0, k),
-					c->option[i] + k + 1, minishell);
-			g_status = 0;
-			i++;
-		}
-	}
+		export_opt(c, minishell);
 }
