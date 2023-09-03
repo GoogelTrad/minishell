@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 11:41:02 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/03 14:35:01 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ t_redirection	*redi(char *ligne);
 void			parse_redi(char **ligne, t_command *c);
 void			replace_heredoc(t_minishell *minishell);
 int				verif_line(char *line);
-int				verif_redi(char *word);
+int				verif_redi(char *word, t_command *c);
 
 // redirection/simple.c
 int				simple_droite(t_command *c);

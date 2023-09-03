@@ -67,7 +67,7 @@ int	exec_redi(t_command *c, t_minishell *minishell)
 	tmp = c->redi;
 	while (c->redi->there)
 	{
-		if (!verif_redi(c->redi->word))
+		if (!verif_redi(c->redi->word, c))
 			return (0);
 		if (!redi_norme(c, minishell))
 			return (0);

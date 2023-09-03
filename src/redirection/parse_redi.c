@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 18:09:30 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 13:06:40 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 14:34:47 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,11 @@ int	verif_line(char *line)
 	return (1);
 }
 
-int	verif_redi(char *word)
+int	verif_redi(char *word, t_command *c)
 {
 	if (word[0] == '\0')
 	{
+		free_redi(c);
 		write(2, "syntax error near unexpected token 'newline'\n", 45);
 		g_status = 2;
 		return (0);

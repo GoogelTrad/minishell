@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:02:29 by cmichez           #+#    #+#             */
-/*   Updated: 2023/08/23 12:12:33 by elisa            ###   ########.fr       */
+/*   Updated: 2023/09/03 14:35:57 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	simple_droite(t_command *c)
 {
-	if (!verif_redi(c->redi->word))
-		return (0);
 	c->fd_out = open(c->redi->word, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	return (1);
 }
@@ -26,8 +24,6 @@ int	simple_gauche(t_command *c)
 	int		fd;
 	char	buf;
 
-	if (!verif_redi(c->redi->word))
-		return (0);
 	pipe(pipes);
 	if (open(c->redi->word, O_RDONLY) != -1)
 		fd = open(c->redi->word, O_RDONLY);
