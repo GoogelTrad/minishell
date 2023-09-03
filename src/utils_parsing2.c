@@ -64,10 +64,7 @@ t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
 	if (ligne[i] == '>' || ligne[i] == '<')
 		redis->word = ft_strdup("");
 	else
-	{
 		redis->word = ft_strndup(ligne + i, j - i - incr);
-		printf("word = %s\n", redis->word);
-	}
 	redis->there = 1;
 	while (n < j--)
 		ligne = delete_char(ligne, n);

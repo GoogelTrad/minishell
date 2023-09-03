@@ -22,10 +22,8 @@ void	free_redi(t_command *c)
 	{
 		actu = tmp;
 		tmp = tmp->next_redi;
-		if (actu->type)
-			free(actu->type);
-		if (actu->word)
-			free(actu->word);
+		free(actu->type);
+		free(actu->word);
 		free(actu);
 	}
 	free(tmp);
