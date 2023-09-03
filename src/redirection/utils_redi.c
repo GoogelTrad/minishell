@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:08:50 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 12:43:51 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 15:54:12 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ char	*display_quote(char *ligne, t_minishell *minishell)
 			i += var_size(ligne + i);
 		}
 		else
-		{
-			res = replace_quote(res, ligne[i]);
-			i++;
-		}
+			res = replace_quote(res, ligne[i++]);
 	}
 	return (res);
 }

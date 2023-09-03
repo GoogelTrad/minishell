@@ -81,7 +81,6 @@ int	exec_others(t_command *c, int verif, t_minishell *minishell)
 {
 	char	**path;
 	int		pid;
-	char	*var;
 	int		i;
 
 	i = 0;
@@ -90,9 +89,7 @@ int	exec_others(t_command *c, int verif, t_minishell *minishell)
 		pid = exec_fork(c->cmd, c, minishell, 0);
 	else
 	{
-		var = get_env("PATH", minishell->env);
-		path = ft_split(var, ':', 0);
-		free(var);
+		path = split_var(minishell);
 		while (path[i] && c->cmd[0] != '/' && c->cmd[0] != '.' && c->cmd)
 		{
 			if (!exec_relative_path(path[i], &verif, minishell, c))

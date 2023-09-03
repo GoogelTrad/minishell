@@ -41,11 +41,11 @@ void	free_cmd(t_minishell *minishell)
 			free_redi(&minishell->command[i]);
 			free_double_tab(minishell->command[i].option);
 			if (!minishell->command[i].cmd)
-				break;
+				break ;
 			free(minishell->command[i].cmd);
 			i++;
 			if (!minishell->command[i].cmd)
-				break;
+				break ;
 		}
 		free(minishell->command);
 	}

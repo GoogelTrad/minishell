@@ -40,7 +40,6 @@ t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
 	int		j;
 	int		n;
 	int		incr;
-	char	quote;
 
 	redis->type = get_redi(ligne + i);
 	n = i;
@@ -48,19 +47,7 @@ t_redirection	*redi_parse(char *ligne, int i, t_redirection *redis)
 	while (ligne[i] && ligne[i] == ' ')
 		i++;
 	j = i;
-	incr = 0;
-	while (ligne[j] && ligne[j] != ' ')
-	{
-		if (ligne[j] == '\'' || ligne[j] == '"')
-		{
-			i++;
-			quote = ligne[j++];
-			while (ligne[j] && ligne[j] != quote)
-				j++;
-			incr = 1;
-		}
-		j++;
-	}
+	incr = parse_redi_word(ligne, &j, &i);
 	if (ligne[i] == '>' || ligne[i] == '<')
 		redis->word = ft_strdup("");
 	else

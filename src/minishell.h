@@ -6,7 +6,7 @@
 /*   By: cmichez <cmichez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:25:16 by cmichez           #+#    #+#             */
-/*   Updated: 2023/09/03 15:07:34 by cmichez          ###   ########.fr       */
+/*   Updated: 2023/09/03 15:49:51 by cmichez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ void			impr_double(t_command *c, int pipes[2], char *ligne);
 
 t_redirection	*redi(char *ligne);
 void			parse_redi(char **ligne, t_command *c);
-void			replace_heredoc(t_minishell *minishell);
 int				verif_line(char *line);
 int				verif_redi(char *word);
 
@@ -257,5 +256,7 @@ int				exec_relative_path(char *path, int *verif,
 //utils3.c
 int				var_size(char *ligne);
 char			*replace_char(char *ligne, int i);
+char			**split_var(t_minishell *minishell);
+int				parse_redi_word(char *ligne, int *j, int *i);
 
 #endif
